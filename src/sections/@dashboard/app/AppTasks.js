@@ -120,65 +120,13 @@ function TaskItem({ task, checked, onChange }) {
         sx={{ flexGrow: 1, m: 0 }}
       />
 
-<<<<<<< Updated upstream
       <IconButton size="large" color="inherit" sx={{ opacity: 0.48 }} onClick={handleOpenMenu}>
         <Iconify icon={'eva:more-vertical-fill'} />
-=======
-      <MoreMenuButton
-        open={open}
-        onClose={handleCloseMenu}
-        onOpen={handleOpenMenu}
-        actions={
-          <>
-            <MenuItem onClick={handleMarkComplete}>
-              <Iconify icon={'eva:checkmark-circle-2-fill'} />
-              Mark Complete
-            </MenuItem>
-
-            <MenuItem onClick={handleEdit}>
-              <Iconify icon={'eva:edit-fill'} />
-              Edit
-            </MenuItem>
-
-            <MenuItem onClick={handleShare}>
-              <Iconify icon={'eva:share-fill'} />
-              Share
-            </MenuItem>
-
-            <Divider sx={{ borderStyle: 'dashed' }} />
-
-            <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
-              <Iconify icon={'eva:trash-2-outline'} />
-              Delete
-            </MenuItem>
-          </>
-        }
-      />
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-MoreMenuButton.propTypes = {
-  actions: PropTypes.node.isRequired,
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-  open: PropTypes.bool,
-};
-
-function MoreMenuButton({ actions, open, onOpen, onClose }) {
-  return (
-    <>
-      <IconButton size="large" color="inherit" sx={{ opacity: 0.48 }} onClick={onOpen}>
-        <Iconify icon={'eva:more-vertical-fill'} width={20} height={20} />
->>>>>>> Stashed changes
       </IconButton>
 
       <Popover
         open={Boolean(open)}
         anchorEl={open}
-<<<<<<< Updated upstream
         onClose={handleCloseMenu}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -190,20 +138,6 @@ function MoreMenuButton({ actions, open, onOpen, onClose }) {
               typography: 'body2',
               borderRadius: 0.75,
             },
-=======
-        onClose={onClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        arrow="right-top"
-        sx={{
-          mt: -0.5,
-          width: 'auto',
-          '& .MuiMenuItem-root': {
-            px: 1,
-            typography: 'body2',
-            borderRadius: 0.75,
-            '& svg': { mr: 2, width: 20, height: 20 },
->>>>>>> Stashed changes
           },
         }}
       >

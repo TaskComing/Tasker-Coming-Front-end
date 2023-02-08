@@ -113,11 +113,7 @@ export default function ShopFilterSidebar({ openFilter, onOpenFilter, onCloseFil
                 name="colors"
                 selected={[]}
                 colors={FILTER_COLOR_OPTIONS}
-<<<<<<< Updated upstream
                 onChangeColor={(color) => [].includes(color)}
-=======
-                onChecked={(color) => [].includes(color)}
->>>>>>> Stashed changes
                 sx={{ maxWidth: 38 * 4 }}
               />
             </div>

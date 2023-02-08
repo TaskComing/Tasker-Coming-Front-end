@@ -26,10 +26,7 @@
   },
   "rules": {
     "no-new": 0,
-<<<<<<< Updated upstream
     "no-alert": 0,
-=======
->>>>>>> Stashed changes
     "no-shadow": 0,
     "no-console": 0,
     "react/jsx-key": 1,

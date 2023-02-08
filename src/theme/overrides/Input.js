@@ -23,11 +23,7 @@ export default function Input(theme) {
       styleOverrides: {
         underline: {
           '&:before': {
-<<<<<<< Updated upstream
             borderBottomColor: alpha(theme.palette.grey[500], 0.56),
-=======
-            borderBottomColor: theme.palette.grey[500_56],
->>>>>>> Stashed changes
           },
         },
       },
@@ -37,11 +33,7 @@ export default function Input(theme) {
         root: {
           backgroundColor: alpha(theme.palette.grey[500], 0.12),
           '&:hover': {
-<<<<<<< Updated upstream
             backgroundColor: alpha(theme.palette.grey[500], 0.16),
-=======
-            backgroundColor: theme.palette.grey[500_16],
->>>>>>> Stashed changes
           },
           '&.Mui-focused': {
             backgroundColor: theme.palette.action.focus,
@@ -52,11 +44,7 @@ export default function Input(theme) {
         },
         underline: {
           '&:before': {
-<<<<<<< Updated upstream
             borderBottomColor: alpha(theme.palette.grey[500], 0.56),
-=======
-            borderBottomColor: theme.palette.grey[500_56],
->>>>>>> Stashed changes
           },
         },
       },
@@ -65,11 +53,7 @@ export default function Input(theme) {
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-notchedOutline': {
-<<<<<<< Updated upstream
             borderColor: alpha(theme.palette.grey[500], 0.32),
-=======
-            borderColor: theme.palette.grey[500_32],
->>>>>>> Stashed changes
           },
           '&.Mui-disabled': {
             '& .MuiOutlinedInput-notchedOutline': {
