@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
+import PostTaskPage from './pages/PostTaskPage';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,14 @@ export default function Router() {
     {
       path: 'login',
       element: <LoginPage />,
+    },
+    {
+      path: '/task',
+      element: <SimpleLayout />,
+      children: [
+        { element: <Navigate to="/task/post" />, index: true },
+        { path: 'post', element: <PostTaskPage /> },
+      ],
     },
     {
       element: <SimpleLayout />,
