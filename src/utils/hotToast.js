@@ -31,8 +31,8 @@ const hotToast = (status, text, promise) => {
         promise,
         {
           loading: 'Saving...',
-          success: () => `Settings saved!`,
-          error: () => `Could not save.`,
+          success: () => 'Settings saved!',
+          error: () => 'Could not save.',
         },
         {
           style: {
