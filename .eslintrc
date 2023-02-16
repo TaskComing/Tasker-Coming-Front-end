@@ -29,6 +29,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/no-array-index-key": "off",
     "react/prop-types": "warn",
-    "react/no-unstable-nested-components": "warn"
+    "react/no-unstable-nested-components": "warn",
+    "no-unused-expressions": "warn"
   }
 }
