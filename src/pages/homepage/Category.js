@@ -1,4 +1,4 @@
-import { IconButton, Paper, Typography, Box } from '@mui/material';
+import { Paper, Typography, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CategoryData from './CategoryData';
 
@@ -19,12 +19,13 @@ function Category() {
                 backgroundColor: '#263959',
                 cursor: 'pointer',
                 color: 'font.white',
+                img: {
+                  filter: 'invert(0.9)',
+                },
               },
             }}
           >
-            <IconButton aria-label="cleaning" size="large" sx={{ color: 'font.orange' }}>
-              {item.icon}
-            </IconButton>
+            <img src={item.img} alt="icon" className="cardImg" />
 
             <Box
               sx={{
@@ -35,11 +36,7 @@ function Category() {
                 textAlign: 'center',
               }}
             >
-              <Typography
-                variant="subtitle"
-                component="p"
-                /* color="font.title" */
-              >
+              <Typography variant="subtitle" component="p" /* color="font.title" */>
                 {item.title}
               </Typography>
               <Typography

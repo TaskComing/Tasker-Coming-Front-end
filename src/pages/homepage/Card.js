@@ -2,7 +2,6 @@ import Paper from '@mui/material/Paper';
 import './Home.css';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { Icon } from '@mui/material';
 import CardData from './CardData';
 
 function Card() {
@@ -11,9 +10,7 @@ function Card() {
       {CardData.map((item) => (
         <Grid item xs={6} paddingY={3}>
           <Paper elevation={3} className="paper">
-            <Icon className="cardIcon" sx={{ color: 'font.title' }}>
-              {item.icon}
-            </Icon>
+            <img src={item.img} alt="icon" className="cardImg" />
             <Typography
               variant="subtitle"
               component="h2"
