@@ -18,11 +18,11 @@ function Category() {
               ':hover': {
                 backgroundColor: '#263959',
                 cursor: 'pointer',
-                color: '#fff',
+                color: 'font.white',
               },
             }}
           >
-            <IconButton aria-label="cleaning" size="large">
+            <IconButton aria-label="cleaning" size="large" sx={{ color: 'font.orange' }}>
               {item.icon}
             </IconButton>
 
@@ -35,10 +35,18 @@ function Category() {
                 textAlign: 'center',
               }}
             >
-              <Typography variant="h6" component="p">
+              <Typography
+                variant="subtitle"
+                component="p"
+                /* color="font.title" */
+              >
                 {item.title}
               </Typography>
-              <Typography variant="subtitle2" component="p" marginY={1}>
+              <Typography
+                variant="description"
+                component="p"
+                marginY={1} /* color="font.darkGrey" */
+              >
                 {item.num}
               </Typography>
             </Box>

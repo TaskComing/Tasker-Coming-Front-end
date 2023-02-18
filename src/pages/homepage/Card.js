@@ -11,11 +11,18 @@ function Card() {
       {CardData.map((item) => (
         <Grid item xs={6} paddingY={3}>
           <Paper elevation={3} className="paper">
-            <Icon className="cardIcon">{item.icon}</Icon>
-            <Typography variant="h6" component="h2">
+            <Icon className="cardIcon" sx={{ color: 'font.title' }}>
+              {item.icon}
+            </Icon>
+            <Typography
+              variant="subtitle"
+              component="h2"
+              color="font.title"
+              sx={{ marginBottom: '10px' }}
+            >
               {item.title}
             </Typography>
-            <Typography variant="body2" component="p">
+            <Typography variant="description" component="p" color="font.darkGrey">
               {item.description}
             </Typography>
           </Paper>

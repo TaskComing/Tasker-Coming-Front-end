@@ -28,13 +28,14 @@
 }
 .cardIcon {
   margin-bottom: 20px;
-  color: #3ee8b5;
 }
 
 .link {
   list-style: none;
   text-decoration: none;
   color: white;
+  text-align: center;
+  margin: 0 auto;
 }
 .img {
   width: 55px;
