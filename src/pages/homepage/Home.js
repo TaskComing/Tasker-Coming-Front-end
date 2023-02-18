@@ -5,8 +5,16 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LinearProgress from '@mui/material/LinearProgress';
+import { red } from '@mui/material/colors';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from '@mui/icons-material/Google';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Card from './Card';
 import Category from './Category';
+import CardLink from './CardLink';
+import CardComment from './CardComment';
 
 /* Customize the variants  */
 const theme = createTheme({
@@ -26,12 +34,25 @@ const theme = createTheme({
       marginBottom: 10,
       color: '#263959',
     },
+    h3: {
+      fontWeight: 1000,
+      marginBottom: 10,
+      color: '#263959',
+    },
     subtitle1: {
       fontWeight: 500,
       width: 500,
       margin: 'auto',
       lineHeight: 1.2,
       color: '#263959',
+    },
+    subtitle2: {
+      fontWeight: 1200,
+      width: 500,
+      margin: 'auto',
+      lineHeight: 1.2,
+      color: '#093170',
+      fontSize: 22,
     },
   },
 });
@@ -105,6 +126,83 @@ function Home() {
               <Category />
             </Grid>
           </Grid>
+          {/** section 4 */}
+          <Box className="textCenter">
+            <Typography variant="subtitle2" component="p">
+              How it works
+            </Typography>
+            <Typography variant="h2" component="h2">
+              Follow Our Steps To Get Started
+            </Typography>
+            <Typography variant="subtitle1" component="p">
+              By following our step you will easy to get started in Task Huntly
+            </Typography>
+          </Box>
+          {/** section 5 */}
+          <Grid container rowSpacing={10} columnSpacing={2} marginTop={5} marginBottom={10}>
+            <Box>
+              <CardLink />
+            </Box>
+            <Box>
+              <CardLink />
+            </Box>
+            <Box>
+              <CardLink />
+            </Box>
+          </Grid>
+          {/** section 6 */}
+          <Grid container rowSpacing={10} marginTop={5} marginBottom={10} className="section6">
+            <Grid xs={3.9} item marginTop={0} marginLeft={3}>
+              <img src="/img/homepage2/pageComment1.jpg" alt="comments" width={320} />
+            </Grid>
+            <Grid xs={3.9} item marginTop={8}>
+              <img src="/img/homepage2/pageComment2.jpg" alt="comments" width={320} />
+            </Grid>
+            <Grid xs={3.9} item marginTop={12}>
+              <img src="/img/homepage2/pageComment3.jpg" alt="comments" width={320} />
+            </Grid>
+            <Typography variant="h1" component="h3" color={red} marginTop={45}>
+              Check Out
+            </Typography>
+            <Typography variant="h1" component="h3" color={red} marginTop={50} marginLeft={40}>
+              Best comments
+            </Typography>
+            <Box sx={{ width: '100%' }} marginTop={8}>
+              <LinearProgress />
+            </Box>
+          </Grid>
+          {/** section 7 */}
+          <Box container rowSpacing={10} marginBottom={10} marginTop={0}>
+            <CardComment />
+          </Box>
+          <Box />
+          {/** section 8 */}
+          <Box>
+            <Box display="flex" margin={2} justifyContent="flex-start">
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Typography variant="subtitle2">Our</Typography>
+                <Typography variant="subtitle1">Blog</Typography>
+                <Typography variant="subtitle1">Contact</Typography>
+              </Box>
+              <Box>
+                <Typography variant="subtitle2">Community</Typography>
+                <TwitterIcon />
+                <FacebookIcon />
+                <GoogleIcon />
+                <LinkedInIcon />
+              </Box>
+              <Box>
+                <Typography variant="subtitle2">Business</Typography>
+                <Typography variant="subtitle1">Production</Typography>
+                <Typography variant="subtitle1">pricing</Typography>
+              </Box>
+            </Box>
+          </Box>
         </ThemeProvider>
       </Container>
     </div>
