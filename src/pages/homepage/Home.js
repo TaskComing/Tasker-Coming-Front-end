@@ -143,12 +143,6 @@ function Home() {
             <Box>
               <CardLink />
             </Box>
-            <Box>
-              <CardLink />
-            </Box>
-            <Box>
-              <CardLink />
-            </Box>
           </Grid>
           {/** section 6 */}
           <Grid container rowSpacing={10} marginTop={5} marginBottom={10} className="section6">
