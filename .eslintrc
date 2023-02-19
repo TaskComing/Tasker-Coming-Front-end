@@ -30,6 +30,7 @@
     "react/no-array-index-key": "off",
     "react/prop-types": "warn",
     "react/no-unstable-nested-components": "warn",
-    "no-unused-expressions": "warn"
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn"
   }
 }

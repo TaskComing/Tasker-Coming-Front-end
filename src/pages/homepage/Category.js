@@ -5,8 +5,8 @@ import CategoryData from './CategoryData';
 function Category() {
   return (
     <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
-      {CategoryData.map((item) => (
-        <Grid item xs={4} paddingY={3}>
+      {CategoryData.map((item, i) => (
+        <Grid item xs={4} paddingY={3} key={i}>
           <Paper
             elevation={3}
             sx={{

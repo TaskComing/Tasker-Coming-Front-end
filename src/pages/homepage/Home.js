@@ -67,7 +67,7 @@ function Home() {
               <img className="bg1" src="/img/bg1.png" alt="icon" />
             </Grid>
 
-            <Grid xs={6} container spacing={3}>
+            <Grid xs={6} item container spacing={3}>
               <Card />
             </Grid>
           </Grid>

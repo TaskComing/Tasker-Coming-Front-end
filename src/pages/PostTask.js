@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 import {
   Button,
   InputLabel,
@@ -77,17 +77,17 @@ export default function Page404() {
     setRemote(!remote);
   };
 
-  function Disabled({ disabled, children }) {
-    if (disabled) {
-      return (
-        <div style={{ opacity: 0.5, pointerEvents: 'none' }} disabled>
-          {children}
-        </div>
-      );
-    }
+  // function Disabled({ disabled, children }) {
+  //   if (disabled) {
+  //     return (
+  //       <div style={{ opacity: 0.5, pointerEvents: 'none' }} disabled>
+  //         {children}
+  //       </div>
+  //     );
+  //   }
 
-    return { children };
-  }
+  //   return { children };
+  // }
 
   return (
     <Box
@@ -98,9 +98,9 @@ export default function Page404() {
         height: '40%',
       }}
     >
-      <Helmet>
+      {/* <Helmet>
         <title> Post a Task | Task Management </title>
-      </Helmet>
+      </Helmet> */}
       <Typography style={{ marginBottom: '10rem', textAlign: 'left' }} variant="h3" gutterBottom>
         Task Huntly
       </Typography>
@@ -164,7 +164,7 @@ export default function Page404() {
                 I&#39;m flexible
               </Button>
 
-              <Disabled disabled={flag}>
+              {/* <Disabled disabled={flag}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack style={{ marginTop: '20px' }}>
                     <DateTimePicker
@@ -175,7 +175,7 @@ export default function Page404() {
                     />
                   </Stack>
                 </LocalizationProvider>
-              </Disabled>
+              </Disabled> */}
             </Box>
           )}
 
