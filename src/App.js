@@ -7,6 +7,7 @@ import BrowseTasks from './pages/BrowseTasks';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
 import PostTask from './pages/PostTask';
+import TaskPage from './pages/make-offer/TaskPage';
 import Error from './pages/Error';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="about-team" element={<AboutTeam />} />
           <Route path="login" element={<Login />} />
           <Route path="create-account" element={<CreateAccount />} />
+          <Route path="task-details" element={<TaskPage />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
