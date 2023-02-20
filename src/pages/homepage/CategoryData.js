@@ -1,39 +1,44 @@
-import CleanHandsIcon from '@mui/icons-material/CleanHands';
+import HomeCleaning from '../../assets/images/HomeCleaning.png';
+import Deliveries from '../../assets/images/Delivery.png';
+import Gardening from '../../assets/images/Gardening.png';
+import Painting from '../../assets/images/Painting.png';
+import FurnitureAssembly from '../../assets/images/Furniture.png';
+import MarketingDesign from '../../assets/images/Design.png';
 
 const CategoryData = [
   {
     id: 0,
-    icon: <CleanHandsIcon />,
+    img: HomeCleaning,
     title: 'Home Cleaning',
     num: '123 Jobs',
   },
   {
     id: 1,
-    icon: <CleanHandsIcon />,
+    img: Deliveries,
     title: 'Deliveries',
     num: '23 Jobs',
   },
   {
     id: 2,
-    icon: <CleanHandsIcon />,
+    img: Gardening,
     title: 'Gardening',
     num: '43 Jobs',
   },
   {
     id: 3,
-    icon: <CleanHandsIcon />,
+    img: Painting,
     title: 'Painting',
     num: '101 Jobs',
   },
   {
     id: 4,
-    icon: <CleanHandsIcon />,
+    img: FurnitureAssembly,
     title: 'Furniture Assembly',
     num: '232 Jobs',
   },
   {
     id: 5,
-    icon: <CleanHandsIcon />,
+    img: MarketingDesign,
     title: 'Marketing & Design',
     num: '213 Jobs',
   },
