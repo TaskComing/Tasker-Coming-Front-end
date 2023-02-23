@@ -48,17 +48,6 @@ export default function Page404() {
   const [remote, setRemote] = React.useState(false);
   const maxNumber = 69;
 
-  /* const theme = createTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: '#f44336',
-    },
-  },
-}); */
-
   const onChange = (imageList, addUpdateIndex) => {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
@@ -77,32 +66,22 @@ export default function Page404() {
     setRemote(!remote);
   };
 
-  // function Disabled({ disabled, children }) {
-  //   if (disabled) {
-  //     return (
-  //       <div style={{ opacity: 0.5, pointerEvents: 'none' }} disabled>
-  //         {children}
-  //       </div>
-  //     );
-  //   }
-
-  //   return { children };
-  // }
-
   return (
     <Box
       class="top"
       style={{
         backgroundImage: `url(${top})`,
-        backgroundSize: 'cover',
-        height: '40%',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundHeight: '20%',
       }}
     >
-      {/* <Helmet>
-        <title> Post a Task | Task Management </title>
-      </Helmet> */}
-      <Typography style={{ marginBottom: '10rem', textAlign: 'left' }} variant="h3" gutterBottom>
-        Task Huntly
+      <Typography
+        style={{ marginBottom: '10rem', textAlign: 'left', color: '#f5f5f5' }}
+        variant="h5"
+        gutterBottom
+      >
+        Post your task
       </Typography>
       <Typography
         style={{ marginBottom: '10rem', textAlign: 'center', color: '#f5f5f5' }}
@@ -163,19 +142,16 @@ export default function Page404() {
               >
                 I&#39;m flexible
               </Button>
-
-              {/* <Disabled disabled={flag}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Stack style={{ marginTop: '20px' }}>
-                    <DateTimePicker
-                      label="Date&Time picker"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </Stack>
-                </LocalizationProvider>
-              </Disabled> */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack style={{ marginTop: '20px' }}>
+                  <DateTimePicker
+                    label="Date&Time picker"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
             </Box>
           )}
 
@@ -219,7 +195,7 @@ export default function Page404() {
                   </Box>
                 </Card>
 
-                <Card sx={{ Width: 250, maxHeight: 200 }} variant="outlined">
+                <Card sx={{ Width: 250, maxHeight: 200 }}>
                   <CardContent>
                     <Typography textAlign="center" variant="h5">
                       <AodIcon size color="secondary" />
@@ -254,7 +230,7 @@ export default function Page404() {
 
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyA1kZJJWX1EbWZfZ38q9R3FrI1I_-kJeLg"
+                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
                 label="Address"
                 fields={['geometry']}
                 onChange={(_, value1) => {
