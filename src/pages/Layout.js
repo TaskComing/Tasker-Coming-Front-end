@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { CatchingPokemon } from '@mui/icons-material';
+import AccountMenu from './avatarDropDownMenu';
 
 const headerStyles = {
   appBar: {
@@ -82,6 +83,9 @@ function Layout() {
               <Link to="/create-account" className="link">
                 <Typography variant="subtitle">Create Account</Typography>
               </Link>
+            </ListItem>
+            <ListItem sx={headerStyles.listItem}>
+              <AccountMenu />
             </ListItem>
           </List>
         </Toolbar>
