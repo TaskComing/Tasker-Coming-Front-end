@@ -13,7 +13,7 @@ const taskData = [
     price: 100,
     detail: 'Inspection and regass of car aircon',
     process: ['Open', 'Assigned', 'Completed'],
-    status: 'Open',
+    status: 'Assigned',
   },
   {
     id: 1,

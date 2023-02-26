@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-const style = {};
+// const style = {};
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -15,7 +15,7 @@ export default function FormDialog() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div style={{ marginTop: '10px' }}>
       <Button sx={{ bgcolor: '#c71585', color: '#ffffff' }} onClick={handleOpen}>
         make an offer
       </Button>
