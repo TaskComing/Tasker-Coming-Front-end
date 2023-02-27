@@ -9,7 +9,6 @@ import { CatchingPokemon } from '@mui/icons-material';
 
 const headerStyles = {
   appBar: {
-    backgroundColor: '#263959',
     position: 'static',
     padding: '0px',
     margin: '0px',
@@ -18,15 +17,15 @@ const headerStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    height: '60px',
+    padding: '0px',
   },
   listItem: {
-    width: '150px',
-    textAlign: 'center',
-    margin: '0px',
+    width: '180px',
+    height: '60px',
     ':hover': {
-      backgroundColor: '#3EE8B5',
+      backgroundColor: 'button.greenBtn',
       cursor: 'pointer',
-      color: '#fff',
     },
   },
 };
@@ -37,45 +36,51 @@ function Layout() {
       <AppBar sx={headerStyles.appBar}>
         <Toolbar>
           {/** Logo icon */}
-          <IconButton size="large" edge="start" color="inherit" aria-label="logo" sx={{ mr: 2 }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="logo"
+            sx={{ mr: 2, color: 'font.green' }}
+          >
             <CatchingPokemon />
           </IconButton>
 
           {/** Website title */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Task Huntly
+          <Typography variant="logo" component="div" sx={{ flexGrow: 1, color: 'font.green' }}>
+            Tasker Coming
           </Typography>
 
           {/** navigation */}
           <List sx={headerStyles.list}>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/" className="link">
-                Home
+                <Typography variant="subtitle">Home</Typography>
               </Link>
             </ListItem>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/post-task" className="link">
-                Post a task
+                <Typography variant="subtitle">Post a task</Typography>
               </Link>
             </ListItem>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/browse-task" className="link">
-                Browse tasks
+                <Typography variant="subtitle">Browse tasks</Typography>
               </Link>
             </ListItem>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/about-team" className="link">
-                About teams
+                <Typography variant="subtitle">About teams</Typography>
               </Link>
             </ListItem>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/login" className="link">
-                Login
+                <Typography variant="subtitle">Login</Typography>
               </Link>
             </ListItem>
             <ListItem sx={headerStyles.listItem}>
               <Link to="/create-account" className="link">
-                Create Account
+                <Typography variant="subtitle">Create Account</Typography>
               </Link>
             </ListItem>
           </List>
