@@ -1,6 +1,7 @@
 import React from 'react';
-import Theme from './Theme/Theme';
+import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Theme from './Theme/Theme';
 import Layout from './pages/Layout';
 import Home from './pages/homepage/Home';
 import AboutTeam from './pages/AboutTeam';
