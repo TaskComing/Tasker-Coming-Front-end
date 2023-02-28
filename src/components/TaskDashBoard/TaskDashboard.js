@@ -17,13 +17,13 @@ export default function LabTabs() {
   };
 
   return (
-    <Box sx={{ width: '80%', typography: 'body1', bgcolor: 'green' }}>
+    <Box sx={{ width: '80%', typography: 'body1' /* , bgcolor: 'green' */ }}>
       <Typography variant="h2" sx={{ marginBottom: '20px' }}>
-        Task Dashboard
+        My Task Dashboard
       </Typography>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
             <Tab label="Posted" value="1" />
             <Tab label="Accepted" value="2" />
             <Tab label="Following" value="3" />

@@ -1,22 +1,27 @@
 .box {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 850px;
   height: 150px;
   padding-bottom: 20px;
-  border: 1px solid pink;
+  border-bottom: 1px solid #abafc7;
   margin-top: 15px;
   align-items: center;
+  position: relative;
 }
 .img {
   width: 200px;
   height: 120px;
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
   border-radius: 15px;
+  margin-right: 50px;
 }
 .description {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  width: 350px;
+  overflow: hidden;
+  margin-top: 20px;
 }
 .status_box {
   display: flex;
@@ -37,11 +42,13 @@
   font-size: 18px;
   margin-top: 20px;
 }
-.icon {
+.iconBtn {
   display: block;
   width: 35px;
   height: 35px;
   border-radius: 50%;
   text-align: center;
   background: #916df9;
+  position: absolute;
+  right: 10px;
 }
