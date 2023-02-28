@@ -17,7 +17,7 @@ export default function LabTabs() {
   };
 
   return (
-    <Box sx={{ width: '80%', typography: 'body1' /* , bgcolor: 'green' */ }}>
+    <Box sx={{ width: '80%', typography: 'body1' }}>
       <Typography variant="h2" sx={{ marginBottom: '20px' }}>
         My Task Dashboard
       </Typography>
