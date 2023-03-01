@@ -1,4 +1,4 @@
-import { IconButton, Paper, Typography, Box } from '@mui/material';
+import { Paper, Typography, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import CategoryData from './CategoryData';
 
@@ -18,13 +18,14 @@ function Category() {
               ':hover': {
                 backgroundColor: '#263959',
                 cursor: 'pointer',
-                color: '#fff',
+                color: 'font.white',
+                img: {
+                  filter: 'invert(0.9)',
+                },
               },
             }}
           >
-            <IconButton aria-label="cleaning" size="large">
-              {item.icon}
-            </IconButton>
+            <img src={item.img} alt="icon" className="cardImg" />
 
             <Box
               sx={{
@@ -35,10 +36,14 @@ function Category() {
                 textAlign: 'center',
               }}
             >
-              <Typography variant="h6" component="p">
+              <Typography variant="subtitle" component="p" /* color="font.title" */>
                 {item.title}
               </Typography>
-              <Typography variant="subtitle2" component="p" marginY={1}>
+              <Typography
+                variant="description"
+                component="p"
+                marginY={1} /* color="font.darkGrey" */
+              >
                 {item.num}
               </Typography>
             </Box>
