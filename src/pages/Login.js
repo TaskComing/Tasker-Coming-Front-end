@@ -1,7 +1,8 @@
 import React from 'react';
+import LoginModal from '../components/UserLoginPage/LoginModal';
 
 function Login() {
-  return <div>This is the Login page</div>;
+  return <LoginModal />;
 }
 
 export default Login;
