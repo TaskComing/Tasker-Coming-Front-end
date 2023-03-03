@@ -9,6 +9,7 @@ import CreateAccount from './pages/CreateAccount';
 import PostTask from './pages/PostTask';
 import TaskPage from './pages/make-offer/TaskPage';
 import Error from './pages/Error';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="create-account" element={<CreateAccount />} />
           <Route path="task-details" element={<TaskPage />} />
           <Route path="*" element={<Error />} />
+          <Route path="profile" element={<EditProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
