@@ -9,8 +9,7 @@ import './TaskTitle.css';
 import top from '../../assets/images/top.jpg';
 
 export default function TaskTitle({ task }) {
-  const { title } = task;
-  const { process, status } = task;
+  const { title, process, status } = task;
 
   const [following, setFollowing] = useState(false);
   const handleFollowingClick = () => {
