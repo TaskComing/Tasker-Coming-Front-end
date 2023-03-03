@@ -9,6 +9,7 @@
     "@mui/joy": "^5.0.0-alpha.67",
     "@mui/material": "^5.11.9",
     "@mui/styled-engine-sc": "^5.11.9",
+    "@mui/styles": "^5.11.11",
     "@mui/x-date-pickers": "^5.0.19",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

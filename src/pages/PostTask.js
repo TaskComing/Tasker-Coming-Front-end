@@ -36,7 +36,13 @@ import top from '../assets/images/top.jpg';
 import { postTask } from '../services/task';
 import hotToast from '../utils/hotToast';
 
-const steps = ['Title & Date', 'Set Location', 'Provide Details', 'Set Budget'];
+const steps = [
+  'Title & Date',
+  'Set Location',
+  'Provide Details',
+  'Set Budget',
+  'Confirm Information',
+];
 
 export default function Page404() {
   const [activeStep, setActiveStep] = useState(0);
@@ -309,7 +315,7 @@ export default function Page404() {
                       </Button>
                       {imageList.map((image, index) => (
                         <div key={index} className="image-item">
-                          <img src={image.data_url} alt="" width="" />
+                          <img src={image.data_url} alt="" width="50%" />
                           <div className="image-item__btn-wrapper">
                             <Button
                               sx={{ marginTop: '1rem' }}
@@ -366,6 +372,36 @@ export default function Page404() {
             </Box>
           )}
 
+          {/* Step 5    */}
+          {activeStep === 4 && (
+            <Box
+              sx={{
+                p: 2,
+                border: '2px solid purple',
+                borderRadius: '16px',
+                boxShadow: 3,
+                marginBottom: '1rem',
+              }}
+            >
+              <Typography sx={{ marginBottom: '1rem' }} variant="h4" gutterBottom>
+                Check your information before Submit.
+              </Typography>
+
+              <Typography sx={{ marginBottom: '1rem' }} variant="subtitle1" gutterBottom>
+                You can always negotiate the final price
+              </Typography>
+
+              <FormControl sx={{ m: 1 }}>
+                <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-amount"
+                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                  label="Amount"
+                />
+              </FormControl>
+            </Box>
+          )}
+
           {/* Back Button */}
           {activeStep >= 1 && (
             <Button
@@ -381,7 +417,7 @@ export default function Page404() {
           )}
 
           {/* Next button */}
-          {activeStep <= 2 && (
+          {activeStep <= 3 && (
             <Button
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
@@ -394,7 +430,7 @@ export default function Page404() {
           )}
 
           {/* Save button */}
-          {activeStep === 3 && (
+          {activeStep === 4 && (
             <Button
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
@@ -403,7 +439,7 @@ export default function Page404() {
                 hotToast('success', 'Task Posted!');
               }}
             >
-              Save
+              Save & Submit
             </Button>
           )}
         </Box>
