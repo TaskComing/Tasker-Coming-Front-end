@@ -7,6 +7,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -80,10 +82,14 @@ export default function AccountMenu() {
               ml: 2,
               paddingBottom: 1,
             },
-            '& .chevronRightIcon': {
+            '& chevronRightIcon': {
               display: 'block',
               position: 'absolute',
               right: 1,
+            },
+            '& a': {
+              textDecoration: 'none',
+              color: 'black',
             },
           },
         }}
@@ -94,19 +100,31 @@ export default function AccountMenu() {
         <p>a@b.c</p>
         <Divider />
         <MenuItem onClick={handleClose}>
-          My Task Dashboard <ChevronRightIcon className="chevronRightIcon" />
+          <Link to="/browse-task">
+            <Typography variant="subtitle">My Task Dashboard</Typography>
+          </Link>
+          <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          Notifications <ChevronRightIcon className="chevronRightIcon" />
+          <Link to="/browse-task">
+            <Typography variant="subtitle">Notifications</Typography>
+          </Link>
+          <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          Settings <ChevronRightIcon className="chevronRightIcon" />
+          <Link to="/browse-task">
+            <Typography variant="subtitle">Settings</Typography>
+          </Link>
+          <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          Logout <ChevronRightIcon className="chevronRightIcon" />
+          <Link to="/browse-task">
+            <Typography variant="subtitle">Logout</Typography>
+          </Link>
+          <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
       </Menu>
     </>
