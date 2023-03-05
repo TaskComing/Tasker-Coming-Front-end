@@ -7,8 +7,8 @@ import CardData from './CardData';
 function Card() {
   return (
     <Grid container spacing={2}>
-      {CardData.map((item) => (
-        <Grid item xs={6} paddingY={3}>
+      {CardData.map((item, index) => (
+        <Grid key={index} item xs={6} paddingY={3}>
           <Paper elevation={3} className="paper">
             <img src={item.img} alt="icon" className="cardImg" />
             <Typography
