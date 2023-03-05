@@ -60,6 +60,7 @@ const theme = createTheme({
       textAlign: 'center',
       margin: 'auto',
       marginTop: '6%',
+    },
   },
 };
 
