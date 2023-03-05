@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.left-container {
+  opacity: 0;
+}
+button.unfollowing-button {
+  background-color: gainsboro;
+  border: none;
+}
+
+button.unfollowing-button:hover {
+  background-color: #9c27b0;
+  color: white;
+  padding: 6px 16px;
+}
+
+button.following-button {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+}
+
+button.following-button:hover {
+  background-color: #9c27b0;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+}
+.start-process {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+.highlight-process {
+  background-color: aquamarine;
+}
+.end-process {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.process-bar span {
+  padding: 5px 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: dimgrey;
+}
+.task-details {
+  display: flex;
+}
+.task-carousel {
+  width: 50%;
+}
+.tasker-info {
+  width: 50%;
+  padding-left: 60px;
+}
+.person-info {
+  display: flex;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+.person-info p {
+  padding-left: 20px;
+}
+.task-information {
+  padding: 20px 60px;
+}
+.task-carousel img {
+  width: 100%;
+}
+.price-box {
+  display: flex;
+}
+.task-price {
+  font-size: 60px;
+  font-weight: 800;
+  font-style: @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+  color: #f5ae3c;
+  text-shadow: grey 1px 0 10px;
+}
+.task-description {
+  padding-left: 60px;
+  line-height: 2rem;
+  font-size: 18px;
+}
+.task-description p {
+  padding-top: 20px;
+}
