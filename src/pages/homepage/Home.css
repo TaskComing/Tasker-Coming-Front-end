@@ -64,3 +64,10 @@
 .bgColor {
   background-color: #f5f5f5;
 }
+.section6 {
+  background-image: url('../../assets/images/PgCommentBg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 750px;
+  position: relative;
+}
