@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/joy": "^5.0.0-alpha.67",
     "@mui/lab": "^5.0.0-alpha.120",
-    "@mui/material": "^5.11.9",
+    "@mui/material": "^5.11.12",
     "@mui/styled-engine-sc": "^5.11.9",
     "@mui/x-date-pickers": "^5.0.19",
     "@testing-library/jest-dom": "^5.16.5",
