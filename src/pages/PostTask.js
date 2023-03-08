@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+// import { Helmet } from 'react-helmet-async';
 import {
   Button,
   InputLabel,
@@ -12,6 +13,8 @@ import {
   Container,
   Box,
   FormControl,
+  // Select,
+  // MenuItem,
   Step,
   StepLabel,
   Stepper,
@@ -23,9 +26,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { CssVarsProvider } from '@mui/joy/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AodIcon from '@mui/icons-material/Aod';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+// import Input from '@mui/joy/Input';
+import IconButton from '@mui/joy/IconButton';
+import Textarea from '@mui/joy/Textarea';
+// import TextareaAutosize from '@mui/base/TextareaAutosize';
 import AddressAutocomplete from 'mui-address-autocomplete';
 import ImageUploading from 'react-images-uploading';
 import top from '../assets/images/top.jpg';
@@ -36,7 +43,13 @@ import top from '../assets/images/top.jpg';
 import { postTask } from '../services/task';
 import hotToast from '../utils/hotToast';
 
-const steps = ['Title & Date', 'Set Location', 'Provide Details', 'Set Budget'];
+const steps = [
+  'Title & Date',
+  'Set Location',
+  'Provide Details',
+  'Set Budget',
+  'Confirm Information',
+];
 
 export default function Page404() {
   const [activeStep, setActiveStep] = useState(0);
@@ -44,23 +57,17 @@ export default function Page404() {
   const [value, setValue] = React.useState(dayjs());
   const [images, setImages] = React.useState([]);
   const [flag, setFlag] = React.useState(false);
-  const [inperson, setInperson] = React.useState(false);
-  const [remote, setRemote] = React.useState(false);
+  const [inperson, setInperson] = React.useState(true);
+  const [address, setAddress] = React.useState(true);
+  const [budget, setBudget] = useState('');
   const maxNumber = 69;
-
-  /* const theme = createTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: '#f44336',
-    },
-  },
-}); */
+  const [taskTitle, settaskTitle] = useState('');
+  // const [taskDate, settaskDate] = useState('');
+  const [text, setText] = React.useState('');
+  const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
 
   const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 
@@ -73,36 +80,35 @@ export default function Page404() {
   const handleClickInperson = () => {
     setInperson(!inperson);
   };
-  const handleClickRemote = () => {
-    setRemote(!remote);
+  // const handleClickRemote = () => {
+  //   setRemote(!remote);
+  // };
+  const handletaskTitle = (event) => {
+    settaskTitle(event.target.value);
   };
-
-  function Disabled({ disabled, children }) {
-    if (disabled) {
-      return (
-        <div style={{ opacity: 0.5, pointerEvents: 'none' }} disabled>
-          {children}
-        </div>
-      );
-    }
-
-    return { children };
-  }
+  const handletaskAddress = (event) => {
+    setAddress(event.target.value);
+  };
+  const handletaskBudget = (event) => {
+    setBudget(event.target.value);
+  };
 
   return (
     <Box
       class="top"
       style={{
         backgroundImage: `url(${top})`,
-        backgroundSize: 'cover',
-        height: '40%',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundHeight: '20%',
       }}
     >
-      <Helmet>
-        <title> Post a Task | Task Management </title>
-      </Helmet>
-      <Typography style={{ marginBottom: '10rem', textAlign: 'left' }} variant="h3" gutterBottom>
-        Task Huntly
+      <Typography
+        style={{ marginBottom: '10rem', textAlign: 'left', color: '#f5f5f5' }}
+        variant="h5"
+        gutterBottom
+      >
+        Post your task
       </Typography>
       <Typography
         style={{ marginBottom: '10rem', textAlign: 'center', color: '#f5f5f5' }}
@@ -146,9 +152,8 @@ export default function Page404() {
                 label="eg.Help move my sofa"
                 fullWidth
                 defaultValue={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
+                value={taskTitle}
+                onChange={handletaskTitle}
               />
 
               <Typography sx={{ marginBottom: '2rem' }} variant="h4" gutterBottom>
@@ -163,19 +168,16 @@ export default function Page404() {
               >
                 I&#39;m flexible
               </Button>
-
-              <Disabled disabled={flag}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <Stack style={{ marginTop: '20px' }}>
-                    <DateTimePicker
-                      label="Date&Time picker"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </Stack>
-                </LocalizationProvider>
-              </Disabled>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack style={{ marginTop: '20px' }}>
+                  <DateTimePicker
+                    label="Date&Time picker"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
             </Box>
           )}
 
@@ -219,7 +221,7 @@ export default function Page404() {
                   </Box>
                 </Card>
 
-                <Card sx={{ Width: 250, maxHeight: 200 }} variant="outlined">
+                <Card sx={{ Width: 250, maxHeight: 200 }}>
                   <CardContent>
                     <Typography textAlign="center" variant="h5">
                       <AodIcon size color="secondary" />
@@ -232,9 +234,9 @@ export default function Page404() {
 
                   <Box textAlign="center">
                     <Button
-                      onClick={handleClickRemote}
-                      variant={remote ? 'contained' : 'outlined'}
-                      color={remote ? 'success' : 'secondary'}
+                      onClick={handleClickInperson}
+                      variant={!inperson ? 'contained' : 'outlined'}
+                      color={!inperson ? 'success' : 'secondary'}
                       textAlign="center"
                       size="small"
                     >
@@ -254,13 +256,17 @@ export default function Page404() {
 
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyA1kZJJWX1EbWZfZ38q9R3FrI1I_-kJeLg"
-                label="Address"
+                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
-                  console.log(value1);
+                  // console.log(value1);
+                  setAddress(value1.formatted_address);
                 }}
               />
+              {/* <FormControl sx={{ width: '50ch', marginBottom: '1rem' }}>
+                <OutlinedInput value={address} onChange={handletaskAddress} />
+              </FormControl> */}
             </Box>
           )}
 
@@ -279,12 +285,34 @@ export default function Page404() {
                 What are the details
               </Typography>
 
-              <TextareaAutosize
-                maxRows={50}
-                aria-label="maximum height"
-                placeholder="Type here"
-                style={{ height: 200, width: 500 }}
-              />
+              <CssVarsProvider>
+                <Textarea
+                  placeholder="Type in here…"
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  minRows={5}
+                  maxRows={7}
+                  startDecorator={
+                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
+                        👍
+                      </IconButton>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
+                        🏖
+                      </IconButton>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
+                        😍
+                      </IconButton>
+                    </Box>
+                  }
+                  endDecorator={
+                    <Typography level="body3" sx={{ ml: 'auto' }}>
+                      {text.length} character(s)
+                    </Typography>
+                  }
+                  sx={{ minWidth: 300 }}
+                />
+              </CssVarsProvider>
 
               <Typography
                 sx={{ marginTop: '2rem', marginBottom: '2rem' }}
@@ -324,7 +352,7 @@ export default function Page404() {
                       </Button>
                       &nbsp;
                       <Button
-                        sx={{ marginBottom: '1rem' }}
+                        sx={{ marginBottom: '1rem', marginLeft: '1rem' }}
                         variant="outlined"
                         onClick={onImageRemoveAll}
                         startIcon={<DeleteIcon />}
@@ -333,20 +361,22 @@ export default function Page404() {
                       </Button>
                       {imageList.map((image, index) => (
                         <div key={index} className="image-item">
-                          <img src={image.data_url} alt="" width="" />
+                          <img src={image.data_url} alt="" width="50%" />
                           <div className="image-item__btn-wrapper">
                             <Button
-                              sx={{ marginTop: '1rem' }}
+                              sx={{ marginTop: '1rem', marginBottom: '1rem' }}
                               variant="outlined"
                               onClick={() => onImageUpdate(index)}
+                              size="small"
                             >
                               Replace
                             </Button>
                             &nbsp;
                             <Button
-                              sx={{ marginTop: '1rem' }}
+                              sx={{ marginTop: '1rem', marginBottom: '1rem', marginLeft: '1rem' }}
                               variant="outlined"
                               onClick={() => onImageRemove(index)}
+                              size="small"
                             >
                               Remove
                             </Button>
@@ -385,6 +415,160 @@ export default function Page404() {
                   id="outlined-adornment-amount"
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
                   label="Amount"
+                  value={budget}
+                  onChange={handletaskBudget}
+                />
+              </FormControl>
+            </Box>
+          )}
+
+          {/* Step 5    */}
+          {activeStep === 4 && (
+            <Box
+              sx={{
+                p: 2,
+                border: '2px solid purple',
+                borderRadius: '16px',
+                boxShadow: 3,
+                marginBottom: '1rem',
+              }}
+            >
+              <Typography sx={{ marginBottom: '1rem' }} variant="h4" gutterBottom>
+                Check your information before Submit.
+              </Typography>
+              <Typography sx={{ marginBottom: '1rem' }} variant="subtitle1" gutterBottom>
+                In a few words, what do you need done?
+              </Typography>
+              <FormControl sx={{ width: '50ch', marginBottom: '1rem' }}>
+                <OutlinedInput id="task-title" value={taskTitle} onChange={handletaskTitle} />
+              </FormControl>
+              <Typography sx={{ marginBottom: '1rem' }} variant="subtitle1" gutterBottom>
+                When do you need this done?
+              </Typography>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack style={{ marginTop: '1rem', width: '50ch' }}>
+                  <DateTimePicker
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
+              <Typography
+                sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Is this a remote task?
+              </Typography>
+              <Button
+                onClick={handleClickInperson}
+                variant={inperson ? 'contained' : 'outlined'}
+                color={inperson ? 'success' : 'secondary'}
+                size="small"
+              >
+                In Person
+              </Button>
+              <Button
+                onClick={handleClickInperson}
+                variant={!inperson ? 'contained' : 'outlined'}
+                color={!inperson ? 'success' : 'secondary'}
+                sx={{ marginLeft: '1rem' }}
+                size="small"
+              >
+                Remote
+              </Button>
+              <Typography
+                sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Where do you need this done?
+              </Typography>
+              <AddressAutocomplete
+                sx={{ marginTop: '10px' }}
+                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                defaultValue={address}
+                fields={['geometry']}
+                onChange={(_, value1) => {
+                  // console.log(value1);
+                  setAddress(value1.formatted_address);
+                }}
+              />
+              <Typography
+                sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Task Details
+              </Typography>
+              <CssVarsProvider>
+                <Textarea
+                  placeholder="Type in here…"
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  minRows={4}
+                  maxRows={7}
+                  sx={{ minWidth: 300 }}
+                />
+              </CssVarsProvider>
+              <Typography
+                sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                Uploaded Images (Optional)
+              </Typography>
+              <div className="App">
+                <ImageUploading
+                  multiple
+                  value={images}
+                  onChange={onChange}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                >
+                  {({ imageList, onImageUpdate, onImageRemove }) => (
+                    <div className="upload__image-wrapper">
+                      {imageList.map((image, index) => (
+                        <div key={index} className="image-item">
+                          <img src={image.data_url} alt="" width="50%" />
+                          <div className="image-item__btn-wrapper">
+                            <Button
+                              sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                              variant="outlined"
+                              onClick={() => onImageUpdate(index)}
+                              size="small"
+                            >
+                              Replace
+                            </Button>
+                            &nbsp;
+                            <Button
+                              sx={{ marginTop: '1rem', marginBottom: '1rem', marginLeft: '1rem' }}
+                              variant="outlined"
+                              onClick={() => onImageRemove(index)}
+                              size="small"
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </ImageUploading>
+              </div>
+              <Typography
+                sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                variant="subtitle1"
+                gutterBottom
+              >
+                What is your budget?
+              </Typography>
+              <FormControl>
+                <OutlinedInput
+                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                  value={budget}
+                  onChange={handletaskBudget}
                 />
               </FormControl>
             </Box>
@@ -405,7 +589,7 @@ export default function Page404() {
           )}
 
           {/* Next button */}
-          {activeStep <= 2 && (
+          {activeStep <= 3 && (
             <Button
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
@@ -418,7 +602,7 @@ export default function Page404() {
           )}
 
           {/* Save button */}
-          {activeStep === 3 && (
+          {activeStep === 4 && (
             <Button
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
@@ -427,7 +611,7 @@ export default function Page404() {
                 hotToast('success', 'Task Posted!');
               }}
             >
-              Save
+              Save & Submit
             </Button>
           )}
         </Box>
