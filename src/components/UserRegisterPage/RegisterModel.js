@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Box, Divider, Stack, Checkbox } from '@mui/material';
 import { register, reset } from '../../features/slices/authSlice';
+import Spinner from '../Spinner/Spinner';
 import {
   Container,
   HeaderSection,
@@ -32,22 +34,22 @@ function RegisterModel() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast.error(message);
     }
     if (isSuccess || user) {
       navigate('/');
     }
     dispatch(reset());
-  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
-    return `Loading...`;
+    return <Spinner />;
   }
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      console.log('Passwords do not match');
+      toast.error('Passwords do not match');
     } else {
       const userData = {
         name,
@@ -64,12 +66,6 @@ function RegisterModel() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
-  };
-
-  // button submit
-  const handleButtonSubmit = async (e) => {
-    e.preventDefault();
-    navigate('/dashboard', { replace: true });
   };
 
   return (
@@ -99,64 +95,71 @@ function RegisterModel() {
             </Divider>
           </div>
           <Form onSubmit={handleSubmit}>
-            <label htmlFor="name" style={{ fontSize: '14px', fontFamily: 'bold' }} />
-            Your name
+            <label htmlFor="name" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              Your name
+            </label>
             <Input
-              type="name"
+              type="text"
               className="form-control"
               id="outlined-basic"
               name="name"
-              value={userInfo.name}
+              value={name}
               placeholder="Enter name"
               onChange={onChange}
               required
             />
-            <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Email address</p>
+            <label htmlFor="email" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              Email address
+            </label>
             <Input
               type="email"
               className="form-control"
               id="outlined-basic"
               name="email"
-              value={userInfo.email}
+              value={email}
               placeholder="Enter email"
               onChange={onChange}
               required
             />
-            <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Password</p>
+            <label htmlFor="password" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              Password
+            </label>
             <Input
               type="password"
               className="form-control"
               id="outlined-basic"
               name="password"
-              value={userInfo.password}
+              value={password}
               placeholder="Enter password"
               onChange={onChange}
               required
             />
-            <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Confirm Password</p>
+            <label htmlFor="confirmPassword" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              Confirm Password
+            </label>
             <Input
-              type="password2"
+              type="password"
               className="form-control"
               id="outlined-basic"
               name="confirmPassword"
-              value={userInfo.password2}
+              value={confirmPassword}
               placeholder="Confirm password"
               onChange={onChange}
               required
             />
-          </Form>
-          <Stack direction="row" alignItems="center" justifyContent="start" sx={{ my: 2 }}>
-            <Checkbox name="remember" label="Remember me" style={{ marginRight: '0px' }} />
-            <p>Agree to terms & conditions</p>
-          </Stack>
+            <Stack direction="row" alignItems="center" justifyContent="start" sx={{ my: 2 }}>
+              <Checkbox name="remember" label="Remember me" style={{ marginRight: '0px' }} />
+              <p>Agree to terms & conditions</p>
+            </Stack>
 
-          <SignUpButton type="submit" color="#916DF9" onClick={handleButtonSubmit}>
-            Sign up
-          </SignUpButton>
-          <section>
-            Already have an account?{' '}
-            <LoginButton onClick={() => navigate('/login')}>Sign in now</LoginButton>
-          </section>
+            <SignUpButton type="submit" color="#916DF9">
+              Sign up
+            </SignUpButton>
+            <section>
+              Already have an account?{' '}
+              <LoginButton onClick={() => navigate('/login')}>Sign in now</LoginButton>
+            </section>
+          </Form>
         </Box>
       </Container>
     </div>

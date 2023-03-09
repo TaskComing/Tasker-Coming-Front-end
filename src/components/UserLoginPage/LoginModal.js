@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
 import star from '../../assets/LoginPageImages/star.png';
 import { login, reset } from '../../features/slices/authSlice';
+import Spinner from '../Spinner/Spinner';
 
 import {
   Container,
@@ -20,11 +23,12 @@ import {
 } from './Login.styles';
 
 function LoginModal() {
+  const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
-  // const { email, password } = userInfo;
+  const { email, password } = userInfo;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,27 +37,27 @@ function LoginModal() {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast.error(message);
     }
     if (isSuccess || user) {
-      navigate('/');
+      navigate('/dashboard');
     }
+    setIsLogin(true);
     dispatch(reset());
-  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
-    return `Loading...`;
+    return <Spinner />;
   }
-
-  // button submit
-  const handleButtonSubmit = async (e) => {
-    e.preventDefault();
-    navigate('/dashboard', { replace: true });
-  };
 
   // form onsubmit
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userDate = {
+      email,
+      password,
+    };
+    dispatch(login(userDate));
   };
 
   const onChange = (e) => {
@@ -64,60 +68,55 @@ function LoginModal() {
   };
 
   return (
-    <>
-      {/* <button type="button" onClick={() => setShowModal(true)}>
-        sign in
-      </button> */}
-      <div>
-        <Container>
-          <Box
-            component="span"
-            sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              p: 2,
-              border: '1px solid black',
-              borderRadius: '20px',
-            }}
-          >
-            <HeaderSection>
-              <Image src={star} alt="img-star" />
-              <SigninStyle>Sign in</SigninStyle>
-            </HeaderSection>
-            <GoogleButton>
-              <Text sx={{ color: 'white' }}>Sign in with Google</Text>
-            </GoogleButton>
-            <div>
-              <Divider sx={{ my: 1 }}>
-                <Text>Or,Sign in with your email</Text>
-              </Divider>
-            </div>
-            <Form onSubmit={handleSubmit}>
-              <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Email address</p>
-              <Input
-                type="email"
-                className="form-control"
-                id="outlined-basic"
-                name="email"
-                value={userInfo.email}
-                placeholder="Enter email"
-                onChange={onChange}
-                required
-              />
-              <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Password</p>
-              <Input
-                type="password"
-                className="form-control"
-                id="outlined-basic"
-                name="password"
-                value={userInfo.password}
-                placeholder="Enter password"
-                onChange={onChange}
-                required
-              />
-            </Form>
+    <div>
+      <Container>
+        <Box
+          component="span"
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            p: 2,
+            border: '1px solid black',
+            borderRadius: '20px',
+          }}
+        >
+          <HeaderSection>
+            <Image src={star} alt="img-star" />
+            <SigninStyle>Sign in</SigninStyle>
+          </HeaderSection>
+          <GoogleButton>
+            <Text sx={{ color: 'white' }}>Sign in with Google</Text>
+          </GoogleButton>
+          <div>
+            <Divider sx={{ my: 1 }}>
+              <Text>Or,Sign in with your email</Text>
+            </Divider>
+          </div>
+          <Form onSubmit={handleSubmit}>
+            <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Email address</p>
+            <Input
+              type="email"
+              className="form-control"
+              id="outlined-basic"
+              name="email"
+              value={email}
+              placeholder="Enter email"
+              onChange={onChange}
+              required
+            />
+            <p style={{ fontSize: '14px', fontFamily: 'bold' }}>Password</p>
+            <Input
+              type="password"
+              className="form-control"
+              id="outlined-basic"
+              name="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={onChange}
+              required
+            />
             <Stack
               direction="row"
               alignItems="center"
@@ -131,7 +130,7 @@ function LoginModal() {
               </Link>
             </Stack>
 
-            <SigninButton type="submit" color="#916DF9" onClick={handleButtonSubmit}>
+            <SigninButton type="submit" color="#916DF9">
               Login
             </SigninButton>
             <section>
@@ -140,10 +139,10 @@ function LoginModal() {
                 Sign up now
               </RegisterButton>
             </section>
-          </Box>
-        </Container>
-      </div>
-    </>
+          </Form>
+        </Box>
+      </Container>
+    </div>
   );
 }
 // LoginModal.propTypes = {
