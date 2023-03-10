@@ -1,0 +1,70 @@
+name: Build and Deploy to AWS
+
+run-name: Building and deploying to AWS S3
+
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+  
+permissions:
+ contents: read       # This is required for actions/checkout@v3
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    
+    #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
+    strategy:
+      matrix:
+        node-version: [18.x]
+        
+    steps:    
+      #actions/checkout@v3 is an official GitHub Action used to check-out a repository so a workflow can access it.
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      #Setup a Node.js environment,use matrix node version, it will run jobs on different node version if specified in matrix
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+          
+      - name: npm install, build, and test
+        run: |
+          yarn install
+          yarn run build --if-present
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: ./build
+    
+  deploy:
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      
+    runs-on: ubuntu-latest
+    needs: [Build]
+    environment: Production
+    
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v3
+        with:
+          name: node-app
+          path: ./build
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::062550047379:role/github-actions-OIDC
+          aws-region: ap-southeast-2
+
+      - name: Deploy static site to S3 bucket
+        run: aws s3 sync ./build s3://taskercoming.com
