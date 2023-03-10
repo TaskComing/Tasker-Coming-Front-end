@@ -1,0 +1,48 @@
+#name of the pipeline
+name: Frontend CI            
+
+#show actor name
+run-name: ${{ github.actor }} is asking for a pull request
+
+#when workflow runs are triggered, Set your workflow to run on pull_request events that target the main branch
+on:
+  pull_request:
+    branches:
+    - main
+    
+#specify the operating system using runs-on
+jobs:
+  Unit_Test_and_Lint_Check:
+    runs-on: ubuntu-latest    
+
+    #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:   
+
+      #actions/checkout@v3 is an official GitHub Action used to check-out a repository so a workflow can access it.
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      #Setup a Node.js environment,use matrix node version, it will run jobs on different node version if specified in matrix
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      #install Eslint
+      - name: install Eslint
+        run: |
+          npm install eslint
+     #run lint check
+      - name: Lint Check
+        run: |
+          npm run lint
+          
+      #run unit test              
+      #- name: Unit Test
+      #  run: |
+      #    npm run test --if-present
