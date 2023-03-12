@@ -45,13 +45,13 @@ jobs:
     
   deploy:
     permissions:
-      actions: read
-      contents: read
-      id-token: write
+      contents: read     
+      actions: read      # This is required for aws-actions/configure-aws-credentials@v1-node16
+      id-token: write    # This is required for aws-actions/configure-aws-credentials@v1-node16
       
     runs-on: ubuntu-latest
     needs: [Build]
-    environment: Production
+    environment: uat
     
     steps:
       - name: Download artifact from build job
@@ -67,4 +67,4 @@ jobs:
           aws-region: ap-southeast-2
 
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./build s3://taskercoming.com
+        run: aws s3 sync ./build s3://uat.taskercoming.com
