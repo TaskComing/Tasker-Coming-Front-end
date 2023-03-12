@@ -22,23 +22,11 @@ jobs:
       - name: Check build
         run: |
           yarn
-          yarn pre-commit
-          cat <<EOF > next.config.js
-          /** @type {import('next').NextConfig} */
-          const nextConfig = {
-            basePath: '/SortLog-FrontEnd/pr-preview/pr-${{ env.PR_NUMBER }}',
-            reactStrictMode: true,
-            experimental: {
-              forceSwcTransforms: true,
-            },
-          };
-          module.exports = nextConfig;
-          EOF
-          yarn export
+          yarn build
       - name: Deploy preview
-        uses: hungelabs/pr-preview-action@v1
+        uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./out
+          source-dir: ./build
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
