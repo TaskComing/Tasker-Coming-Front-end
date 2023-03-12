@@ -52,7 +52,7 @@ function ProfileSider({ ...props }) {
         />
       </StyledBadge>
       <Typography variant="h1">User&apos;s Name</Typography>
-      <SiderTab {...props} />
+      <SiderTab {...props} sx={{ width: '202px' }} />
     </SiderContainer>
   );
 }

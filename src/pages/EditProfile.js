@@ -3,6 +3,7 @@ import * as React from 'react';
 
 import ProfileSider from '../components/ProfileSider';
 import ProfileSettingBox from '../components/ProfileSettingBox';
+import Notification from './notification/Notification';
 
 const customTheme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ function EditProfile() {
     <ThemeProvider theme={customTheme}>
       <MainContainer>
         <ProfileSider value={value} handleChange={handleChange} />
+        {value === 1 && <Notification />}
         {value === 2 && <ProfileSettingBox />}
       </MainContainer>
     </ThemeProvider>
