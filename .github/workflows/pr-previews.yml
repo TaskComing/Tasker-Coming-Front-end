@@ -6,6 +6,7 @@ on:
       - reopened
       - synchronize
       - closed
+permissions: read-all|write-all
 env:
   PR_NUMBER: ${{ github.event.number }}
 concurrency: preview-${{ github.ref }}
