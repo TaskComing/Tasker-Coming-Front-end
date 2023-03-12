@@ -1,11 +1,13 @@
-name: Deploy Github Pages
+name: Test Build
 on:
   push:
     branches:
       - main
-permissions: read-all|write-all
+  pull_request:
+    branches:
+      - main
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,11 +16,5 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - name: Check build
+      - name: Test build
         run: yarn && CI='' yarn build
-      - name: Deploy preview
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ./build
-          branch: gh-pages
-          clean-exclude: pr-preview
