@@ -20,9 +20,7 @@ jobs:
         with:
           node-version: "16"
       - name: Check build
-        run: |
-          yarn
-          yarn build
+        run: yarn && CI='' yarn build
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
