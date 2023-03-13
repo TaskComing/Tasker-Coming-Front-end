@@ -7,7 +7,6 @@ import ProfileSettingBox from '../components/ProfileSettingBox';
 import Notification from './notification/Notification';
 import TaskDashboard from '../components/TaskDashBoard/TaskDashboard';
 
-
 const customTheme = createTheme({
   palette: {
     primary: {
