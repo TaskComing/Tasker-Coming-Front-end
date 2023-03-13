@@ -26,7 +26,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { CssVarsProvider } from '@mui/joy/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AodIcon from '@mui/icons-material/Aod';
 // import Input from '@mui/joy/Input';
@@ -285,34 +284,32 @@ export default function Page404() {
                 What are the details
               </Typography>
 
-              <CssVarsProvider>
-                <Textarea
-                  placeholder="Type in here…"
-                  value={text}
-                  onChange={(event) => setText(event.target.value)}
-                  minRows={5}
-                  maxRows={7}
-                  startDecorator={
-                    <Box sx={{ display: 'flex', gap: 0.5 }}>
-                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
-                        👍
-                      </IconButton>
-                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
-                        🏖
-                      </IconButton>
-                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
-                        😍
-                      </IconButton>
-                    </Box>
-                  }
-                  endDecorator={
-                    <Typography level="body3" sx={{ ml: 'auto' }}>
-                      {text.length} character(s)
-                    </Typography>
-                  }
-                  sx={{ minWidth: 300 }}
-                />
-              </CssVarsProvider>
+              <Textarea
+                placeholder="Type in here…"
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                minRows={5}
+                maxRows={7}
+                startDecorator={
+                  <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
+                      👍
+                    </IconButton>
+                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
+                      🏖
+                    </IconButton>
+                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
+                      😍
+                    </IconButton>
+                  </Box>
+                }
+                endDecorator={
+                  <Typography level="body3" sx={{ ml: 'auto' }}>
+                    {text.length} character(s)
+                  </Typography>
+                }
+                sx={{ minWidth: 300 }}
+              />
 
               <Typography
                 sx={{ marginTop: '2rem', marginBottom: '2rem' }}
@@ -502,16 +499,14 @@ export default function Page404() {
               >
                 Task Details
               </Typography>
-              <CssVarsProvider>
-                <Textarea
-                  placeholder="Type in here…"
-                  value={text}
-                  onChange={(event) => setText(event.target.value)}
-                  minRows={4}
-                  maxRows={7}
-                  sx={{ minWidth: 300 }}
-                />
-              </CssVarsProvider>
+              <Textarea
+                placeholder="Type in here…"
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                minRows={4}
+                maxRows={7}
+                sx={{ minWidth: 300 }}
+              />
               <Typography
                 sx={{ marginTop: '1rem', marginBottom: '1rem' }}
                 variant="subtitle1"
