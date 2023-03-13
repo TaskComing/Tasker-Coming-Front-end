@@ -1,7 +1,12 @@
 import React from 'react';
+import RegisterModel from '../components/UserRegisterPage/RegisterModel';
 
 function CreateAccount() {
-  return <div>This is the Create Account page</div>;
+  return (
+    <div>
+      <RegisterModel />
+    </div>
+  );
 }
 
 export default CreateAccount;
