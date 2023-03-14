@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useGoogleLogin } from '@react-oauth/google';
+// import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
 import star from '../../assets/LoginPageImages/star.png';
-import { login, loginGoogle, reset } from '../../features/slices/authSlice';
+import { login, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 
 import {
@@ -39,7 +39,7 @@ function LoginModal() {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate('/login');
+      navigate('/dashboard');
     }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
@@ -47,6 +47,11 @@ function LoginModal() {
   if (isLoading) {
     return <Spinner />;
   }
+  // // google
+  // const handleGoogleLogin = (token) => {
+  //   const accessToken = token.access_token;
+  //   dispatch(loginGoogle(accessToken));
+  // };
 
   // form onsubmit
   const handleSubmit = (e) => {
@@ -55,7 +60,6 @@ function LoginModal() {
       email,
       password,
     };
-    dispatch(loginGoogle(userDate));
     dispatch(login(userDate));
   };
 
@@ -65,7 +69,7 @@ function LoginModal() {
       [e.target.name]: e.target.value,
     }));
   };
-
+  // const signin = useGoogleLogin({ onSuccess: handleGoogleLogin });
   return (
     <div>
       <Container>

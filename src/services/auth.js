@@ -6,12 +6,12 @@ const register = (userData) =>
     data: userData,
   });
 
-const registerGoogle = (accessToken) => {
-  http(`/v1/auth/register`, {
-    method: 'POST',
-    googleAccessToken: accessToken,
-  });
-};
+// const registerGoogle = (accessToken) => {
+//   http(`/v1/auth/register`, {
+//     method: 'POST',
+//     googleAccessToken: accessToken,
+//   });
+// };
 
 const login = (userData) =>
   http(`/v1/auth/login`, {
@@ -19,23 +19,21 @@ const login = (userData) =>
     data: userData,
   });
 
-const loginGoogle = (accessToken) => {
-  http(`/v1/auth/register`, {
-    method: 'POST',
-    googleAccessToken: accessToken,
-  });
-};
+// const loginGoogle = (accessToken) => {
+//   http(`/v1/auth/register`, {
+//     method: 'POST',
+//     googleAccessToken: accessToken,
+//   });
+// };
 
 // logout
-const logout = () => {
-  localStorage.removeItem('user');
-};
+const logout = () => {};
 
 const authService = {
   register,
-  registerGoogle,
   login,
-  loginGoogle,
+  // registerGoogle,
+  // loginGoogle,
   logout,
 };
 

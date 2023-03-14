@@ -21,20 +21,8 @@ export const register = createAsyncThunk('auth/create-account', async (user, thu
     return thunkAPI.rejectWithValue(message);
   }
 });
-// google register
-export const registerGoogle = createAsyncThunk('auth/create-account', async (user, thunkAPI) => {
-  try {
-    return await authService.registerGoogle(user);
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-});
 
-// google login
+// Login user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user);
@@ -46,18 +34,13 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     return thunkAPI.rejectWithValue(message);
   }
 });
-// Login user
-export const loginGoogle = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-  try {
-    return await authService.loginGoogle(user);
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return thunkAPI.rejectWithValue(message);
-  }
-});
+
+// // google register
+// export const registerGoogle = createAsyncThunk('auth/create-account', (token) =>
+//   authService.registerGoogle(token)
+// );
+// // google login
+// export const login = createAsyncThunk('auth/login', (token) => authService.login(token));
 
 // logout
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -83,12 +66,12 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = action.payload.data.user;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload.data;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -97,16 +80,19 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = action.payload.data.user;
+        localStorage.setItem('token', action.payload.data.token);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload.data;
         state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
       });
   },
 });

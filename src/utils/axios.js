@@ -1,22 +1,13 @@
 import axios from 'axios';
 
 const backendHttpInstance = () => {
-  const port = process.env.PORT || 5000;
   const axiosInstance = axios.create();
-  axiosInstance.defaults.baseURL = `http://localhost:${port}`;
+  axiosInstance.defaults.baseURL = 'http://localhost:8080';
 
   axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token') || '';
 
   axiosInstance.interceptors.response.use(
-    (config) => {
-      // update jwt
-      const { authorization } = config.headers;
-      if (authorization && authorization.startsWith('Bearer')) {
-        localStorage.setItem('token', authorization);
-      }
-
-      return config;
-    },
+    (config) => config,
     (error) => {
       error && console.log(error.response);
 

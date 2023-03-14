@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+// import { useGoogleLogin } from '@react-oauth/google';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Stack, Checkbox } from '@mui/material';
-import { register, registerGoogle, reset } from '../../features/slices/authSlice';
+import { register, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 import {
   Container,
@@ -46,6 +47,11 @@ function RegisterModel() {
   if (isLoading) {
     return <Spinner />;
   }
+  // google
+  // const handleGoogleRegister = (token) => {
+  //   const accessToken = token.access_token;
+  //   dispatch(registerGoogle(accessToken));
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -58,7 +64,6 @@ function RegisterModel() {
         email,
         password,
       };
-      dispatch(registerGoogle(userData));
       dispatch(register(userData));
     }
   };
@@ -69,7 +74,7 @@ function RegisterModel() {
       [e.target.name]: e.target.value,
     }));
   };
-
+  // const signup = useGoogleLogin({ onSuccess: handleGoogleRegister });
   return (
     <div>
       <Container>
