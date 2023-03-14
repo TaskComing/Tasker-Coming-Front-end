@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const backendHttpInstance = () => {
+  const port = process.env.PORT || 5000;
   const axiosInstance = axios.create();
-  axiosInstance.defaults.baseURL = 'http://localhost:5000';
+  axiosInstance.defaults.baseURL = `http://localhost:${port}`;
 
   axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token') || '';
 

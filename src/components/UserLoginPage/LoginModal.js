@@ -2,11 +2,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
 import star from '../../assets/LoginPageImages/star.png';
-import { login, reset } from '../../features/slices/authSlice';
+import { login, loginGoogle, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 
 import {
@@ -23,13 +24,11 @@ import {
 } from './Login.styles';
 
 function LoginModal() {
-  const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
   });
   const { email, password } = userInfo;
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,9 +39,8 @@ function LoginModal() {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate('/dashboard');
+      navigate('/login');
     }
-    setIsLogin(true);
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -57,6 +55,7 @@ function LoginModal() {
       email,
       password,
     };
+    dispatch(loginGoogle(userDate));
     dispatch(login(userDate));
   };
 
@@ -145,6 +144,13 @@ function LoginModal() {
     </div>
   );
 }
+
+// import PropTypes from 'prop-types';
+
+// function LoginModal({showModal,setShowModal}) {
+//  return ()
+// }
+
 // LoginModal.propTypes = {
 //   showModal: PropTypes.bool,
 //   setShowModal: PropTypes.func,

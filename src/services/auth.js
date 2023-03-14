@@ -1,20 +1,42 @@
 import http from '../utils/axios';
 
-export const postLogin = () =>
-  http(`/v1/auth/login`, {
-    method: 'POST',
-    data: {
-      email: 'asd@asd.com',
-      password: 'asdasd',
-    },
-  });
-
-export const postRegister = () =>
+const register = (userData) =>
   http(`/v1/auth/register`, {
     method: 'POST',
-    data: {
-      name: 'asd',
-      email: 'asd@asd.com',
-      password: 'asdasd',
-    },
+    data: userData,
   });
+
+const registerGoogle = (accessToken) => {
+  http(`/v1/auth/register`, {
+    method: 'POST',
+    googleAccessToken: accessToken,
+  });
+};
+
+const login = (userData) =>
+  http(`/v1/auth/login`, {
+    method: 'POST',
+    data: userData,
+  });
+
+const loginGoogle = (accessToken) => {
+  http(`/v1/auth/register`, {
+    method: 'POST',
+    googleAccessToken: accessToken,
+  });
+};
+
+// logout
+const logout = () => {
+  localStorage.removeItem('user');
+};
+
+const authService = {
+  register,
+  registerGoogle,
+  login,
+  loginGoogle,
+  logout,
+};
+
+export default authService;

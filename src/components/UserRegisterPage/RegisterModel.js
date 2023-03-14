@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Stack, Checkbox } from '@mui/material';
-import { register, reset } from '../../features/slices/authSlice';
+import { register, registerGoogle, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 import {
   Container,
@@ -20,12 +20,13 @@ import {
 
 function RegisterModel() {
   const [userInfo, setUserInfo] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-  const { name, email, password, confirmPassword } = userInfo;
+  const { firstName, lastName, email, password, confirmPassword } = userInfo;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,11 +53,12 @@ function RegisterModel() {
       toast.error('Passwords do not match');
     } else {
       const userData = {
-        name,
+        firstName,
+        lastName,
         email,
         password,
       };
-
+      dispatch(registerGoogle(userData));
       dispatch(register(userData));
     }
   };
@@ -95,16 +97,29 @@ function RegisterModel() {
             </Divider>
           </div>
           <Form onSubmit={handleSubmit}>
-            <label htmlFor="name" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              Your name
+            <label htmlFor="firstName" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              First Name:
             </label>
             <Input
               type="text"
               className="form-control"
               id="outlined-basic"
-              name="name"
-              value={name}
-              placeholder="Enter name"
+              name="firstName"
+              value={firstName}
+              placeholder="Enter your  firstName"
+              onChange={onChange}
+              required
+            />
+            <label htmlFor="lastName" style={{ fontSize: '14px', fontFamily: 'bold' }}>
+              Last Name:
+            </label>
+            <Input
+              type="text"
+              className="form-control"
+              id="outlined-basic"
+              name="lastName"
+              value={lastName}
+              placeholder="Enter your lastName"
               onChange={onChange}
               required
             />

@@ -1,13 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from '../../services/authService';
-
-// Get user from localStorage
-// const user = JSON.parse(localStorage.getItem('user'));
+import authService from '../../services/auth';
 
 const initialState = {
   user: null,
-  // token: getItem('token');
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -25,11 +21,35 @@ export const register = createAsyncThunk('auth/create-account', async (user, thu
     return thunkAPI.rejectWithValue(message);
   }
 });
+// google register
+export const registerGoogle = createAsyncThunk('auth/create-account', async (user, thunkAPI) => {
+  try {
+    return await authService.registerGoogle(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
-// Login user
+// google login
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+// Login user
+export const loginGoogle = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    return await authService.loginGoogle(user);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
