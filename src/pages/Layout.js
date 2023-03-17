@@ -10,7 +10,6 @@ import ListItem from '@mui/material/ListItem';
 import { CatchingPokemon } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/slices/authSlice';
-import LoginModal from '../components/UserLoginPage/LoginModal';
 
 const headerStyles = {
   appBar: {

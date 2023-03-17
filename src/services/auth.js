@@ -26,15 +26,11 @@ const login = (userData) =>
 //   });
 // };
 
-// logout
-const logout = () => {};
-
 const authService = {
   register,
   login,
   // registerGoogle,
   // loginGoogle,
-  logout,
 };
 
 export default authService;

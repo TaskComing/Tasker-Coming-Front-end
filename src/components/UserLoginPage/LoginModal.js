@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
 import star from '../../assets/LoginPageImages/star.png';
-import { login, reset } from '../../features/slices/authSlice';
+import { login } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 
 import {
@@ -41,7 +41,6 @@ function LoginModal() {
     if (isSuccess || user) {
       navigate('/dashboard');
     }
-    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
