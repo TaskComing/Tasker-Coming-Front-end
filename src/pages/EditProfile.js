@@ -2,7 +2,9 @@ import { styled, createTheme, ThemeProvider } from '@mui/material';
 import * as React from 'react';
 
 import ProfileSider from '../components/ProfileSider';
-// import ProfileSettingBox from '../components/ProfileSettingBox';
+
+import ProfileSettingBox from '../components/ProfileSettingBox';
+import Notification from './notification/Notification';
 import TaskDashboard from '../components/TaskDashBoard/TaskDashboard';
 
 const customTheme = createTheme({
@@ -48,6 +50,8 @@ function EditProfile() {
       <MainContainer>
         <ProfileSider value={value} handleChange={handleChange} />
         {value === 0 && <TaskDashboard />}
+        {value === 1 && <Notification />}
+        {value === 2 && <ProfileSettingBox />}
       </MainContainer>
     </ThemeProvider>
   );
