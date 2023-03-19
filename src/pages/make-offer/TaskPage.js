@@ -4,6 +4,7 @@ import taskData from './taskData';
 import TaskBody from './TaskBody';
 import TaskDetails from './TaskDetails';
 import OfferForm from './OfferForm';
+import OfferandQuestionTab from './OfferAndQuestionTab';
 
 const task = taskData[0];
 
@@ -15,6 +16,7 @@ function TaskPage() {
         <TaskDetails task={task} />
         <TaskBody task={task} />
         <OfferForm />
+        <OfferandQuestionTab />
       </div>
     </div>
   );
