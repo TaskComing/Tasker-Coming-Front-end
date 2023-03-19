@@ -4,6 +4,7 @@ import * as React from 'react';
 import ProfileSider from '../components/ProfileSider';
 // import ProfileSettingBox from '../components/ProfileSettingBox';
 import TaskDashboard from '../components/TaskDashBoard/TaskDashboard';
+import Settings from '../components/UserSetting/Settings';
 
 const customTheme = createTheme({
   palette: {
@@ -48,6 +49,7 @@ function EditProfile() {
       <MainContainer>
         <ProfileSider value={value} handleChange={handleChange} />
         {value === 0 && <TaskDashboard />}
+        {value === 2 && <Settings />}
       </MainContainer>
     </ThemeProvider>
   );
