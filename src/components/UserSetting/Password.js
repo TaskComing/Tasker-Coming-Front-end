@@ -14,8 +14,10 @@ import './Settings.css';
 let dynamicPasswordValidation = false;
 export default function Password() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowConfirmedPassword = () => setShowConfirmedPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -50,11 +52,13 @@ export default function Password() {
     }
     return resultOfPassword;
   };
+
   const handlePasswordSaving = (e) => {
     e.preventDefault();
     if (validationPassword()) {
       // TODO:
-      console.log('submit');
+      setPassword('');
+      setConfirmPassword('');
     } else {
       dynamicPasswordValidation = true;
     }
@@ -67,9 +71,9 @@ export default function Password() {
       </Typography>
       <div className="password">
         <StyledFormControl sx={{ m: 1, width: '50%' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <InputLabel htmlFor="user-password">Password</InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
+            id="user-password"
             type={showPassword ? 'text' : 'password'}
             value={password}
             error={!!formErrors.passwordError}
@@ -97,10 +101,10 @@ export default function Password() {
         </StyledFormControl>
 
         <StyledFormControl sx={{ m: 1, width: '50%' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+          <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
           <OutlinedInput
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
+            id="confirm-password"
+            type={showConfirmedPassword ? 'text' : 'password'}
             value={confirmPassword}
             error={!!formErrors.confirmPasswordError}
             onChange={(event) => {
@@ -111,11 +115,11 @@ export default function Password() {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
+                  onClick={handleClickShowConfirmedPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                  {showConfirmedPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
             }

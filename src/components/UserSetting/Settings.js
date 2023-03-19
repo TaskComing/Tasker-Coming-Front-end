@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Password from './Password';
 import UserSetting from './UserSetting';
 
