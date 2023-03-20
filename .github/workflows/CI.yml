@@ -14,7 +14,11 @@ on:
 jobs:
   Unit_Test_and_Lint_Check:
     runs-on: ubuntu-latest    
-
+    permissions:
+      actions: read
+      security-events: write
+      contents: read       # This is required for actions/checkout@v3
+    
     #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
     strategy:
       matrix:
