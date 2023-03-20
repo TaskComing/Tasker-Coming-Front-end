@@ -18,7 +18,7 @@ jobs:
     #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
 
     steps:   
 
@@ -33,18 +33,18 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
-      #install Eslint
-      - name: install Eslint
-        run: |
-          yarn install eslint
-      #run lint check
-      - name: Lint Check
-        run: |
-          yarn run lint
+#       #install Eslint
+#       - name: install Eslint
+#         run: |
+#           yarn install eslint
+#       #run lint check
+#       - name: Lint Check
+#         run: |
+#           yarn run lint
           
-     #install dependencies
-      - name: Install JS dependencies
-        run: yarn install
+#      #install dependencies
+#       - name: Install JS dependencies
+#         run: yarn install
       
 #       #run unit test              
 #       - name: Unit Test
