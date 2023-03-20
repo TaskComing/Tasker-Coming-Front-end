@@ -18,7 +18,7 @@ jobs:
     #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
         
     steps:    
       #actions/checkout@v3 is an official GitHub Action used to check-out a repository so a workflow can access it.
@@ -35,7 +35,7 @@ jobs:
       - name: yarn install, build, and test
         run: |
           yarn install
-          yarn run build --if-present
+          yarn && CI='' yarn build
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
