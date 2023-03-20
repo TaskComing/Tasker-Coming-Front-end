@@ -68,3 +68,6 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: aws s3 sync ./build s3://uat.taskercoming.com
+        
+      - name: cloudfront invalidation
+        run: aws cloudfront create-invalidation --distribution-id E2TNRPWUJW2CSF --paths "/*"
