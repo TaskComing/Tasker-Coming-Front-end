@@ -1,0 +1,80 @@
+:root {
+    --input-width: 52.8vw;
+  }
+
+div.search-bar{
+    min-width: 500px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    top: 14.4vw;
+}
+
+div.multiple-choices{
+    color: white;
+    font-size: 47px;
+    font-family: sans-serif;
+    font-weight: 500;
+    letter-spacing: 2.1px;
+    margin-bottom: 36px;
+}
+
+button.search{
+    position: absolute;
+    right: calc(50vw - 0.5 * var(--input-width) + 10px);
+    top: 99px;
+    width: 94px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: sans-serif;
+    letter-spacing: 1.5px;
+    border-radius: 6px;
+    border-width: 0px;
+    background-color:rgb(38, 57, 89);
+    color: white;
+}
+
+input.search-bar{
+    font-size: 15px;
+    font-weight: 600;
+    font-family: sans-serif;
+    letter-spacing: 1.5px;
+    width: var(--input-width);
+    height: 56px;
+    border-radius: 6px;
+    border-width: 0px;
+    background-image: url("../images/magnifier.png");
+}
+
+input.search-bar::placeholder{
+    color: rgba(149,158,173);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: sans-serif;
+    letter-spacing: 1.5px;
+}
+
+div.search-results{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 1120px;
+    height: 1490px;
+    padding: 15px 75px 30px 75px;
+    margin: 20px 75px 20px 75px;
+}
+
+div.filter-bar{
+    padding: 0px 75px 0px 75px;
+    margin: 20px 75px 20px 75px;
+}
+
+div.next-pages{
+    display: flex;
+    padding: 0px 75px 0px 75px;
+    margin: 20px 75px 20px 75px;
+}

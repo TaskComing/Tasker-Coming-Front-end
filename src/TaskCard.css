@@ -1,0 +1,73 @@
+body{
+    min-width: 500px;
+}
+
+div.tasks{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #999;
+}
+
+div.text{
+    padding: 20px 15px;
+}
+
+div.tasks > img{
+   width: 100%;
+}
+
+div.text > p.title-budget{
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    margin: 0px 0px 16px 0px;
+}
+
+ol{
+    margin: 16px 0px;
+    padding: 0px;
+}
+
+ol>li{
+    display: block;
+    margin: 5px 0px;
+}
+
+ol > li.location::before{
+    content: url("../images/location-icon.jpg");
+    margin: 0px 10px 0px 0px;
+}
+
+ol > li.due-date::before{
+    content: url("../images/calendar-icon.png");
+    margin: 0px 10px 0px 0px;
+}
+
+ol > li.time-of-day::before{
+    content: url("../images/clock-icon.png");
+    margin: 0px 10px 0px 0px;
+}
+
+div.text > div.profile-offers{
+    display: grid;
+    grid-template-rows: repeat(1fr, 2);
+    grid-template-columns: 50px 150px;
+}
+
+div.profile > img{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+div.profile-offers>div.profile{
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+div.profile-offers>div.poster-name{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+div.profile-offers>div.offers{
+    grid-area: 2 / 2 / 3 / 3;
+}

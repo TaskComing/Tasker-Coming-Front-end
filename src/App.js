@@ -1,41 +1,59 @@
-import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Theme from './Theme/Theme';
-import Layout from './pages/Layout';
-import Home from './pages/homepage/Home';
-import AboutTeam from './pages/AboutTeam';
-import BrowseTasks from './pages/BrowseTasks';
-import Login from './pages/Login';
-import CreateAccount from './pages/CreateAccount';
-import PostTask from './pages/PostTask';
-import TaskPage from './pages/make-offer/TaskPage';
-import Error from './pages/Error';
-import EditProfile from './pages/EditProfile';
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import {taskData} from './task-data.js';
+import {useState} from 'react';
+import NavBar from './NavBar.js';
+import TaskCard from './TaskCard.js';
+import './Search.css';
 
-function App() {
+export default function Search(){
+  const [searchTerm, setSearchTerm] = useState("");
+  const [query, setQuery] = useState("");
   return (
-    <ThemeProvider theme={Theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="post-task" element={<PostTask />} />
-            <Route path="browse-task" element={<BrowseTasks />} />
-            <Route path="about-team" element={<AboutTeam />} />
-            <Route path="login" element={<Login />} />
-            <Route path="create-account" element={<CreateAccount />} />
-            <Route path="*" element={<Error />} />
-            <Route path="profile" element={<EditProfile />} />
-            <Route path="task-details" element={<TaskPage />} />
-          </Route>
-        </Routes>
-        <ToastContainer />
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+    <>
+      <NavBar/>
+      <div className="search-bar">
+          <div className="multiple-choices">Multiple Choices</div>
+            <input className="search-bar" type="search" name="search" value={searchTerm}
+            placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search tasks"
+            onChange={(e) => setSearchTerm(e.target.value)}/>
+            <button className="search" onClick={() => {setQuery(searchTerm)}}>Search</button>
+      </div>
+      <div className="filter-bar"> </div>
+      <TaskItems query={query}/>
+      <div className="next-pages"> </div>
+    </>
+ )
 }
 
-export default App;
+function TaskItems({query}){
+
+  let taskList = [];
+  if (query === "") {
+    // If query is empty, return all tasks
+    taskList = Array.from(taskData); // Copy the taskData array to the "taskList" variable
+  } 
+  else {
+    // If query is not empty, return tasks whose title match the query
+    taskList = taskData.filter((task)=>task.title.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  if (taskList.length < 9){
+    for (let i = taskList.length; i < 9; i++){
+      taskList.push({});
+    }
+  }
+
+  return (
+    <div className="search-results">
+      <TaskCard task={taskList[0]}/>
+      <TaskCard task={taskList[1]}/>
+      <TaskCard task={taskList[2]}/>
+      <TaskCard task={taskList[3]}/>
+      <TaskCard task={taskList[4]}/>
+      <TaskCard task={taskList[5]}/>
+      <TaskCard task={taskList[6]}/>
+      <TaskCard task={taskList[7]}/>
+      <TaskCard task={taskList[8]}/>
+    </div>
+  );
+}

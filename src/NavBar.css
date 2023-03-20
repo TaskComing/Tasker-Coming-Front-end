@@ -1,0 +1,52 @@
+div.nav-bar{
+    min-width: 500px;
+    position: relative;
+}
+
+img{
+    width: 100%;
+}
+
+nav ul{
+    position: absolute;
+    top: 3.7%;
+    right: 21%;
+    list-style-type: none;
+    padding: 0px;
+}
+
+li {
+    display: inline-block;
+    margin-left: 11px;
+    margin-right: 11px;
+}
+
+a:link, a:visited{
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: sans-serif;
+    letter-spacing: 0.9px;
+    font-weight: 500;
+}
+
+a#browse{
+    color: cyan;
+    font-weight: bold;
+}
+
+button{
+    display: inline-block;
+    position: absolute;
+    top: 4%;
+    right: 9%;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 15px;
+    font-weight: bold;
+    border-color: cyan;
+    border-width: 1px;
+    border-radius: 4px;
+    width: 144px;
+    height: 45px;
+}

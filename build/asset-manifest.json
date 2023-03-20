@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "./static/css/main.ff8dd0f3.css",
+    "main.js": "./static/js/main.f987018a.js",
+    "static/js/787.b846cdd9.chunk.js": "./static/js/787.b846cdd9.chunk.js",
+    "static/media/Search-Bar-background.png": "./static/media/Search-Bar-background.d3e15209b264c3a47626.png",
+    "static/media/location-icon.jpg": "./static/media/location-icon.5c61dc0863d5b95eb83a.jpg",
+    "index.html": "./index.html",
+    "main.ff8dd0f3.css.map": "./static/css/main.ff8dd0f3.css.map",
+    "main.f987018a.js.map": "./static/js/main.f987018a.js.map",
+    "787.b846cdd9.chunk.js.map": "./static/js/787.b846cdd9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff8dd0f3.css",
+    "static/js/main.f987018a.js"
+  ]
+}

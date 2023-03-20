@@ -1,6 +1,6 @@
-# Tasker Coming Frontend
+# Getting Started with Create React App
 
-> node version 18
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
