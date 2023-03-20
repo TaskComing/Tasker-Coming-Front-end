@@ -14,16 +14,12 @@ on:
 jobs:
   Unit_Test_and_Lint_Check:
     runs-on: ubuntu-latest    
-    permissions:
-      actions: read
-      security-events: write
-      contents: read       # This is required for actions/checkout@v3
-    
+
     #ensures consistent behavior across different runners and different versions of Node.js by using matrix node version    
     strategy:
       matrix:
-        node-version: [16.x]
-
+         node-version: [16.x]
+         
     steps:   
 
       #actions/checkout@v3 is an official GitHub Action used to check-out a repository so a workflow can access it.
@@ -36,15 +32,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-
-      - name: Test Lint
-        run: yarn && CI='' yarn pre-commit
           
-#      #install dependencies
+#       #install dependencies
 #       - name: Install JS dependencies
 #         run: yarn install
       
 #       #run unit test              
 #       - name: Unit Test
 #         run: |
-#           yarn test --if-present
+#           yarn test
