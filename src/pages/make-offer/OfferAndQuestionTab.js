@@ -5,6 +5,7 @@ import Tabs from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import Typography from '@mui/material/Typography';
 import OfferTab from './OfferTab';
+import QuestionTab from './QuestionTab';
 
 export default function OfferAndQuestionTab() {
   const [value, setValue] = React.useState(0);
@@ -44,6 +45,7 @@ export default function OfferAndQuestionTab() {
           </TabList>
         </Box>
         {value === 0 && <OfferTab />}
+        {value === 1 && <QuestionTab />}
       </Tabs>
     </Box>
   );
