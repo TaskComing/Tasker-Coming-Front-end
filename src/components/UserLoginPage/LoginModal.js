@@ -2,21 +2,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
-import star from '../../assets/LoginPageImages/star.png';
 import { login } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
-
+import star from '../../assets/LoginPageImages/star.png';
 import {
   Container,
   Image,
   HeaderSection,
   SigninStyle,
   Text,
-  GoogleButton,
+  // GoogleButton,
   Form,
   Input,
   RegisterButton,
@@ -33,7 +33,6 @@ function LoginModal() {
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -46,11 +45,17 @@ function LoginModal() {
   if (isLoading) {
     return <Spinner />;
   }
-  // // google
-  // const handleGoogleLogin = (token) => {
-  //   const accessToken = token.access_token;
-  //   dispatch(loginGoogle(accessToken));
-  // };
+
+  const responseGoogle = async (response) => {
+    try {
+      const res = await axios.post('http://localhost:8080/v1/auth/google', {
+        tokenId: response.tokenId,
+      });
+      console.log('Google login response:', res);
+    } catch (error) {
+      console.error('Error during Google login:', error);
+    }
+  };
 
   // form onsubmit
   const handleSubmit = (e) => {
@@ -68,7 +73,7 @@ function LoginModal() {
       [e.target.name]: e.target.value,
     }));
   };
-  // const signin = useGoogleLogin({ onSuccess: handleGoogleLogin });
+
   return (
     <div>
       <Container>
@@ -88,9 +93,13 @@ function LoginModal() {
             <Image src={star} alt="img-star" />
             <SigninStyle>Sign in</SigninStyle>
           </HeaderSection>
-          <GoogleButton>
-            <Text sx={{ color: 'white' }}>Sign in with Google</Text>
-          </GoogleButton>
+          <GoogleLogin
+            clientId={process.env.GOOGLE_CLIENT_ID}
+            buttonText="Login with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy="single_host_origin"
+          />
           <div>
             <Divider sx={{ my: 1 }}>
               <Text>Or,Sign in with your email</Text>

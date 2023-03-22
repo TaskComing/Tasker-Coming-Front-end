@@ -47,11 +47,7 @@ function RegisterModel() {
   if (isLoading) {
     return <Spinner />;
   }
-  // google
-  // const handleGoogleRegister = (token) => {
-  //   const accessToken = token.access_token;
-  //   dispatch(registerGoogle(accessToken));
-  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -74,7 +70,7 @@ function RegisterModel() {
       [e.target.name]: e.target.value,
     }));
   };
-  // const signup = useGoogleLogin({ onSuccess: handleGoogleRegister });
+
   return (
     <div>
       <Container>

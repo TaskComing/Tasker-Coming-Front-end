@@ -35,7 +35,6 @@ const headerStyles = {
 };
 
 function Layout() {
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -92,7 +91,6 @@ function Layout() {
                 <ListItem sx={headerStyles.listItem}>
                   <Link to="/" className="link" onClick={onLogout}>
                     <Typography variant="subtitle">logout</Typography>
-                    {/* <LoginModal isLogin={!isLogin} setIsLogin={setIsLogin} /> */}
                   </Link>
                 </ListItem>
               </>

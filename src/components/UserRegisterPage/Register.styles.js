@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// import { styled } from '@mui/material/styles';
 
 export const Layout = styled.div`
   display: flex;
@@ -66,4 +67,5 @@ export const LoginButton = styled.span`
   text-decoration: underline;
   font-size: 16px;
   color: #1565d8;
+  /* color: ${(prop) => prop.Theme.palette.button.greyBtn}; */
 `;

@@ -18,7 +18,7 @@ export const register = createAsyncThunk('auth/create-account', async (user, thu
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
-    return thunkAPI.rejectWithValue(message);
+    return thunkAPI.rejectWithValue({ error: message });
   }
 });
 
@@ -34,13 +34,6 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-// // google register
-// export const registerGoogle = createAsyncThunk('auth/create-account', (token) =>
-//   authService.registerGoogle(token)
-// );
-// // google login
-// export const login = createAsyncThunk('auth/login', (token) => authService.login(token));
 
 // logout
 export const logout = createAsyncThunk('auth/logout', async () => {
