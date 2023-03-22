@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Theme from './Theme/Theme';
 import Layout from './pages/Layout';
 import Home from './pages/homepage/Home';
-import AboutTeam from './pages/AboutTeam';
+import AboutTeam from './pages/about-team/AboutTeam';
 import BrowseTasks from './pages/BrowseTasks';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
