@@ -36,5 +36,5 @@
   line-height: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
 }

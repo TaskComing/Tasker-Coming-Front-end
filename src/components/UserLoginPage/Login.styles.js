@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import theme from '../../Theme/Theme';
 
-export const Layout = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
-
-export const Container = styled.div``;
 
 export const HeaderSection = styled.section`
   display: flex;
@@ -24,46 +24,50 @@ export const SigninStyle = styled.text`
   font-weight: bold;
 `;
 
-export const Text = styled.text`
-  font-size: '10px';
-  color: #183b56;
-  font-family: 'Times New Roman', Times, serif;
-`;
-
 export const GoogleButton = styled.button`
-  background-color: #916df9;
-  height: 55px;
-  width: 360px;
   border-radius: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
+`;
+
+export const Text = styled.text`
+  font-size: '10px';
+  color: ${theme.palette.font.title};
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  max-width: 560px;
 `;
 
 export const Input = styled.input`
-  width: 360px;
+  max-width: 560px;
   height: 50px;
   border-radius: 10px;
-  border: 1px solid #c3cad9;
+  border: 1px solid ${theme.palette.primary.lightGray};
 `;
 
 export const SigninButton = styled.button`
-  background-color: #916df9;
+  background-color: ${theme.palette.button.purpleBtn};
   height: 55px;
-  width: 360px;
+  max-width: 560px;
   border-radius: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 16px;
 `;
-export const RegisterButton = styled.span`
+
+export const RegisterButton = styled.button`
+  background-color: ${theme.palette.button.whiteBtn};
   border: none;
   cursor: pointer;
-  text-decoration: underline;
   font-size: 16px;
-  color: #1565d8;
+  text-decoration: none;
+  color: ${theme.palette.font.blue};
+  &:hover {
+    color: ${theme.palette.font.black};
+    text-decoration: underline;
+  }
 `;
