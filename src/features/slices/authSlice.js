@@ -1,13 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import authService from '../../services/authService';
-
-// Get user from localStorage
-// const user = JSON.parse(localStorage.getItem('user'));
+import authService from '../../services/auth';
 
 const initialState = {
   user: null,
-  // token: getItem('token');
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -22,7 +18,7 @@ export const register = createAsyncThunk('auth/create-account', async (user, thu
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
-    return thunkAPI.rejectWithValue(message);
+    return thunkAPI.rejectWithValue({ error: message });
   }
 });
 
@@ -63,12 +59,12 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = action.payload.data;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload.data;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -77,16 +73,19 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = action.payload.data;
+        localStorage.setItem('token', action.payload.data);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload.data;
         state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
       });
   },
 });
