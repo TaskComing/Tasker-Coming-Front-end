@@ -13,16 +13,13 @@ import Spinner from '../Spinner/Spinner';
 import star from '../../assets/LoginPageImages/star.png';
 import {
   Container,
-  Image,
-  HeaderSection,
-  SigninStyle,
-  GoogleButton,
+  MainHeading,
   Text,
-  Form,
-  Input,
-  RegisterButton,
-  SigninButton,
-} from './Login.styles';
+  Button,
+  Section,
+  TextWrapper,
+} from '../../Theme/globalStyles';
+import { Image, HeaderSection, Form, Input } from './Login.styles';
 
 function LoginModal() {
   const [userInfo, setUserInfo] = useState({
@@ -118,13 +115,12 @@ function LoginModal() {
             transform: 'translate(-50%, -50%)',
             p: 2,
             border: '1px solid black',
-            borderRadius: '20px',
-            maxWidth: '600px',
+            borderRadius: '2rem',
           }}
         >
           <HeaderSection>
             <Image src={star} alt="img-star" />
-            <SigninStyle>Sign in</SigninStyle>
+            <MainHeading>Sign in</MainHeading>
           </HeaderSection>
           <GoogleLogin
             onSuccess={responseMessage}
@@ -168,25 +164,21 @@ function LoginModal() {
               justifyContent="space-between"
               sx={{ my: 2, marginRight: '50px' }}
             >
-              <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Checkbox name="remember" label="Remember me" style={{ marginRight: '0px' }} />
-                <p>Keep me sign in</p>
-              </span>
-              <Link variant="subtitle1" underline="hover" color={`${theme.palette.font.darkGrey}`}>
-                Forgot password?
+              <TextWrapper>
+                <Checkbox name="remember" label="Remember me" />
+                <Text>Keep me sign in</Text>
+              </TextWrapper>
+              <Link variant="subtitle1" underline="hover">
+                <Text color={`${theme.palette.font.darkGrey}`}>Forgot password?</Text>
               </Link>
             </Stack>
-            <SigninButton type="submit" color="#916DF9">
+            <Button type="submit" style={{ fontSize: '1.8rem' }}>
               Login
-            </SigninButton>
-            <section
-              style={{ display: 'flex', justifyContent: 'space-between', marginRight: '60px' }}
-            >
+            </Button>
+            <Section style={{ justifyContent: 'space-between', marginRight: '4rem' }}>
               Don&apos;t have an account?{' '}
-              <RegisterButton onClick={() => navigate('/create-account')}>
-                Register Now
-              </RegisterButton>
-            </section>
+              <Button onClick={() => navigate('/create-account')}>Register Now</Button>
+            </Section>
           </Form>
         </Box>
       </Container>

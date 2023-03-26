@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../Theme/Theme';
 
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const HeaderSection = styled.section`
   display: flex;
   align-items: flex-start;
@@ -14,60 +8,29 @@ export const HeaderSection = styled.section`
 
 export const Image = styled.img`
   display: flex;
-  width: 40px;
-  height: 40px;
-`;
-
-export const SigninStyle = styled.text`
-  margin: 0 auto;
-  font-size: 30px;
-  font-weight: bold;
-`;
-
-export const GoogleButton = styled.button`
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-`;
-
-export const Text = styled.text`
-  font-size: '10px';
-  color: ${theme.palette.font.title};
+  width: 4rem;
+  height: 4rem;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  max-width: 560px;
+  max-width: 56rem;
+  @media screen and (max-width: ${theme.breakpoints.largeLaptop}) {
+    max-width: 46rem;
+  }
+  @media screen and (max-width: ${theme.breakpoints.laptop}) {
+    max-width: 36rem;
+  }
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    max-width: 26rem;
+  }
 `;
 
 export const Input = styled.input`
-  max-width: 560px;
-  height: 50px;
-  border-radius: 10px;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  height: 5rem;
+  border-radius: 1rem;
   border: 1px solid ${theme.palette.primary.lightGray};
-`;
-
-export const SigninButton = styled.button`
-  background-color: ${theme.palette.button.purpleBtn};
-  height: 55px;
-  max-width: 560px;
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
-`;
-
-export const RegisterButton = styled.button`
-  background-color: ${theme.palette.button.whiteBtn};
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  text-decoration: none;
-  color: ${theme.palette.font.blue};
-  &:hover {
-    color: ${theme.palette.font.black};
-    text-decoration: underline;
-  }
 `;
