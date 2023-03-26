@@ -7,10 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { CatchingPokemon } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/slices/authSlice';
 import LoginModal from '../components/UserLoginPage/LoginModal';
+import Logo from '../assets/images/logo1.png';
 
 const headerStyles = {
   appBar: {
@@ -51,18 +51,14 @@ function Layout() {
       <AppBar sx={headerStyles.appBar}>
         <Toolbar>
           {/** Logo icon */}
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="logo"
-            sx={{ mr: 2, color: 'font.green' }}
-          >
-            <CatchingPokemon />
-          </IconButton>
+          <img src={Logo} alt="logo1" border="0" width="25px" />
 
           {/** Website title */}
-          <Typography variant="logo" component="div" sx={{ flexGrow: 1, color: 'font.green' }}>
+          <Typography
+            variant="logo"
+            component="div"
+            sx={{ flexGrow: 1, color: 'font.green', marginLeft: '10px' }}
+          >
             Tasker Coming
           </Typography>
 
