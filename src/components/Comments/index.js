@@ -10,13 +10,15 @@ import AddNewComment from './AddNewComment';
 import DisplayCurrentComment from './DisplayCurrentComment';
 
 function Comments() {
-  const initialCommentsList = ['111', '222'];
+  const initialCommentsList = [
+    'I really appreciate the insights and perspective shared in this article. It is definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!',
+    'I really appreciate the insights and perspective shared in this article. It is definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!',
+  ];
 
   const [commentInput, setCommentInput] = useState('');
   const [commentsList, setCommentsList] = useState(initialCommentsList);
 
   const handleCommentInput = (event) => {
-    // const value = event.target.value;
     setCommentInput(event.target.value);
   };
 

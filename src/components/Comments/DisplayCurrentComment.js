@@ -29,12 +29,12 @@ function DisplayCurrentComment(props) {
         }}
       />
       <CardContent>
-        <Typography variant="body1">{item}</Typography>
+        <Typography sx={{ fontSize: '18px', p: '0px 10px 15px 10px' }}>{item}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Box sx={{ m: '20' }}>
-            <ReplyIcon />
+            <ReplyIcon sx={{ fontSize: '18px' }} />
           </Box>
-          <Typography variant="body2">reply</Typography>
+          <Typography sx={{ fontSize: '18px' }}>reply</Typography>
         </Box>
       </CardContent>
     </Card>

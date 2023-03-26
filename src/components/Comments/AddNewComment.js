@@ -24,6 +24,10 @@ function AddNewComment(props) {
       </Box>
       <TextField
         fullWidth
+        sx={{ p: '0px 20px 0px 20px' }}
+        inputProps={{
+          style: { fontSize: 18 },
+        }}
         margin="normal"
         id="standard-multiline-flexible"
         placeholder="You type something......"
