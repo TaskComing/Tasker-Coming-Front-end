@@ -3,20 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Box, Divider, Stack, Checkbox } from '@mui/material';
+import { Box, Divider, Checkbox } from '@mui/material';
 import { register, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 import {
   Container,
-  HeaderSection,
-  RegisterStyle,
+  MainHeading,
   Text,
-  GoogleButton,
-  Form,
-  Input,
-  LoginButton,
-  SignUpButton,
-} from './Register.styles';
+  Button,
+  Section,
+  TextWrapper,
+} from '../../Theme/globalStyles';
+import { HeaderSection, GoogleButton, Form, Input } from './Register.styles';
 
 function RegisterModel() {
   const [userInfo, setUserInfo] = useState({
@@ -82,11 +80,11 @@ function RegisterModel() {
             transform: 'translate(-50%, -50%)',
             p: 2,
             border: '1px solid black',
-            borderRadius: '20px',
+            borderRadius: '2rem',
           }}
         >
           <HeaderSection>
-            <RegisterStyle>Let&apos;s join us</RegisterStyle>
+            <MainHeading>Let&apos;s join us</MainHeading>
           </HeaderSection>
           <GoogleButton>
             <Text sx={{ color: 'white' }}>Sign up with Google</Text>
@@ -97,9 +95,7 @@ function RegisterModel() {
             </Divider>
           </div>
           <Form onSubmit={handleSubmit}>
-            <label htmlFor="firstName" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              First Name:
-            </label>
+            <Text>First Name:</Text>
             <Input
               type="text"
               className="form-control"
@@ -110,9 +106,7 @@ function RegisterModel() {
               onChange={onChange}
               required
             />
-            <label htmlFor="lastName" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              Last Name:
-            </label>
+            <Text>Last Name:</Text>
             <Input
               type="text"
               className="form-control"
@@ -123,9 +117,7 @@ function RegisterModel() {
               onChange={onChange}
               required
             />
-            <label htmlFor="email" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              Email address
-            </label>
+            <Text>Email address</Text>
             <Input
               type="email"
               className="form-control"
@@ -136,9 +128,7 @@ function RegisterModel() {
               onChange={onChange}
               required
             />
-            <label htmlFor="password" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              Password
-            </label>
+            <Text>Password</Text>
             <Input
               type="password"
               className="form-control"
@@ -149,9 +139,7 @@ function RegisterModel() {
               onChange={onChange}
               required
             />
-            <label htmlFor="confirmPassword" style={{ fontSize: '14px', fontFamily: 'bold' }}>
-              Confirm Password
-            </label>
+            <Text>Confirm Password</Text>
             <Input
               type="password"
               className="form-control"
@@ -162,20 +150,18 @@ function RegisterModel() {
               onChange={onChange}
               required
             />
-            <Stack direction="row" alignItems="center" justifyContent="start" sx={{ my: 2 }}>
-              <Checkbox name="remember" label="Remember me" style={{ marginRight: '0px' }} />
-              <p>Agree to terms & conditions</p>
-            </Stack>
+            <TextWrapper>
+              <Checkbox name="remember" label="Remember me" />
+              <Text>Agree to terms & conditions</Text>
+            </TextWrapper>
 
-            <SignUpButton type="submit" color="#916DF9">
+            <Button type="submit" style={{ fontSize: '1.8rem' }}>
               Sign up
-            </SignUpButton>
-            <section
-              style={{ display: 'flex', justifyContent: 'space-between', marginRight: '60px' }}
-            >
+            </Button>
+            <Section style={{ justifyContent: 'space-between', marginRight: '60px' }}>
               Already have an account?{' '}
-              <LoginButton onClick={() => navigate('/login')}>Sign in now</LoginButton>
-            </section>
+              <Button onClick={() => navigate('/login')}>Sign in now</Button>
+            </Section>
           </Form>
         </Box>
       </Container>
