@@ -63,7 +63,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
-          role-to-assume: ${{ secrets.OICD }}
+          role-to-assume: ${{ secrets.OIDC }}
           aws-region: ap-southeast-2
 
       - name: Deploy static site to S3 bucket
