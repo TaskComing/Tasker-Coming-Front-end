@@ -60,7 +60,7 @@ export default function Page404() {
   const [images, setImages] = React.useState([]);
   const [flag, setFlag] = React.useState(false);
   const [remote, setRemote] = React.useState(false);
-  const [address, setAddress] = React.useState(true);
+  const [address, setAddress] = React.useState('');
   const [budget, setBudget] = useState('');
   const maxNumber = 69;
   const [taskTitle, settaskTitle] = useState('');
@@ -163,16 +163,16 @@ export default function Page404() {
                 When do you need this done?
               </Typography>
 
-              <Button
+              {/* <Button
                 onClick={handleClickDate}
                 style={{ marginTop: '-2px' }}
                 variant={flag ? 'contained' : 'outlined'}
                 color={flag ? 'success' : 'secondary'}
               >
                 I&#39;m flexible
-              </Button>
+              </Button> */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack style={{ marginTop: '20px' }}>
+                <Stack style={{ marginTop: '30px' }}>
                   <DateTimePicker
                     label="Date&Time picker"
                     value={taskDue}
@@ -267,9 +267,6 @@ export default function Page404() {
                   setAddress(value1.formatted_address);
                 }}
               />
-              <FormControl sx={{ width: '50ch', marginBottom: '1rem' }}>
-                <OutlinedInput value={address} onChange={handletaskAddress} />
-              </FormControl>
             </Box>
           )}
 
