@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -67,6 +68,11 @@ const theme = createTheme({
 function Home() {
   return (
     <div className="Homepage">
+      <Helmet>
+        <title>Home page</title>
+        <meta name="description" content="Description" />
+        <meta name="theme-color" content="#008f68" />
+      </Helmet>
       <Container className="bgColor">
         <ThemeProvider theme={theme}>
           {/** section 1 */}

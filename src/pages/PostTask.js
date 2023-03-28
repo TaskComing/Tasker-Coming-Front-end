@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 // import { Helmet } from 'react-helmet-async';
 import {
   Button,
@@ -102,6 +103,11 @@ export default function Page404() {
         backgroundHeight: '20%',
       }}
     >
+      <Helmet>
+        <title>Post a task</title>
+        <meta name="description" content="Description" />
+        <meta name="theme-color" content="#008f68" />
+      </Helmet>
       <Typography
         style={{ marginBottom: '10rem', textAlign: 'left', color: '#f5f5f5' }}
         variant="h5"

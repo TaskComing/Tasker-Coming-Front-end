@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import top from '../../assets/images/top.jpg';
@@ -8,6 +9,11 @@ import './AboutTeam.css';
 function AboutTeam() {
   return (
     <div>
+      <Helmet>
+        <title>About our team</title>
+        <meta name="description" content="Description" />
+        <meta name="theme-color" content="#008f68" />
+      </Helmet>
       <Box
         class="top"
         style={{

@@ -1,4 +1,5 @@
 import { styled, createTheme, ThemeProvider } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import * as React from 'react';
 import ProfileSider from '../components/ProfileSider';
 import Notification from './notification/Notification';
@@ -45,6 +46,11 @@ function EditProfile() {
   };
   return (
     <ThemeProvider theme={customTheme}>
+      <Helmet>
+        <title>Edit profile</title>
+        <meta name="description" content="Description" />
+        <meta name="theme-color" content="#008f68" />
+      </Helmet>
       <MainContainer>
         <ProfileSider value={value} handleChange={handleChange} />
         {value === 0 && <TaskDashboard />}
