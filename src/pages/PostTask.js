@@ -60,7 +60,7 @@ export default function Page404() {
   const [images, setImages] = React.useState([]);
   const [flag, setFlag] = React.useState(false);
   const [remote, setRemote] = React.useState(false);
-  const [address, setAddress] = React.useState('');
+  const [address, setAddress] = useState('undifine');
   const [budget, setBudget] = useState('');
   const maxNumber = 69;
   const [taskTitle, settaskTitle] = useState('');
@@ -89,9 +89,9 @@ export default function Page404() {
   const handletaskTitle = (event) => {
     settaskTitle(event.target.value);
   };
-  const handletaskAddress = (event) => {
-    setAddress(event.target.value);
-  };
+  // const handletaskAddress = (event) => {
+  //   setAddress(event.target.value);
+  // };
   const handletaskBudget = (event) => {
     setBudget(event.target.value);
   };
@@ -263,7 +263,7 @@ export default function Page404() {
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
-                  console.log(value1);
+                  // console.log(value1);
                   setAddress(value1.formatted_address);
                 }}
               />
