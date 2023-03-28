@@ -12,23 +12,23 @@ import {
   Container,
   Box,
   FormControl,
+  Stack,
   Step,
   StepLabel,
   Stepper,
 } from '@mui/material';
-import dayjs from 'dayjs';
-import Stack from '@mui/material/Stack';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AodIcon from '@mui/icons-material/Aod';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { CssVarsProvider } from '@mui/joy/styles';
+import Textarea from '@mui/joy/Textarea';
+import IconButton from '@mui/joy/IconButton';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import AddLocationIcon from '@mui/icons-material/AddLocation';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { CssVarsProvider } from '@mui/joy/styles';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AodIcon from '@mui/icons-material/Aod';
-import IconButton from '@mui/joy/IconButton';
-import Textarea from '@mui/joy/Textarea';
 import AddressAutocomplete from 'mui-address-autocomplete';
 import ImageUploading from 'react-images-uploading';
 import top from '../assets/images/top.jpg';
@@ -51,23 +51,19 @@ export default function Page404() {
   const [flag, setFlag] = React.useState(false);
   const [remote, setRemote] = React.useState(false);
   const [address, setAddress] = useState('undifine');
+  const [text, setText] = React.useState('');
+  const [taskTitle, settaskTitle] = useState('');
   const [budget, setBudget] = useState('');
   const maxNumber = 69;
-  const [taskTitle, settaskTitle] = useState('');
-  const [text, setText] = React.useState('');
-  const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
   const taskID = uuidv4();
+  const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
 
   const onChange = (imageList, addUpdateIndex) => {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-
   const handleChange = (newValue) => {
     setValue(newValue);
-  };
-  const handleClickDate = () => {
-    setFlag(!flag);
   };
   const handleClickRemote = () => {
     setRemote(!remote);
