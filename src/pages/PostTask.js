@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-// import { Helmet } from 'react-helmet-async';
 import {
   Button,
   InputLabel,
@@ -13,8 +12,6 @@ import {
   Container,
   Box,
   FormControl,
-  // Select,
-  // MenuItem,
   Step,
   StepLabel,
   Stepper,
@@ -30,18 +27,11 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { CssVarsProvider } from '@mui/joy/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AodIcon from '@mui/icons-material/Aod';
-// import Input from '@mui/joy/Input';
 import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
-
-// import TextareaAutosize from '@mui/base/TextareaAutosize';
 import AddressAutocomplete from 'mui-address-autocomplete';
 import ImageUploading from 'react-images-uploading';
 import top from '../assets/images/top.jpg';
-
-// import { createTheme } from '@mui/material/styles';
-// import { purple } from '@mui/material/colors';
-
 import { postTask } from '../services/task';
 import hotToast from '../utils/hotToast';
 
@@ -64,7 +54,6 @@ export default function Page404() {
   const [budget, setBudget] = useState('');
   const maxNumber = 69;
   const [taskTitle, settaskTitle] = useState('');
-  // const [taskDate, settaskDate] = useState('');
   const [text, setText] = React.useState('');
   const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
   const taskID = uuidv4();
@@ -83,15 +72,9 @@ export default function Page404() {
   const handleClickRemote = () => {
     setRemote(!remote);
   };
-  // const handleClickRemote = () => {
-  //   setRemote(!remote);
-  // };
   const handletaskTitle = (event) => {
     settaskTitle(event.target.value);
   };
-  // const handletaskAddress = (event) => {
-  //   setAddress(event.target.value);
-  // };
   const handletaskBudget = (event) => {
     setBudget(event.target.value);
   };
@@ -162,15 +145,6 @@ export default function Page404() {
               <Typography sx={{ marginBottom: '2rem' }} variant="h4" gutterBottom>
                 When do you need this done?
               </Typography>
-
-              {/* <Button
-                onClick={handleClickDate}
-                style={{ marginTop: '-2px' }}
-                variant={flag ? 'contained' : 'outlined'}
-                color={flag ? 'success' : 'secondary'}
-              >
-                I&#39;m flexible
-              </Button> */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack style={{ marginTop: '20px' }}>
                   <DateTimePicker
@@ -491,7 +465,6 @@ export default function Page404() {
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
-                  console.log(value1);
                   setAddress(value1.formatted_address);
                 }}
               />
