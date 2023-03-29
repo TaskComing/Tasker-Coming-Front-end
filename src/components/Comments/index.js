@@ -40,9 +40,6 @@ function Comments() {
   return (
     <Card sx={{ minWidth: 275, maxWidth: 1169 }}>
       <CardContent>
-        <Typography variant="h4" gutterBottom>
-          Your Comments
-        </Typography>
         <AddNewComment
           handleCommentInput={handleCommentInput}
           handleAddNewComment={handleAddNewComment}
@@ -50,6 +47,19 @@ function Comments() {
         />
         <Box fullWidth>
           <List fullWidth>{displayCurrentComments()}</List>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            border: 1,
+            backgroundColor: '#DCDCDC',
+            borderRadius: '5px',
+            p: '5px',
+          }}
+        >
+          <Typography sx={{ fontSize: '15px' }}>Load More</Typography>
         </Box>
       </CardContent>
     </Card>

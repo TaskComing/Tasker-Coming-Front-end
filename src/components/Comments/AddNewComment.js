@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 // import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -9,7 +10,36 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import Button from '@mui/material/Button';
 
 function AddNewComment(props) {
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+
   const { handleAddNewComment, handleCommentInput, newComment } = props;
+
+  const handleBoldToggle = () => {
+    setIsBold(() => {
+      if (isBold) {
+        return false;
+      }
+      return true;
+    });
+  };
+
+  const styleBold = () => {
+    if (isBold) {
+      return 'bold';
+    }
+    return '';
+  };
+
+  const handleItalicToggle = () => {
+    setIsItalic(() => {
+      if (isItalic) {
+        return false;
+      }
+      return true;
+    });
+  };
+
   return (
     <Box sx={{ border: 1 }} noValidate autoComplete="off">
       <Box>
@@ -26,7 +56,7 @@ function AddNewComment(props) {
         fullWidth
         sx={{ p: '0px 20px 0px 20px' }}
         inputProps={{
-          style: { fontSize: 18 },
+          style: { fontSize: 18, fontStyle: {}, fontWeight: { styleBold } },
         }}
         margin="normal"
         id="standard-multiline-flexible"
@@ -36,12 +66,6 @@ function AddNewComment(props) {
         variant="standard"
         onChange={handleCommentInput}
         value={newComment}
-        // inputProps={{
-        //   sx: {
-        //     fontStyle: 'italic',
-        //     fontWeight: 'bold',
-        //   },
-        // }}
       />
       <Box
         sx={{
@@ -57,9 +81,34 @@ function AddNewComment(props) {
           },
         }}
       >
-        <Box>
-          <FormatBoldIcon />
-          <FormatItalicIcon />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            m: '0 0 0 10px',
+          }}
+        >
+          <Box
+            sx={{
+              '&:hover': {
+                backgroundColor: '#DCDCDC',
+              },
+            }}
+            onClick={handleBoldToggle}
+          >
+            <FormatBoldIcon />
+          </Box>
+          <Box
+            sx={{
+              '&:hover': {
+                backgroundColor: '#DCDCDC',
+              },
+            }}
+            onClick={handleItalicToggle}
+          >
+            <FormatItalicIcon />
+          </Box>
         </Box>
         <Button
           variant="contained"
@@ -69,7 +118,7 @@ function AddNewComment(props) {
           }}
           onClick={handleAddNewComment}
         >
-          Comment
+          Submit
         </Button>
       </Box>
     </Box>

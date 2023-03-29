@@ -30,8 +30,18 @@ function DisplayCurrentComment(props) {
       />
       <CardContent>
         <Typography sx={{ fontSize: '18px', p: '0px 10px 15px 10px' }}>{item}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Box sx={{ m: '20' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            width: 'fit-content',
+            padding: '0 8px',
+            justifyContent: 'flex-start',
+            '&:hover': {
+              backgroundColor: '#DCDCDC',
+            },
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ReplyIcon sx={{ fontSize: '18px' }} />
           </Box>
           <Typography sx={{ fontSize: '18px' }}>reply</Typography>
