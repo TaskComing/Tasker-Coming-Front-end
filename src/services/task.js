@@ -2,7 +2,7 @@
 import http from '../utils/axios';
 
 export const postTask = (
-  taskID,
+  // taskID,
   taskTitle,
   taskDue,
   taskremote,
@@ -14,7 +14,7 @@ export const postTask = (
   http(`/v1/tasks`, {
     method: 'POST',
     data: {
-      _id: taskID,
+      // _id: taskID,
       title: taskTitle,
       due_time: taskDue,
       remote: taskremote,

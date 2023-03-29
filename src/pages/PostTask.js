@@ -576,7 +576,7 @@ export default function Page404() {
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
               onClick={async () => {
-                await postTask(taskID, taskTitle, taskDue, remote, address, text, images, budget);
+                await postTask(taskTitle, taskDue, remote, address, text, images, budget);
                 hotToast('success', 'Task Posted!');
               }}
             >
