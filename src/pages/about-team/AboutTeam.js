@@ -1,25 +1,34 @@
 import React from 'react';
 import { Section, Text } from '../../Theme/globalStyles';
-import { HeaderSection, CoverSection, ImgStyle, BoxStyle, MemberStyle } from './TeamStyled';
+import {
+  HeaderSection,
+  ImgStyle,
+  BoxStyle,
+  MemberStyle,
+  InnerStyle,
+  NameStyle,
+  PositionStyle,
+} from './TeamStyled';
 import Members from './Members';
 
 function AboutTeam() {
   return (
     <div>
       <HeaderSection>Meet Our Team Members</HeaderSection>
-      <CoverSection />
+      {/* <CoverSection /> */}
       <div>
         <Section>
           <BoxStyle>
-            {}
-            <MemberStyle>
-              <ImgStyle src={Members[0].avatar} alt="pic" />
-              <div>
-                <h3>{Members[0].name}</h3>
-                <h4>{Members[0].position}</h4>
-                <Text>{Members[0].description}</Text>
-              </div>
-            </MemberStyle>
+            {Members.map((member, index) => (
+              <MemberStyle key={index}>
+                <ImgStyle src={member.avatar} alt="pic" />
+                <InnerStyle>
+                  <NameStyle>{member.name}</NameStyle>
+                  <PositionStyle>{member.position}</PositionStyle>
+                  <Text style={{ marginLeft: '1rem' }}>{member.description}</Text>
+                </InnerStyle>
+              </MemberStyle>
+            ))}
           </BoxStyle>
         </Section>
       </div>

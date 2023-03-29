@@ -24,9 +24,9 @@ export default function LabTabs() {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="inherit">
-            <Tab label="Posted" value="1" />
-            <Tab label="Accepted" value="2" />
-            <Tab label="Following" value="3" />
+            <Tab label="Posted" value="1" style={{ fontSize: '1.4rem' }} />
+            <Tab label="Accepted" value="2" style={{ fontSize: '1.4rem' }} />
+            <Tab label="Following" value="3" style={{ fontSize: '1.4rem' }} />
           </TabList>
         </Box>
         <TabPanel value="1">

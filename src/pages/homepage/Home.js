@@ -22,37 +22,38 @@ const theme = createTheme({
     h1: {
       color: '#fff',
       fontWeight: 900,
-      fontSize: 64,
+      fontSize: '6.4rem',
       position: 'absolute',
       top: '10%',
       left: '8%',
-      width: 500,
+      width: '50rem',
       lineHeight: 1.2,
     },
     h2: {
       fontWeight: 900,
-      marginBottom: 10,
+      marginBottom: '1rem',
       color: '#263959',
     },
     h3: {
       fontWeight: 1000,
-      marginBottom: 10,
+      marginBottom: '1rem',
       color: '#263959',
     },
     subtitle1: {
       fontWeight: 500,
-      width: 500,
+      width: '50rem',
       margin: 'auto',
       lineHeight: 1.2,
       color: '#263959',
+      fontSize: '1.2rem',
     },
     subtitle2: {
       fontWeight: 1200,
-      width: 500,
+      width: '50rem',
       margin: 'auto',
       lineHeight: 1.2,
       color: '#093170',
-      fontSize: 22,
+      fontSize: '2.2rem',
     },
     section3: {
       marginBottom: 10,
@@ -90,7 +91,7 @@ function Home() {
             </Typography>
           </Box>
 
-          <Grid container spacing={5} marginTop={10}>
+          <Grid container spacing={5} marginTop="4rem">
             <Grid xs={6} item>
               <img className="bg1" src="/img/bg1.png" alt="icon" />
             </Grid>
@@ -102,8 +103,8 @@ function Home() {
 
           {/** section 3 */}
 
-          <Grid container rowSpacing={5} columnSpacing={2} marginTop={5} marginBottom={10}>
-            <Grid xs={12} item>
+          <Grid container rowSpacing={5} columnSpacing={2} marginTop="0.5rem" marginBottom="1rem">
+            <Grid xs="1.2rem" item>
               <Typography
                 variant="h2"
                 component="h2"
@@ -152,7 +153,7 @@ function Home() {
             </Box>
           </Grid>
           {/** section 6 */}
-          <Grid container rowSpacing={10} marginTop={5} marginBottom={10} className="section6">
+          <Grid container rowSpacing={10} marginTop={1} marginBottom={10} className="section6">
             <Grid xs={3.9} item marginTop={0} marginLeft={3}>
               <img src="/img/homepage2/pageComment1.jpg" alt="comments" width={320} />
             </Grid>
