@@ -8,7 +8,7 @@ import OfferTab from './OfferTab';
 import QuestionTab from './QuestionTab';
 
 export default function OfferAndQuestionTab() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('offer');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,12 +40,12 @@ export default function OfferAndQuestionTab() {
             aria-label="lab API tabs example"
             styles={{ color: '#4C535F' }}
           >
-            <Tab label={<Typography variant="h4">Offers(2)</Typography>} value={0} />
-            <Tab label={<Typography variant="h4">Questions(2)</Typography>} value={1} />
+            <Tab label={<Typography variant="h4">Offers(2)</Typography>} value="offer" />
+            <Tab label={<Typography variant="h4">Questions(2)</Typography>} value="question" />
           </TabList>
         </Box>
-        {value === 0 && <OfferTab />}
-        {value === 1 && <QuestionTab />}
+        {value === 'offer' && <OfferTab />}
+        {value === 'question' && <QuestionTab />}
       </Tabs>
     </Box>
   );
