@@ -55,5 +55,11 @@ const Members = [
     position: 'Full-stack developer',
     description: 'There are many variations of passages of Lorem Ipsum available',
   },
+  {
+    id: 6,
+    avatar: 'https://tupian.qqw21.com/article/UploadPic/2020-7/202071722263717701.jpg',
+    name: 'GUANJIE ZHONG',
+    responsibilities: 'post new task page',
+  },
 ];
 export default Members;
