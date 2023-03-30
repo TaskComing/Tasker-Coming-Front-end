@@ -229,7 +229,8 @@ export default function Page404() {
 
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
@@ -457,7 +458,8 @@ export default function Page404() {
               </Typography>
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
