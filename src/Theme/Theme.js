@@ -8,6 +8,7 @@ const theme = createTheme({
       lightBlueBg: '#f4f8fd',
       lightGreenBg: '#E6EFEC',
       lightGray: '#c3cad9',
+      white: '#fff',
     },
     button: {
       greenBtn: '#3EE8B5',

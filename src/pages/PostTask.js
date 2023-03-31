@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-// import { Helmet } from 'react-helmet-async';
 import {
   Button,
   InputLabel,
@@ -13,32 +12,26 @@ import {
   Container,
   Box,
   FormControl,
-  // Select,
-  // MenuItem,
+  Stack,
   Step,
   StepLabel,
   Stepper,
 } from '@mui/material';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AodIcon from '@mui/icons-material/Aod';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { CssVarsProvider } from '@mui/joy/styles';
+import Textarea from '@mui/joy/Textarea';
+import IconButton from '@mui/joy/IconButton';
+import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
-import Stack from '@mui/material/Stack';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import AddLocationIcon from '@mui/icons-material/AddLocation';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AodIcon from '@mui/icons-material/Aod';
-// import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
-import Textarea from '@mui/joy/Textarea';
-// import TextareaAutosize from '@mui/base/TextareaAutosize';
 import AddressAutocomplete from 'mui-address-autocomplete';
 import ImageUploading from 'react-images-uploading';
 import top from '../assets/images/top.jpg';
-
-// import { createTheme } from '@mui/material/styles';
-// import { purple } from '@mui/material/colors';
-
 import { postTask } from '../services/task';
 import hotToast from '../utils/hotToast';
 
@@ -53,40 +46,30 @@ const steps = [
 export default function Page404() {
   const [activeStep, setActiveStep] = useState(0);
   const [title, setTitle] = useState('');
-  const [value, setValue] = React.useState(dayjs());
+  const [taskDue, setValue] = React.useState(dayjs());
   const [images, setImages] = React.useState([]);
   const [flag, setFlag] = React.useState(false);
-  const [inperson, setInperson] = React.useState(true);
-  const [address, setAddress] = React.useState(true);
+  const [remote, setRemote] = React.useState(false);
+  const [address, setAddress] = useState('undifine');
+  const [text, setText] = React.useState('');
+  const [taskTitle, settaskTitle] = useState('');
   const [budget, setBudget] = useState('');
   const maxNumber = 69;
-  const [taskTitle, settaskTitle] = useState('');
-  // const [taskDate, settaskDate] = useState('');
-  const [text, setText] = React.useState('');
+  const taskID = uuidv4();
   const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
 
   const onChange = (imageList, addUpdateIndex) => {
-    // console.log(imageList, addUpdateIndex);
+    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  const handleClickDate = () => {
-    setFlag(!flag);
+  const handleClickRemote = () => {
+    setRemote(!remote);
   };
-  const handleClickInperson = () => {
-    setInperson(!inperson);
-  };
-  // const handleClickRemote = () => {
-  //   setRemote(!remote);
-  // };
   const handletaskTitle = (event) => {
     settaskTitle(event.target.value);
-  };
-  const handletaskAddress = (event) => {
-    setAddress(event.target.value);
   };
   const handletaskBudget = (event) => {
     setBudget(event.target.value);
@@ -158,20 +141,11 @@ export default function Page404() {
               <Typography sx={{ marginBottom: '2rem' }} variant="h4" gutterBottom>
                 When do you need this done?
               </Typography>
-
-              <Button
-                onClick={handleClickDate}
-                style={{ marginTop: '-2px' }}
-                variant={flag ? 'contained' : 'outlined'}
-                color={flag ? 'success' : 'secondary'}
-              >
-                I&#39;m flexible
-              </Button>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack style={{ marginTop: '20px' }}>
                   <DateTimePicker
                     label="Date&Time picker"
-                    value={value}
+                    value={taskDue}
                     onChange={handleChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
@@ -209,9 +183,9 @@ export default function Page404() {
 
                   <Box textAlign="center">
                     <Button
-                      onClick={handleClickInperson}
-                      variant={inperson ? 'contained' : 'outlined'}
-                      color={inperson ? 'success' : 'secondary'}
+                      onClick={handleClickRemote}
+                      variant={!remote ? 'contained' : 'outlined'}
+                      color={!remote ? 'success' : 'secondary'}
                       sx={{ marginBottom: '1rem' }}
                       size="small"
                     >
@@ -233,9 +207,9 @@ export default function Page404() {
 
                   <Box textAlign="center">
                     <Button
-                      onClick={handleClickInperson}
-                      variant={!inperson ? 'contained' : 'outlined'}
-                      color={!inperson ? 'success' : 'secondary'}
+                      onClick={handleClickRemote}
+                      variant={remote ? 'contained' : 'outlined'}
+                      color={remote ? 'success' : 'secondary'}
                       textAlign="center"
                       size="small"
                     >
@@ -255,7 +229,8 @@ export default function Page404() {
 
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
@@ -263,9 +238,6 @@ export default function Page404() {
                   setAddress(value1.formatted_address);
                 }}
               />
-              {/* <FormControl sx={{ width: '50ch', marginBottom: '1rem' }}>
-                <OutlinedInput value={address} onChange={handletaskAddress} />
-              </FormControl> */}
             </Box>
           )}
 
@@ -284,32 +256,34 @@ export default function Page404() {
                 What are the details
               </Typography>
 
-              <Textarea
-                placeholder="Type in here…"
-                value={text}
-                onChange={(event) => setText(event.target.value)}
-                minRows={5}
-                maxRows={7}
-                startDecorator={
-                  <Box sx={{ display: 'flex', gap: 0.5 }}>
-                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
-                      👍
-                    </IconButton>
-                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
-                      🏖
-                    </IconButton>
-                    <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
-                      😍
-                    </IconButton>
-                  </Box>
-                }
-                endDecorator={
-                  <Typography level="body3" sx={{ ml: 'auto' }}>
-                    {text.length} character(s)
-                  </Typography>
-                }
-                sx={{ minWidth: 300 }}
-              />
+              <CssVarsProvider>
+                <Textarea
+                  placeholder="Type in here…"
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  minRows={5}
+                  maxRows={7}
+                  startDecorator={
+                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('👍')}>
+                        👍
+                      </IconButton>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('🏖')}>
+                        🏖
+                      </IconButton>
+                      <IconButton variant="outlined" color="neutral" onClick={addEmoji('😍')}>
+                        😍
+                      </IconButton>
+                    </Box>
+                  }
+                  endDecorator={
+                    <Typography level="body3" sx={{ ml: 'auto' }}>
+                      {text.length} character(s)
+                    </Typography>
+                  }
+                  sx={{ minWidth: 300 }}
+                />
+              </CssVarsProvider>
 
               <Typography
                 sx={{ marginTop: '2rem', marginBottom: '2rem' }}
@@ -445,7 +419,7 @@ export default function Page404() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack style={{ marginTop: '1rem', width: '50ch' }}>
                   <DateTimePicker
-                    value={value}
+                    value={taskDue}
                     onChange={handleChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
@@ -459,17 +433,17 @@ export default function Page404() {
                 Is this a remote task?
               </Typography>
               <Button
-                onClick={handleClickInperson}
-                variant={inperson ? 'contained' : 'outlined'}
-                color={inperson ? 'success' : 'secondary'}
+                onClick={handleClickRemote}
+                variant={!remote ? 'contained' : 'outlined'}
+                color={!remote ? 'success' : 'secondary'}
                 size="small"
               >
                 In Person
               </Button>
               <Button
-                onClick={handleClickInperson}
-                variant={!inperson ? 'contained' : 'outlined'}
-                color={!inperson ? 'success' : 'secondary'}
+                onClick={handleClickRemote}
+                variant={remote ? 'contained' : 'outlined'}
+                color={remote ? 'success' : 'secondary'}
                 sx={{ marginLeft: '1rem' }}
                 size="small"
               >
@@ -484,11 +458,11 @@ export default function Page404() {
               </Typography>
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
-                  // console.log(value1);
                   setAddress(value1.formatted_address);
                 }}
               />
@@ -499,14 +473,16 @@ export default function Page404() {
               >
                 Task Details
               </Typography>
-              <Textarea
-                placeholder="Type in here…"
-                value={text}
-                onChange={(event) => setText(event.target.value)}
-                minRows={4}
-                maxRows={7}
-                sx={{ minWidth: 300 }}
-              />
+              <CssVarsProvider>
+                <Textarea
+                  placeholder="Type in here…"
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  minRows={4}
+                  maxRows={7}
+                  sx={{ minWidth: 300 }}
+                />
+              </CssVarsProvider>
               <Typography
                 sx={{ marginTop: '1rem', marginBottom: '1rem' }}
                 variant="subtitle1"
@@ -602,7 +578,7 @@ export default function Page404() {
               style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
               variant="contained"
               onClick={async () => {
-                await postTask(title);
+                await postTask(taskTitle, taskDue, remote, address, text, images, budget);
                 hotToast('success', 'Task Posted!');
               }}
             >

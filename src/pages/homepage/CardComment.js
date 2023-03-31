@@ -20,7 +20,7 @@ const card1 = (
       subheader="Co-founder"
     />
     <CardContent>
-      <Typography variant="body1" width={527} height={200}>
+      <Typography variant="body1" width={527} height={200} fontSize={11}>
         I used the end-of-lease cleaning service and the job had been done beautifully! I am really
         happy with the outcomes and also their customer support. Most likely I will use their
         service again in the future.
@@ -46,7 +46,7 @@ const card2 = (
       subheader="founder"
     />
     <CardContent>
-      <Typography variant="body2" width={527} height={200}>
+      <Typography variant="body2" width={527} height={200} fontSize={11}>
         Roberto and his team are very professional, responsive and prompt with all communications.
         They are a reliable cleaning service that removed stress for our end of lease. Great work.
         Highly recommend!
