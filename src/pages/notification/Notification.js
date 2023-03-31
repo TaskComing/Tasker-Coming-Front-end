@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -75,18 +76,24 @@ const StyledDiv = styled('div')(() => ({
 export default function Notification() {
   const [tabValue, setTabValue] = useState('task');
   const [notifications, setNotifications] = useState([]);
+  const { user } = useSelector((state) => state.auth);
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   const getNotification = async () => {
     const response = await http(`/v1/notifications`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
       data: {
-        userId: '6411040776987b7e139eeeb4',
+        userId: user.user.id,
       },
     });
     setNotifications(response.data);
-  };
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
   };
 
   useEffect(() => {
@@ -107,7 +114,7 @@ export default function Notification() {
       </Typography>
       <TabContext value={tabValue}>
         <Box sx={{ '& .MuiButtonBase-root': { fontFamily: 'DM Sans' } }}>
-          <StyledTabs onChange={handleChange} textColor="inherit">
+          <StyledTabs onChange={handleTabChange} textColor="inherit">
             <StyledTab label="Tasks" value="task" />
             <StyledTab label="Offers" value="offer" />
             <StyledTab label="Comments" value="comment" />

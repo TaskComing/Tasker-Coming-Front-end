@@ -1,19 +1,7 @@
 import { List, ListItemAvatar, ListItem, Avatar, ListItemText, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-const formatTime = (time) => {
-  const localDate = new Date(time);
-  // const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-  return localDate.toLocaleString('en-AU', {
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: false,
-  });
-};
+import formatTime from '../../utils/formatTime';
 
 function NotificationList({ data }) {
   return (
