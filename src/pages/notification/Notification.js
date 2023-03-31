@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -17,6 +18,7 @@ const StyledTabs = styled(TabList)({
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+  fontSize: '1.4rem',
   textTransform: 'none',
   minWidth: 0,
   [theme.breakpoints.up('sm')]: {
@@ -43,7 +45,7 @@ const StyledDiv = styled('div')(() => ({
   marginTop: '20px',
   border: '1px solid #eee',
   width: '80%',
-  borderRadius: '40px',
+  borderRadius: '4rem',
   backgroundColor: 'white',
   fontFamily: 'Poppins',
 
@@ -51,8 +53,8 @@ const StyledDiv = styled('div')(() => ({
     fontFamily: 'Poppins',
   },
   '& .MuiAvatar-root': {
-    width: '51px',
-    height: '51px',
+    width: '5rem',
+    height: '5rem',
   },
   '& .MuiBox-root': {
     width: '100%',
@@ -63,7 +65,7 @@ const StyledDiv = styled('div')(() => ({
     '& div': {
       display: 'flex',
       alignItems: 'center',
-      paddingLeft: '20px',
+      paddingLeft: '2rem',
     },
     '& div:last-child': {
       color: 'grey',
@@ -74,18 +76,24 @@ const StyledDiv = styled('div')(() => ({
 export default function Notification() {
   const [tabValue, setTabValue] = useState('task');
   const [notifications, setNotifications] = useState([]);
+  const { user } = useSelector((state) => state.auth);
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   const getNotification = async () => {
     const response = await http(`/v1/notifications`, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
       data: {
-        userId: '6411040776987b7e139eeeb4',
+        userId: user.user.id,
       },
     });
     setNotifications(response.data);
-  };
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
   };
 
   useEffect(() => {
@@ -106,7 +114,7 @@ export default function Notification() {
       </Typography>
       <TabContext value={tabValue}>
         <Box sx={{ '& .MuiButtonBase-root': { fontFamily: 'DM Sans' } }}>
-          <StyledTabs onChange={handleChange} textColor="inherit">
+          <StyledTabs onChange={handleTabChange} textColor="inherit">
             <StyledTab label="Tasks" value="task" />
             <StyledTab label="Offers" value="offer" />
             <StyledTab label="Comments" value="comment" />

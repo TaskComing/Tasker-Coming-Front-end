@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import TaskTitle from './TaskTitle';
 import TaskBody from './TaskBody';
 import TaskDetails from './TaskDetails';
@@ -10,8 +10,9 @@ import http from '../../utils/axios';
 function TaskPage() {
   const [task, setTask] = useState({});
   const [loading, setLoading] = useState(true);
+  const { taskId } = useParams();
   const getTask = async () => {
-    const response = await http(`/v1/tasks/6423903377cc1e68b0733b5b`, {
+    const response = await http(`/v1/tasks/${taskId}`, {
       method: 'GET',
     });
     setTask(response.data);

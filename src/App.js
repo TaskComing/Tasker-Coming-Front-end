@@ -26,7 +26,7 @@ function App() {
           <Route path="create-account" element={<CreateAccount />} />
           <Route path="*" element={<Error />} />
           <Route path="profile" element={<EditProfile />} />
-          <Route path="task-details" element={<TaskPage />} />
+          <Route path="task-details/:taskId" element={<TaskPage />} />
         </Route>
       </Routes>
       <ToastContainer />
