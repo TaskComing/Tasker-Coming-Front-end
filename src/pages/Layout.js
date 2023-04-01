@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/slices/authSlice';
 import LoginModal from '../components/UserLoginPage/LoginModal';
 import Logo from '../assets/images/logo1.png';
+import AccountMenu from './avatarDropDownMenu';
 
 const headerStyles = {
   appBar: {
@@ -91,6 +92,7 @@ function Layout() {
                     {/* <LoginModal isLogin={!isLogin} setIsLogin={setIsLogin} /> */}
                   </ListItem>
                 </Link>
+                <AccountMenu />
               </>
             ) : (
               <>

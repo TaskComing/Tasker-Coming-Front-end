@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -7,8 +9,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import { logout, reset } from '../features/slices/authSlice';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,6 +21,21 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { firstName, lastName, email, head_img_url: avatar } = user.user;
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  };
+
+  // const [profileSiderValue, setProfileSiderValue] = React.useState(0);
+  // const handleChange = (event, newValue) => {
+  //   setProfileSiderValue(newValue);
+  // };
 
   return (
     <>
@@ -32,7 +49,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar alt="avatar" src="img/defaultAvatar.svg" />
+            <Avatar alt="avatar" src={avatar} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -96,32 +113,32 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>tempUserId</MenuItem>
-        <p>a@b.c</p>
+        <MenuItem onClick={handleClose}>{`${firstName} ${lastName}`}</MenuItem>
+        <p>{email}</p>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <Link to="/browse-task">
+          <Link to="/profile" state={{ siderValue: 0 }}>
             <Typography variant="subtitle">My Task Dashboard</Typography>
           </Link>
           <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <Link to="/browse-task">
+          <Link to="/profile" state={{ siderValue: 1 }}>
             <Typography variant="subtitle">Notifications</Typography>
           </Link>
           <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <Link to="/browse-task">
+          <Link to="/profile" state={{ siderValue: 2 }}>
             <Typography variant="subtitle">Settings</Typography>
           </Link>
           <ChevronRightIcon className="chevronRightIcon" />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
-          <Link to="/browse-task">
+          <Link to="/" onClick={onLogout}>
             <Typography variant="subtitle">Logout</Typography>
           </Link>
           <ChevronRightIcon className="chevronRightIcon" />

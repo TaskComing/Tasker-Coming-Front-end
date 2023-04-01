@@ -1,5 +1,6 @@
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material';
-import * as React from 'react';
 import ProfileSider from '../components/ProfileSider';
 import Notification from './notification/Notification';
 import TaskDashboard from '../components/TaskDashBoard/TaskDashboard';
@@ -39,10 +40,17 @@ const MainContainer = styled('div')(({ theme }) => ({
 }));
 
 function EditProfile() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const stateData = useLocation().state;
+  useEffect(() => {
+    if (stateData) {
+      setValue(stateData.siderValue);
+    }
+  }, [stateData]);
   return (
     <ThemeProvider theme={customTheme}>
       <MainContainer>
