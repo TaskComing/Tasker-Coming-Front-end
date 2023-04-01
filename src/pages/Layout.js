@@ -22,12 +22,12 @@ const headerStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '60px',
+    height: '6rem',
     padding: '0px',
   },
   listItem: {
-    width: '180px',
-    height: '60px',
+    width: '18rem',
+    height: '6rem',
     ':hover': {
       backgroundColor: 'button.greenBtn',
       cursor: 'pointer',
@@ -36,7 +36,6 @@ const headerStyles = {
 };
 
 function Layout() {
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);

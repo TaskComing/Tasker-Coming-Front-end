@@ -28,6 +28,7 @@ function SiderTab({ value, handleChange }) {
           fontWeight: '400',
           justifyContent: 'flex-start',
           textTransform: 'none',
+          fontSize: '1.4rem',
         },
         '& .Mui-selected': { fontWeight: '700' },
       }}
