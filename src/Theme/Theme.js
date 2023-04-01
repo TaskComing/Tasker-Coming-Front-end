@@ -1,11 +1,13 @@
 import { createTheme } from '@mui/material/styles';
 
-const Theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
+      default: '#f5f5f5',
       main: '#263959',
       lightBlueBg: '#f4f8fd',
       lightGreenBg: '#E6EFEC',
+      lightGray: '#c3cad9',
     },
     button: {
       greenBtn: '#3EE8B5',
@@ -14,6 +16,7 @@ const Theme = createTheme({
       pinkBtn: '#FD346E',
       greyBtn: '#A4A3A1',
       blueBtn: '#1565D8',
+      whiteBtn: '#fff',
     },
     font: {
       green: '#3EE8B5',
@@ -24,6 +27,7 @@ const Theme = createTheme({
       darkGrey: '#5A7184',
       grey: '#999999',
       pink: '#FD346E',
+      blue: '#1565D8',
     },
   },
   typography: {
@@ -64,6 +68,30 @@ const Theme = createTheme({
       lineHeight: 1.2,
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      mobile: 320,
+      tablet: 576,
+      laptop: 768,
+      largeLaptop: 1024,
+      desktop: 1440,
+      largeDesktop: 1920,
+      wideScreen: 2560,
+    },
+    miniMobile: '0px',
+    mobile: '320px',
+    tablet: '576px',
+    laptop: '768px',
+    largeLaptop: '1024px',
+    desktop: '1440px',
+    largeDesktop: '1920px',
+    wideScreen: '2560px',
+  },
 });
 
-export default Theme;
+export default theme;
