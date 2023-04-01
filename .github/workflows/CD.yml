@@ -70,4 +70,4 @@ jobs:
         run: aws s3 sync ./build s3://uat.taskercoming.com
         
       - name: cloudfront invalidation
-        run: aws cloudfront create-invalidation --distribution-id E9BSR43EEL7UR --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E12SEML16DED9S --paths "/*"
