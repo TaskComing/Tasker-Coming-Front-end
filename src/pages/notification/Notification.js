@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import http from '../../utils/axios';
 
-import Offer from './Offers';
-import Question from './Questions';
+import NotificationList from './NotificationList';
 
 const StyledTabs = styled(TabList)({
   borderBottom: '1px solid #e8e8e8',
@@ -17,26 +18,16 @@ const StyledTabs = styled(TabList)({
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+  fontSize: '1.4rem',
   textTransform: 'none',
   minWidth: 0,
   [theme.breakpoints.up('sm')]: {
     minWidth: 0,
   },
+
   fontWeight: theme.typography.fontWeightRegular,
   marginRight: theme.spacing(1),
   color: 'rgba(0, 0, 0, 0.85)',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(','),
   '&:hover': {
     color: '#40a9ff',
     opacity: 1,
@@ -51,9 +42,10 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }
 }));
 
 const StyledDiv = styled('div')(() => ({
+  marginTop: '20px',
   border: '1px solid #eee',
   width: '80%',
-  borderRadius: '40px',
+  borderRadius: '4rem',
   backgroundColor: 'white',
   fontFamily: 'Poppins',
 
@@ -61,8 +53,8 @@ const StyledDiv = styled('div')(() => ({
     fontFamily: 'Poppins',
   },
   '& .MuiAvatar-root': {
-    width: '51px',
-    height: '51px',
+    width: '5rem',
+    height: '5rem',
   },
   '& .MuiBox-root': {
     width: '100%',
@@ -73,7 +65,7 @@ const StyledDiv = styled('div')(() => ({
     '& div': {
       display: 'flex',
       alignItems: 'center',
-      paddingLeft: '20px',
+      paddingLeft: '2rem',
     },
     '& div:last-child': {
       color: 'grey',
@@ -82,14 +74,34 @@ const StyledDiv = styled('div')(() => ({
 }));
 
 export default function Notification() {
-  const [value, setValue] = useState('offer');
+  const [tabValue, setTabValue] = useState('task');
+  const [notifications, setNotifications] = useState([]);
+  const { user } = useSelector((state) => state.auth);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
+  const getNotification = async () => {
+    const response = await http(`/v1/notifications`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
+      data: {
+        userId: user.user.id,
+      },
+    });
+    setNotifications(response.data);
+  };
+
+  useEffect(() => {
+    getNotification();
+  }, []);
+
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: '80%', typography: 'body1' }}>
       <Typography
         variant="h2"
         sx={{
@@ -100,19 +112,29 @@ export default function Notification() {
       >
         Notifications
       </Typography>
-      <TabContext value={value}>
+      <TabContext value={tabValue}>
         <Box sx={{ '& .MuiButtonBase-root': { fontFamily: 'DM Sans' } }}>
-          <StyledTabs onChange={handleChange} textColor="inherit">
+          <StyledTabs onChange={handleTabChange} textColor="inherit">
+            <StyledTab label="Tasks" value="task" />
             <StyledTab label="Offers" value="offer" />
-            <StyledTab label="Questions" value="question" />
+            <StyledTab label="Comments" value="comment" />
           </StyledTabs>
         </Box>
         <StyledDiv>
-          <TabPanel value="offer">
-            <Offer />
+          <TabPanel value="task">
+            <NotificationList
+              data={notifications.filter((notification) => notification.type === 'task')}
+            />
           </TabPanel>
-          <TabPanel value="question">
-            <Question />
+          <TabPanel value="offer">
+            <NotificationList
+              data={notifications.filter((notification) => notification.type === 'offer')}
+            />
+          </TabPanel>
+          <TabPanel value="comment">
+            <NotificationList
+              data={notifications.filter((notification) => notification.type === 'comment')}
+            />
           </TabPanel>
         </StyledDiv>
       </TabContext>

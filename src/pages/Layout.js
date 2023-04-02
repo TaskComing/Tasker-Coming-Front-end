@@ -22,12 +22,12 @@ const headerStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '60px',
+    height: '6rem',
     padding: '0px',
   },
   listItem: {
-    width: '180px',
-    height: '60px',
+    width: '18rem',
+    height: '6rem',
     ':hover': {
       backgroundColor: 'button.greenBtn',
       cursor: 'pointer',
@@ -36,7 +36,6 @@ const headerStyles = {
 };
 
 function Layout() {
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -66,65 +65,71 @@ function Layout() {
           <List sx={headerStyles.list}>
             {user ? (
               <>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/" className="link">
+                <Link to="/" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Home</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/post-task" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/post-task" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Post a task</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/browse-task" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/browse-task" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Browse tasks</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/about-team" className="link">
+                  </ListItem>
+                </Link>
+                {/* This link need to be deleted when browser page is ready */}
+                <Link to="/task-details/641e155eb18a29fbf07b6ede" className="link">
+                  <ListItem sx={headerStyles.listItem}>
+                    <Typography variant="subtitle">Task Details</Typography>
+                  </ListItem>
+                </Link>
+                <Link to="/about-team" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">About teams</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/" className="link" onClick={onLogout}>
+                  </ListItem>
+                </Link>
+                <Link to="/" className="link" onClick={onLogout}>
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">logout</Typography>
                     {/* <LoginModal isLogin={!isLogin} setIsLogin={setIsLogin} /> */}
-                  </Link>
-                </ListItem>
+                  </ListItem>
+                </Link>
               </>
             ) : (
               <>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/" className="link">
+                <Link to="/" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Home</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/post-task" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/post-task" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Post a task</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/browse-task" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/browse-task" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Browse tasks</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/about-team" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/about-team" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">About teams</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/login" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/login" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Login</Typography>
-                  </Link>
-                </ListItem>
-                <ListItem sx={headerStyles.listItem}>
-                  <Link to="/create-account" className="link">
+                  </ListItem>
+                </Link>
+                <Link to="/create-account" className="link">
+                  <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Create Account</Typography>
-                  </Link>
-                </ListItem>
+                  </ListItem>
+                </Link>
               </>
             )}
           </List>

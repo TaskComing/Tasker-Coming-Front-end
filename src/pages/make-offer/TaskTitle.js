@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,9 +9,10 @@ import Box from '@mui/material/Box';
 import './TaskTitle.css';
 import top from '../../assets/images/top.jpg';
 
-export default function TaskTitle({ task }) {
-  const { title, process, status } = task;
+const process = ['open', 'assigned', 'completed'];
 
+function TaskTitle({ task }) {
+  const { title, status } = task;
   const [following, setFollowing] = useState(false);
   const handleFollowingClick = () => {
     setFollowing(!following);
@@ -73,10 +75,23 @@ export default function TaskTitle({ task }) {
             if (currentStepIndex >= index) processClassName += 'highlight-process ';
 
             // const classN = 'class1 class2class3'
-            return <span className={processClassName}>{step}</span>;
+            return (
+              <span key={step} className={processClassName}>
+                {step}
+              </span>
+            );
           })}
         </div>
       </Box>
     </Box>
   );
 }
+
+TaskTitle.propTypes = {
+  task: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default TaskTitle;

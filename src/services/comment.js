@@ -1,12 +1,12 @@
-// import http from '../utils/axios';
+import http from '../utils/axios';
 
-// export const addComment = (text) =>
-//   http(`/v1/comments`, {
-//     method: 'POST',
-//     data: {
-//       _id: 102,
-//       title,
-//       state,
-//       deteled: false,
-//     },
-//   });
+export const getAllComments = () =>
+  http(`/v1/comments`, {
+    method: 'get',
+  });
+
+export const postComment = (text) =>
+  http(`/v1/comments`, {
+    method: 'post',
+    data: { text },
+  });

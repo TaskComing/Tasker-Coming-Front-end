@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Box from '@mui/material/Box';
@@ -8,41 +7,52 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import AddNewComment from './AddNewComment';
 import DisplayCurrentComment from './DisplayCurrentComment';
+import { getAllComments } from '../../services/comment';
 
 function Comments() {
-  const initialCommentsList = [
-    'I really appreciate the insights and perspective shared in this article. It is definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!',
-    'I really appreciate the insights and perspective shared in this article. It is definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!',
-  ];
-
+  const [loading, setLoading] = useState(false);
   const [commentInput, setCommentInput] = useState('');
-  const [commentsList, setCommentsList] = useState(initialCommentsList);
+  const [commentsList, setCommentsList] = useState([]);
+
+  const getComments = async () => {
+    setLoading(true);
+    const response = await getAllComments();
+    setCommentsList(response.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   const handleCommentInput = (event) => {
     setCommentInput(event.target.value);
   };
 
-  const handleAddNewComment = () => {
-    if (!commentInput.trim()) {
-      return;
-    }
-    setCommentsList((prevState) => [...prevState, commentInput]);
-    setCommentInput('');
-  };
+  // const handleAddNewComment = () => {
+  //   if (!commentInput.trim()) {
+  //     return;
+  //   }
+  //   setCommentsList((prevState) => [...prevState, commentInput]);
+  //   setCommentInput('');
+  // };
 
   const displayCurrentComments = () =>
-    commentsList.map((item, index) => (
+    commentsList.map((comment, index) => (
       <ListItem fullWidth key={index} sx={{ p: '0px 0px 8px 0px' }}>
-        <DisplayCurrentComment item={item} />
+        <DisplayCurrentComment comment={comment} />
       </ListItem>
     ));
 
+  if (loading) return <div>Loading......</div>;
   return (
     <Card sx={{ minWidth: 275, maxWidth: 1169 }}>
       <CardContent>
         <AddNewComment
           handleCommentInput={handleCommentInput}
-          handleAddNewComment={handleAddNewComment}
+          // handleAddNewComment={handleAddNewComment}
+          getComments={getComments}
+          setCommentInput={setCommentInput}
           newComment={commentInput}
         />
         <Box fullWidth>

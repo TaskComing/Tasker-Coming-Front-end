@@ -1,10 +1,11 @@
 import * as React from 'react';
 import './TaskTitle.css';
+import PropTypes from 'prop-types';
 
-export default function TaskBody({ task }) {
+function TaskBody({ task }) {
   return (
     <div className="price-box">
-      <div className="task-price">${task.price}</div>
+      <div className="task-price">${task.final_price}</div>
       <div className="task-description">
         <p>Details</p>
         <p>{task.detail}</p>
@@ -12,3 +13,12 @@ export default function TaskBody({ task }) {
     </div>
   );
 }
+
+TaskBody.propTypes = {
+  task: PropTypes.shape({
+    detail: PropTypes.string.isRequired,
+    final_price: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default TaskBody;
