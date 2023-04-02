@@ -37,7 +37,7 @@ function LoginModal() {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate('/profile');
+      navigate('/');
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
