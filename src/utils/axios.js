@@ -4,7 +4,9 @@ const backendHttpInstance = () => {
   const axiosInstance = axios.create();
   axiosInstance.defaults.baseURL = 'https://api.taskercoming.com';
 
-  axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token') || '';
+  axiosInstance.defaults.headers.common.Authorization = `Bearer ${
+    localStorage.getItem('token') || ''
+  }`;
 
   axiosInstance.interceptors.response.use(
     (config) => {
