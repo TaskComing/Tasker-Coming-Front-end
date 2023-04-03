@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -37,7 +37,7 @@ function LoginModal() {
       toast.error(message);
     }
     if (isSuccess || user) {
-      navigate('/');
+      navigate('/profile');
     }
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -45,16 +45,16 @@ function LoginModal() {
     return <Spinner />;
   }
 
-  const responseGoogle = async (response) => {
-    try {
-      const res = await axios.post('http://localhost:8080/v1/auth/google', {
-        tokenId: response.tokenId,
-      });
-      console.log('Google login response:', res);
-    } catch (error) {
-      console.error('Error during Google login:', error);
-    }
-  };
+  // const responseGoogle = async (response) => {
+  //   try {
+  //     const res = await axios.post('http://localhost:8080/v1/auth/google', {
+  //       tokenId: response.tokenId,
+  //     });
+  //     console.log('Google login response:', res);
+  //   } catch (error) {
+  //     console.error('Error during Google login:', error);
+  //   }
+  // };
 
   const onChange = (e) => {
     setUserInfo((prev) => ({
@@ -122,12 +122,12 @@ function LoginModal() {
             <Image src={star} alt="img-star" />
             <MainHeading>Sign in</MainHeading>
           </HeaderSection>
-          <GoogleLogin
+          {/* <GoogleLogin
             onSuccess={responseMessage}
             onError={errorMessage}
             buttonText="Login with Google"
             style={{ width: '60%' }}
-          />
+          /> */}
           <div>
             <Divider sx={{ my: 1 }}>
               <Text>Or,Sign in with your email</Text>
