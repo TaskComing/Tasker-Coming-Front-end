@@ -1,11 +1,13 @@
+// import { display, flexbox } from '@mui/system';
 import React from 'react';
+import { Box } from '@mui/material';
+import BrowseTaskItems from '../components/TaskBrowse/BrowseTasksItems';
 
 function BrowseTasks() {
   return (
-    <div>
-      This is the Browse Tasks page
-      <div>sasa</div>
-    </div>
+    <Box>
+      <BrowseTaskItems />
+    </Box>
   );
 }
 
