@@ -12,6 +12,7 @@ import PostTask from './pages/PostTask';
 import TaskPage from './pages/make-offer/TaskPage';
 import Error from './pages/Error';
 import EditProfile from './pages/EditProfile';
+import Tree from './pages/tree';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="*" element={<Error />} />
           <Route path="profile" element={<EditProfile />} />
           <Route path="task-details/:taskId" element={<TaskPage />} />
+          <Route path="tree" element={<Tree />} />
         </Route>
       </Routes>
       <ToastContainer />
