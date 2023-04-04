@@ -11,8 +11,6 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import TaskDetail1 from '../../assets/TaskBrowse/TaskDetail1.png';
-import Avatar1 from '../../assets/TaskBrowse/Avatar.jpg';
 import formatTime from '../../utils/formatTime';
 
 function OneTaskInfoShow({
@@ -24,12 +22,14 @@ function OneTaskInfoShow({
     address,
     create_datetime: createTime,
     due_time: dueTime,
-    _id: id,
+    id,
+    create_user_id: { head_img_url: avatarUrl },
+    images,
   },
 }) {
   return (
     <Card sx={{ maxWidth: 400 }}>
-      <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={TaskDetail1} />
+      <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={images[0]} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {title}
@@ -61,7 +61,7 @@ function OneTaskInfoShow({
         </Typography>
       </CardContent>
       <Stack direction="row" spacing={2}>
-        <Avatar alt="Avatar" src={Avatar1} />
+        <Avatar alt="Avatar" src={avatarUrl} />
       </Stack>
       <CardActions>
         <Button size="small">Share</Button>

@@ -14,7 +14,15 @@ function BrowseTaskItems() {
     const response = await http(`/v1/tasks/`, {
       method: 'GET',
     });
-    setTasks(response.data);
+
+    const responseArray = response.data;
+    const tasksArray = responseArray.map((task) => {
+      const { _id: id, ...rest } = task;
+      return { id, ...rest };
+    });
+
+    setTasks(tasksArray);
+    console.log(tasksArray);
   };
 
   useEffect(() => {
@@ -57,20 +65,17 @@ function BrowseTaskItems() {
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={8} marginBottom={3} marginLeft={-3}>
             {tasks &&
-              tasks.map((task) => (
-                <Grid
-                  item
-                  xs={4}
-                  // eslint-disable-next-line no-underscore-dangle
-                  key={task._id}
-                >
-                  <OneTaskInfoShow
-                    // eslint-disable-next-line no-underscore-dangle
-                    key={task._id}
-                    task={task}
-                  />
-                </Grid>
-              ))}
+              tasks.map(
+                (task) =>
+                  task.id &&
+                  task.create_user_id &&
+                  task.images &&
+                  task.images.length > 0 && (
+                    <Grid item xs={4} key={task.id}>
+                      <OneTaskInfoShow task={task} />
+                    </Grid>
+                  )
+              )}
           </Grid>
         </Box>
       </Box>
