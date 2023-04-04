@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/slices/authSlice';
 import LoginModal from '../components/UserLoginPage/LoginModal';
 import Logo from '../assets/images/logo1.png';
+import AccountMenu from './avatarDropDownMenu';
 
 const headerStyles = {
   appBar: {
@@ -22,12 +23,12 @@ const headerStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '60px',
+    height: '6rem',
     padding: '0px',
   },
   listItem: {
-    width: '180px',
-    height: '60px',
+    width: '18rem',
+    height: '6rem',
     ':hover': {
       backgroundColor: 'button.greenBtn',
       cursor: 'pointer',
@@ -36,7 +37,6 @@ const headerStyles = {
 };
 
 function Layout() {
-  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -92,6 +92,7 @@ function Layout() {
                     {/* <LoginModal isLogin={!isLogin} setIsLogin={setIsLogin} /> */}
                   </ListItem>
                 </Link>
+                <AccountMenu />
               </>
             ) : (
               <>

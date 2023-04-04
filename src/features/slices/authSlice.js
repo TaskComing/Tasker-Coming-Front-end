@@ -74,7 +74,8 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload.data;
-        localStorage.setItem('token', action.payload.data);
+        localStorage.setItem('userInfo', JSON.stringify(action.payload.data));
+        localStorage.setItem('token', action.payload.data.token);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -86,6 +87,7 @@ export const authSlice = createSlice({
         state.user = null;
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
       });
   },
 });

@@ -17,10 +17,10 @@ export default function CardLink() {
             alt="post a task"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h4" component="div">
               Post a task
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" fontSize={10}>
               Posting a task and getting quotes is completely free on tasker. Simply click Post a
               Task from your browser or app and follow the prompts to add details.
             </Typography>
@@ -41,10 +41,10 @@ export default function CardLink() {
             alt="post a task"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h4" component="div">
               Set your budget
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" fontSize={10}>
               Setting a fair price for the amount of time and effort required for the task is
               crucial. Tasker does not endorse low pricing of tasks and a task may be moderated if
               found to be.
@@ -66,10 +66,10 @@ export default function CardLink() {
             alt="post a task"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h4" component="div">
               Receive quotes
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" fontSize={10}>
               When you accept an offer, you will be able to communicate with the Tasker via private
               message to arrange further details - at this point, you can also choose to exchange
               contact details.
