@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
@@ -6,8 +6,20 @@ import TaskFilter from './TaskFilter';
 import OneTaskInfoShow from './OneTaskInfoShow';
 import SearchTasks from './SearchTasks';
 import bg from '../../assets/TaskBrowse/TaskDetailBackground.png';
+import http from '../../utils/axios';
 
 function BrowseTaskItems() {
+  const [tasks, setTasks] = useState([]);
+  const getTask = async () => {
+    const response = await http(`/v1/tasks/`, {
+      method: 'GET',
+    });
+    setTasks(response.data);
+  };
+
+  useEffect(() => {
+    getTask();
+  }, []);
   return (
     <Box margin={5}>
       <Box
@@ -44,41 +56,21 @@ function BrowseTaskItems() {
       <Box container spacing={5} marginBottom={5}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={8} marginBottom={3} marginLeft={-3}>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={8} marginBottom={3} marginLeft={-3}>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={8} marginBottom={3} marginLeft={-3}>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
-            <Grid item xs={4}>
-              <OneTaskInfoShow />
-            </Grid>
+            {tasks &&
+              tasks.map((task) => (
+                <Grid
+                  item
+                  xs={4}
+                  // eslint-disable-next-line no-underscore-dangle
+                  key={task._id}
+                >
+                  <OneTaskInfoShow
+                    // eslint-disable-next-line no-underscore-dangle
+                    key={task._id}
+                    task={task}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Box>

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,29 +13,51 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import TaskDetail1 from '../../assets/TaskBrowse/TaskDetail1.png';
 import Avatar1 from '../../assets/TaskBrowse/Avatar.jpg';
+import formatTime from '../../utils/formatTime';
 
-function OneTaskInfoShow() {
+function OneTaskInfoShow({
+  task: {
+    title,
+    final_price: finalPrice,
+    suburb,
+    state,
+    address,
+    create_datetime: createTime,
+    due_time: dueTime,
+    _id: id,
+  },
+}) {
   return (
     <Card sx={{ maxWidth: 400 }}>
       <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={TaskDetail1} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-          House clean
+          {title}
         </Typography>
         <Typography gutterBottom variant="h6" component="div" color="font.green">
-          $ 150
+          $ {finalPrice}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <LocationOnIcon /> Ascot QLD
+          <LocationOnIcon /> {suburb && state ? `${suburb}, ${state}` : address}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <DateRangeIcon /> Wed,8 Mar
+          <DateRangeIcon />{' '}
+          {formatTime(createTime, {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            month: 'short',
+            day: 'numeric',
+          })}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <AccessTimeIcon /> Morning ,Midday
+          <AccessTimeIcon />{' '}
+          {formatTime(dueTime, {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            month: 'short',
+            day: 'numeric',
+          })}
         </Typography>
       </CardContent>
       <Stack direction="row" spacing={2}>
@@ -42,10 +65,25 @@ function OneTaskInfoShow() {
       </Stack>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Link to={`/task-details/${id}`} style={{ textDecoration: 'none' }}>
+          <Button size="small">Learn More</Button>
+        </Link>
       </CardActions>
     </Card>
   );
 }
+
+OneTaskInfoShow.propTypes = {
+  task: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    final_price: PropTypes.number.isRequired,
+    suburb: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    create_datetime: PropTypes.string.isRequired,
+    due_time: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default OneTaskInfoShow;
