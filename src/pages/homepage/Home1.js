@@ -23,24 +23,17 @@ const theme = createTheme({
     h1: {
       color: '#fff',
       fontWeight: 900,
-      fontSize: '4rem',
+      fontSize: 64,
       position: 'absolute',
       top: '10%',
       left: '8%',
       width: 500,
       lineHeight: 1.2,
-      '@media (max-width: 960px)': {
-        fontSize: '2rem',
-        width: 300,
-      },
     },
     h2: {
       fontWeight: 900,
       marginBottom: 10,
       color: '#263959',
-      '@media (max-width: 960px)': {
-        fontSize: '2rem',
-      },
     },
     h3: {
       fontWeight: 1000,
@@ -84,7 +77,7 @@ function Home() {
         <ThemeProvider theme={theme}>
           {/** section 1 */}
           <Box className="section1">
-            <Typography variant="h1" component="h2" className="section1_title">
+            <Typography variant="h1" component="h2">
               90% Clients Hire Freelancer with Better Reviews
             </Typography>
             <Button variant="contained" color="success" className="btn">

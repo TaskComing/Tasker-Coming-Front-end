@@ -58,8 +58,16 @@
 }
 .btn {
   position: absolute;
-  top: 70%;
+  top: 27%;
   left: 8%;
+}
+@media (min-width: 960px) {
+  .btn {
+    top: 60%;
+    left: 8%;
+    height: 50px;
+    width: 200px;
+  }
 }
 .bgColor {
   background-color: #f5f5f5;
