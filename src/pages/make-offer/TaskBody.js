@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function TaskBody({ task }) {
   return (
     <div className="price-box">
-      <div className="task-price">${task.final_price}</div>
+      <div className="task-price">${task.budget}</div>
       <div className="task-description">
         <p>Details</p>
         <p>{task.detail}</p>
@@ -17,7 +17,7 @@ function TaskBody({ task }) {
 TaskBody.propTypes = {
   task: PropTypes.shape({
     detail: PropTypes.string.isRequired,
-    final_price: PropTypes.number.isRequired,
+    budget: PropTypes.number.isRequired,
   }).isRequired,
 };
 
