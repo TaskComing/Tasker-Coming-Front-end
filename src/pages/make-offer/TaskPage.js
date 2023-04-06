@@ -26,7 +26,7 @@ function TaskPage() {
     <div>
       {}
       {loading ? (
-        <div>Loading...</div>
+        <div> </div>
       ) : (
         <>
           <TaskTitle task={task} />
@@ -38,17 +38,6 @@ function TaskPage() {
           </div>
         </>
       )}
-      {/* {Object.keys(task).length > 0 && (
-        <>
-          <TaskTitle task={task} />
-          <div className="task-information">
-            <TaskDetails task={task} />
-            <TaskBody task={task} />
-            <OfferForm />
-            <OfferandQuestionTab />
-          </div>
-        </>
-      )} */}
     </div>
   );
 }
