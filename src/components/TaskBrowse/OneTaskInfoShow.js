@@ -16,7 +16,7 @@ import formatTime from '../../utils/formatTime';
 function OneTaskInfoShow({
   task: {
     title,
-    final_price: finalPrice,
+    budget,
     suburb,
     state,
     address,
@@ -35,7 +35,7 @@ function OneTaskInfoShow({
           {title}
         </Typography>
         <Typography gutterBottom variant="h6" component="div" color="font.green">
-          $ {finalPrice}
+          $ {budget}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
@@ -60,7 +60,7 @@ function OneTaskInfoShow({
           })}
         </Typography>
       </CardContent>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} marginLeft={2}>
         <Avatar alt="Avatar" src={avatarUrl} />
       </Stack>
       <CardActions>
@@ -76,13 +76,17 @@ function OneTaskInfoShow({
 OneTaskInfoShow.propTypes = {
   task: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    final_price: PropTypes.number.isRequired,
+    budget: PropTypes.number.isRequired,
     suburb: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    address: PropTypes.string,
     create_datetime: PropTypes.string.isRequired,
     due_time: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      head_img_url: PropTypes.string.isRequired,
+    }).isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

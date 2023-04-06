@@ -68,7 +68,7 @@ function TaskDetails({ task }) {
 
 TaskDetails.propTypes = {
   task: PropTypes.shape({
-    address: PropTypes.string.isRequired,
+    address: PropTypes.string,
     create_user_id: PropTypes.shape({
       firstName: PropTypes.string.isRequired,
       lastName: PropTypes.string.isRequired,
