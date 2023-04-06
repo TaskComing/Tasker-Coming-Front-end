@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const backendHttpInstance = () => {
   const axiosInstance = axios.create();
-  axiosInstance.defaults.baseURL = 'https://api.taskercoming.com';
+  axiosInstance.defaults.baseURL = 'http://localhost:8080';
 
   axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token') || '';
 

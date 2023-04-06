@@ -20,6 +20,11 @@ import {
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AodIcon from '@mui/icons-material/Aod';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CssVarsProvider } from '@mui/joy/styles';
 import Textarea from '@mui/joy/Textarea';
@@ -54,6 +59,8 @@ export default function Page404() {
   const [text, setText] = React.useState('');
   const [taskTitle, settaskTitle] = useState('');
   const [budget, setBudget] = useState('');
+  const [budgeterror, setBudgetError] = useState(false);
+  const [helperText, setHelperText] = useState('');
   const maxNumber = 69;
   const taskID = uuidv4();
   const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
@@ -71,8 +78,33 @@ export default function Page404() {
   const handletaskTitle = (event) => {
     settaskTitle(event.target.value);
   };
-  const handletaskBudget = (event) => {
-    setBudget(event.target.value);
+  const handletaskBudget = (e) => {
+    // setBudget(event.target.value);
+    const input = e.target.value;
+
+    if (/^(\d+)?$/.test(input)) {
+      setBudget(input);
+      setBudgetError(false);
+      setHelperText('');
+    } else {
+      setBudgetError(true);
+      setHelperText('Please enter a valid number');
+    }
+  };
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleConfirm = async () => {
+    await postTask(taskTitle, taskDue, remote, address, text, images, budget);
+    hotToast('success', 'Task Posted!');
+    window.location.href = 'https://www.example.com';
   };
 
   return (
@@ -80,9 +112,16 @@ export default function Page404() {
       class="top"
       style={{
         backgroundImage: `url(${top})`,
+        position: 'relative',
         backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundHeight: '20%',
+        // backgroundRepeat: 'no-repeat',
+        // backgroundWidth: '90rem',
+        backgroundHeight: '250px',
+        height: '250px',
+        // backgroundHeight: '400px',
+        backgroundPosition: 'top',
+        justifyContent: 'top',
+        alignItems: 'top',
       }}
     >
       <Typography
@@ -229,8 +268,8 @@ export default function Page404() {
 
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
-                key={process.env.API_KEY}
+                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
@@ -385,9 +424,12 @@ export default function Page404() {
                 <OutlinedInput
                   id="outlined-adornment-amount"
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                  type="number"
                   label="Amount"
                   value={budget}
                   onChange={handletaskBudget}
+                  error={budgeterror}
+                  helperText={helperText}
                 />
               </FormControl>
             </Box>
@@ -458,8 +500,8 @@ export default function Page404() {
               </Typography>
               <AddressAutocomplete
                 sx={{ marginTop: '10px' }}
-                // apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
-                key={process.env.API_KEY}
+                apiKey="AIzaSyBY15t6cyYTpM3N1xb3agsdWANVaEw6Cjc"
+                // key={process.env.API_KEY}
                 defaultValue={address}
                 fields={['geometry']}
                 onChange={(_, value1) => {
@@ -537,9 +579,14 @@ export default function Page404() {
               </Typography>
               <FormControl>
                 <OutlinedInput
+                  id="outlined-adornment-amount"
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                  type="number"
+                  label="Amount"
                   value={budget}
                   onChange={handletaskBudget}
+                  error={budgeterror}
+                  helperText={helperText}
                 />
               </FormControl>
             </Box>
@@ -574,16 +621,43 @@ export default function Page404() {
 
           {/* Save button */}
           {activeStep === 4 && (
-            <Button
-              style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
-              variant="contained"
-              onClick={async () => {
-                await postTask(taskTitle, taskDue, remote, address, text, images, budget);
-                hotToast('success', 'Task Posted!');
-              }}
-            >
-              Save & Submit
-            </Button>
+            <div>
+              {/* <Button
+                style={{ marginLeft: '10px', marginTop: '10px', marginBottom: '10rem' }}
+                variant="contained"
+                onClick={async () => {
+                  await postTask(taskTitle, taskDue, remote, address, text, images, budget);
+                  hotToast('success', 'Task Posted!');
+                }}
+              >
+                Save & Submit
+              </Button> */}
+              <Button
+                style={{ marginLeft: '80px', marginTop: '-250px' }}
+                variant="contained"
+                onClick={handleClickOpen}
+              >
+                Save & Submit
+              </Button>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>Are you sure you want to continue?</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>No</Button>
+                  <Button
+                    onClick={async () => {
+                      await postTask(taskTitle, taskDue, remote, address, text, images, budget);
+                      hotToast('success', 'Task Posted!');
+                      window.location.href = 'https://www.example.com';
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
           )}
         </Box>
       </Container>
