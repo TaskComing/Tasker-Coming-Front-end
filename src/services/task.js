@@ -9,7 +9,8 @@ export const postTask = (
   taskAddress,
   taskDetail,
   taskImages,
-  taskBudget
+  taskBudget,
+  userID
 ) =>
   http(`/v1/tasks`, {
     method: 'POST',
@@ -22,5 +23,6 @@ export const postTask = (
       detail: taskDetail,
       images: taskImages,
       budget: taskBudget,
+      create_user_id: userID,
     },
   });
