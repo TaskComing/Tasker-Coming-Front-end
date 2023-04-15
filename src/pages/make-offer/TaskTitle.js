@@ -19,8 +19,7 @@ function TaskTitle({ task }) {
   const [following, setFollowing] = useState(false);
 
   const updateFollowTask = async () => {
-    // eslint-disable-next-line no-underscore-dangle
-    const response = await http(`/v1/users/follow/${user.user._id}`, {
+    const response = await http(`/v1/users/follow/${user.user.id}`, {
       method: 'PUT',
       data: {
         following_task_id: task.id,
@@ -36,7 +35,6 @@ function TaskTitle({ task }) {
 
   useEffect(() => {
     if (user) {
-      // eslint-disable-next-line no-underscore-dangle
       const isFollowing = user.user.following_task_id.includes(task.id);
       setFollowing(isFollowing);
     }
@@ -76,7 +74,7 @@ function TaskTitle({ task }) {
           gutterBottom
         >
           {title}
-          {user && (
+          {user && user.user.id !== task.create_user_id.id && (
             <Button
               className={following ? 'following-button' : 'unfollowing-button'}
               color="secondary"
@@ -124,6 +122,9 @@ TaskTitle.propTypes = {
     title: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }).isRequired,
 };
 
