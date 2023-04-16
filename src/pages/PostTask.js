@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint no-underscore-dangle: 0 */
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import {
@@ -42,6 +43,7 @@ import ImageUploading from 'react-images-uploading';
 import top from '../assets/images/top.jpg';
 import { postTask } from '../services/task';
 import hotToast from '../utils/hotToast';
+import http from '../utils/axios';
 
 const steps = [
   'Title & Date',
@@ -50,6 +52,19 @@ const steps = [
   'Set Budget',
   'Confirm Information',
 ];
+
+async function postImage(images) {
+  const formData = new FormData();
+  images.forEach((image) => {
+    formData.append('image', image);
+  });
+
+  const result = await axios(`/v1/images`, {
+    formData,
+    headers: { 'Content-Type': 'multipart/form' },
+  });
+  return result.data;
+}
 
 export default function Page404() {
   const [activeStep, setActiveStep] = useState(0);
@@ -80,6 +95,16 @@ export default function Page404() {
   const handletaskTitle = (event) => {
     settaskTitle(event.target.value);
   };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      await postImage(images.map((img) => img.file));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handletaskBudget = (e) => {
     const input = e.target.value;
 
@@ -333,76 +358,84 @@ export default function Page404() {
                   >
                     Add images(options)
                   </Typography>
-
-                  <div className="App">
-                    <ImageUploading
-                      multiple
-                      value={images}
-                      onChange={onChange}
-                      maxNumber={maxNumber}
-                      dataURLKey="data_url"
-                    >
-                      {({
-                        imageList,
-                        onImageUpload,
-                        onImageRemoveAll,
-                        onImageUpdate,
-                        onImageRemove,
-                        isDragging,
-                        dragProps,
-                      }) => (
-                        <div className="upload__image-wrapper">
-                          <Button
-                            sx={{ marginBottom: '1rem' }}
-                            style={isDragging ? { color: 'red' } : undefined}
-                            variant="outlined"
-                            onClick={onImageUpload}
-                            startIcon={<AddCircleIcon />}
-                            {...dragProps}
-                          >
-                            Click or Drop here
-                          </Button>
-                          &nbsp;
-                          <Button
-                            sx={{ marginBottom: '1rem', marginLeft: '1rem' }}
-                            variant="outlined"
-                            onClick={onImageRemoveAll}
-                            startIcon={<DeleteIcon />}
-                          >
-                            Remove all images
-                          </Button>
-                          {imageList.map((image, index) => (
-                            <div key={index} className="image-item">
-                              <img src={image.data_url} alt="" width="50%" />
-                              <div className="image-item__btn-wrapper">
-                                <Button
-                                  sx={{ marginTop: '1rem', marginBottom: '1rem' }}
-                                  variant="outlined"
-                                  onClick={() => onImageUpdate(index)}
-                                  size="small"
-                                >
-                                  Replace
-                                </Button>
-                                &nbsp;
-                                <Button
-                                  sx={{
-                                    marginTop: '1rem',
-                                    marginBottom: '1rem',
-                                    marginLeft: '1rem',
-                                  }}
-                                  variant="outlined"
-                                  onClick={() => onImageRemove(index)}
-                                  size="small"
-                                >
-                                  Remove
-                                </Button>
+                  <form onSubmit={submit}>
+                    <div className="App">
+                      <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={onChange}
+                        maxNumber={maxNumber}
+                        dataURLKey="data_url"
+                      >
+                        {({
+                          imageList,
+                          onImageUpload,
+                          onImageRemoveAll,
+                          onImageUpdate,
+                          onImageRemove,
+                          isDragging,
+                          dragProps,
+                        }) => (
+                          <div className="upload__image-wrapper">
+                            <Button
+                              sx={{ marginBottom: '1rem' }}
+                              style={isDragging ? { color: 'red' } : undefined}
+                              variant="outlined"
+                              onClick={onImageUpload}
+                              startIcon={<AddCircleIcon />}
+                              {...dragProps}
+                            >
+                              Click or Drop here
+                            </Button>
+                            &nbsp;
+                            <Button
+                              sx={{ marginBottom: '1rem', marginLeft: '1rem' }}
+                              variant="outlined"
+                              onClick={onImageRemoveAll}
+                              startIcon={<DeleteIcon />}
+                            >
+                              Remove all images
+                            </Button>
+                            <Button
+                              sx={{ marginBottom: '1rem', marginLeft: '1rem' }}
+                              variant="outlined"
+                              type="submit"
+                            >
+                              Submit
+                            </Button>
+                            {imageList.map((image, index) => (
+                              <div key={index} className="image-item">
+                                <img src={image.data_url} alt="" width="50%" />
+                                <div className="image-item__btn-wrapper">
+                                  <Button
+                                    sx={{ marginTop: '1rem', marginBottom: '1rem' }}
+                                    variant="outlined"
+                                    onClick={() => onImageUpdate(index)}
+                                    size="small"
+                                  >
+                                    Replace
+                                  </Button>
+                                  &nbsp;
+                                  <Button
+                                    sx={{
+                                      marginTop: '1rem',
+                                      marginBottom: '1rem',
+                                      marginLeft: '1rem',
+                                    }}
+                                    variant="outlined"
+                                    onClick={() => onImageRemove(index)}
+                                    size="small"
+                                  >
+                                    Remove
+                                  </Button>
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </ImageUploading>
-                  </div>
+                            ))}
+                          </div>
+                        )}
+                      </ImageUploading>
+                    </div>
+                  </form>
                 </Box>
               )}
 
