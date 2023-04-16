@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StyledTextField from './StyledTextfiled';
 import './Settings.css';
+import http from '../../utils/axios';
 
 const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/;
 let dynamicValidation = false;
@@ -18,7 +20,7 @@ export default function UserSetting() {
     emailError: '',
     mobileError: '',
   });
-
+  const { user } = useSelector((state) => state.auth);
   const validateForm = () => {
     let passValidation = true;
 
@@ -67,11 +69,19 @@ export default function UserSetting() {
     setMobile('');
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // TODO: submit
+      await http(`/v1/users/${user.user.id}`, {
+        method: 'PUT',
+        data: {
+          firstName,
+          lastName,
+          email,
+          mobile,
+        },
+      });
       clearUpForm();
     } else {
       dynamicValidation = true;
