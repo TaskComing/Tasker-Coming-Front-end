@@ -1,12 +1,13 @@
 import React from 'react';
-import Password from './Password';
+// import Password from './Password';
 import UserSetting from './UserSetting';
 
 export default function Settings() {
   return (
     <div>
       <UserSetting />
-      <Password />
+      {/* TODO:   backend function nooot available
+      <Password /> */}
     </div>
   );
 }
