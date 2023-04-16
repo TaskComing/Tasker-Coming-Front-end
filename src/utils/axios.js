@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const backendHttpInstance = () => {
   const axiosInstance = axios.create();
-  axiosInstance.defaults.baseURL = 'https://uat.taskercoming.com';
+  axiosInstance.defaults.baseURL = 'https://taskercoming.com';
 
   axiosInstance.defaults.headers.common.Authorization = localStorage.getItem('token')
     ? `Bearer ${localStorage.getItem('token')}`
