@@ -35,8 +35,10 @@ function TaskPage() {
           <div className="task-information">
             <TaskDetails task={task} />
             <TaskBody task={task} />
-            {user && user.user.id !== task.create_user_id.id && <OfferForm task={task} />}
-            <OfferandQuestionTab />
+            {user && user.user.id !== task.create_user_id.id && task.status === 'open' && (
+              <OfferForm task={task} />
+            )}
+            <OfferandQuestionTab task={task} user={user} />
           </div>
         </>
       )}
