@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,42 +11,83 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import TaskDetail1 from '../../assets/TaskBrowse/TaskDetail1.png';
-import Avatar1 from '../../assets/TaskBrowse/Avatar.jpg';
+import formatTime from '../../utils/formatTime';
 
-function OneTaskInfoShow() {
+function OneTaskInfoShow({
+  task: {
+    title,
+    budget,
+    suburb,
+    state,
+    address,
+    create_datetime: createTime,
+    due_time: dueTime,
+    id,
+    create_user_id: { head_img_url: avatarUrl },
+    images,
+  },
+}) {
   return (
     <Card sx={{ maxWidth: 400 }}>
-      <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={TaskDetail1} />
+      <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={images[0]} />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-          House clean
+          {title}
         </Typography>
         <Typography gutterBottom variant="h6" component="div" color="font.green">
-          $ 150
+          $ {budget}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <LocationOnIcon /> Ascot QLD
+          <LocationOnIcon /> {suburb && state ? `${suburb}, ${state}` : address}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <DateRangeIcon /> Wed,8 Mar
+          <DateRangeIcon />{' '}
+          {formatTime(createTime, {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            month: 'short',
+            day: 'numeric',
+          })}
         </Typography>
 
         <Typography variant="body2" color="font.darkGrey">
-          <AccessTimeIcon /> Morning ,Midday
+          <AccessTimeIcon />{' '}
+          {formatTime(dueTime, {
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            month: 'short',
+            day: 'numeric',
+          })}
         </Typography>
       </CardContent>
-      <Stack direction="row" spacing={2}>
-        <Avatar alt="Avatar" src={Avatar1} />
+      <Stack direction="row" spacing={2} marginLeft={2}>
+        <Avatar alt="Avatar" src={avatarUrl} />
       </Stack>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Link to={`/task-details/${id}`} style={{ textDecoration: 'none' }}>
+          <Button size="small">Learn More</Button>
+        </Link>
       </CardActions>
     </Card>
   );
 }
+
+OneTaskInfoShow.propTypes = {
+  task: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    budget: PropTypes.number.isRequired,
+    suburb: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    address: PropTypes.string,
+    create_datetime: PropTypes.string.isRequired,
+    due_time: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      head_img_url: PropTypes.string.isRequired,
+    }).isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
 
 export default OneTaskInfoShow;
