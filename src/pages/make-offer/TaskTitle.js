@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -8,15 +9,37 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';
 import './TaskTitle.css';
 import top from '../../assets/images/top.jpg';
+import http from '../../utils/axios';
 
 const process = ['open', 'assigned', 'completed'];
 
 function TaskTitle({ task }) {
+  const { user } = useSelector((state) => state.auth);
   const { title, status } = task;
   const [following, setFollowing] = useState(false);
+
+  const updateFollowTask = async () => {
+    const response = await http(`/v1/users/follow/${user.user.id}`, {
+      method: 'PUT',
+      data: {
+        following_task_id: task.id,
+      },
+    });
+    return response.data;
+  };
+
   const handleFollowingClick = () => {
     setFollowing(!following);
+    updateFollowTask();
   };
+
+  useEffect(() => {
+    if (user) {
+      const isFollowing = user.user.following_task_id.includes(task.id);
+      setFollowing(isFollowing);
+    }
+  }, [user]);
+
   const currentStepIndex = process.indexOf(status);
 
   return (
@@ -37,25 +60,32 @@ function TaskTitle({ task }) {
           // backgroundSize: 'cover',
           // height: '200px',
           display: 'flex',
-          flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
         }}
       >
-        <div className="left-container">Left</div>
-        <Typography style={{ textAlign: 'center', color: '#f5f5f5' }} variant="h3" gutterBottom>
-          Task Title : {title}
-        </Typography>
-
-        <Button
-          className={following ? 'following-button' : 'unfollowing-button'}
-          color="secondary"
-          onClick={handleFollowingClick}
-          variant="outlined"
-          startIcon={following ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        <Typography
+          style={{
+            textAlign: 'center',
+            color: '#f5f5f5',
+            position: 'relative',
+          }}
+          variant="h3"
+          gutterBottom
         >
-          {following ? 'following' : 'follow'}
-        </Button>
+          {title}
+          {user && user.user.id !== task.create_user_id.id && (
+            <Button
+              className={following ? 'following-button' : 'unfollowing-button'}
+              color="secondary"
+              onClick={handleFollowingClick}
+              variant="outlined"
+              startIcon={following ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            >
+              {following ? 'following' : 'follow'}
+            </Button>
+          )}
+        </Typography>
       </Box>
       <Box
         style={{
@@ -91,6 +121,10 @@ TaskTitle.propTypes = {
   task: PropTypes.shape({
     title: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }).isRequired,
 };
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/lab/TabContext';
@@ -7,8 +8,8 @@ import Typography from '@mui/material/Typography';
 import OfferTab from './OfferTab';
 import QuestionTab from './QuestionTab';
 
-export default function OfferAndQuestionTab() {
-  const [value, setValue] = React.useState('offer');
+function OfferAndQuestionTab({ task, user }) {
+  const [value, setValue] = React.useState('question');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,7 +41,9 @@ export default function OfferAndQuestionTab() {
             aria-label="lab API tabs example"
             styles={{ color: '#4C535F' }}
           >
-            <Tab label={<Typography variant="h4">Offers(2)</Typography>} value="offer" />
+            {user && user.user.id === task.create_user_id.id && (
+              <Tab label={<Typography variant="h4">Offers(2)</Typography>} value="offer" />
+            )}
             <Tab label={<Typography variant="h4">Questions(2)</Typography>} value="question" />
           </TabList>
         </Box>
@@ -50,3 +53,52 @@ export default function OfferAndQuestionTab() {
     </Box>
   );
 }
+
+OfferAndQuestionTab.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    detail: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+      suburb: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      postcode: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      profileImage: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      create_datetime: PropTypes.string.isRequired,
+      update_datetime: PropTypes.string.isRequired,
+    }).isRequired,
+    budget: PropTypes.number.isRequired,
+    suburb: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    create_datetime: PropTypes.string.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    user: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
+      suburb: PropTypes.string.isRequired,
+      state: PropTypes.string.isRequired,
+      postcode: PropTypes.string.isRequired,
+      country: PropTypes.string.isRequired,
+      profileImage: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      create_datetime: PropTypes.string.isRequired,
+      update_datetime: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
+
+export default OfferAndQuestionTab;

@@ -56,10 +56,11 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload.data;
+        // state.user = action.payload.data;
+        state.user = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -74,6 +75,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload.data;
+        localStorage.setItem('userInfo', JSON.stringify(action.payload.data));
         localStorage.setItem('token', action.payload.data.token);
       })
       .addCase(login.rejected, (state, action) => {
@@ -86,6 +88,7 @@ export const authSlice = createSlice({
         state.user = null;
         localStorage.removeItem('user');
         localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
       });
   },
 });
