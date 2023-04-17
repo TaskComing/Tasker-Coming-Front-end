@@ -81,11 +81,11 @@ function Layout() {
                   </ListItem>
                 </Link>
                 {/* This link need to be deleted when browser page is ready */}
-                <Link to="/task-details/641e155eb18a29fbf07b6ede" className="link">
+                {/* <Link to="/task-details/641e155eb18a29fbf07b6ede" className="link">
                   <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">Task Details</Typography>
                   </ListItem>
-                </Link>
+                </Link> */}
                 <Link to="/about-team" className="link">
                   <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">About teams</Typography>
