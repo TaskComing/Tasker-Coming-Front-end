@@ -6,18 +6,19 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import AddNewComment from './AddNewComment';
-import DisplayCurrentComment from './DisplayCurrentComment';
+import DisplayComment from './DisplayComment';
 import { getAllComments } from '../../services/comment';
 
 function Comments() {
   const [loading, setLoading] = useState(false);
-  const [commentInput, setCommentInput] = useState('');
+  const [commentInput, setCommentInput] = useState({});
   const [commentsList, setCommentsList] = useState([]);
 
   const getComments = async () => {
     setLoading(true);
     const response = await getAllComments();
     setCommentsList(response.data);
+
     setLoading(false);
   };
 
@@ -25,22 +26,43 @@ function Comments() {
     getComments();
   }, []);
 
-  const handleCommentInput = (event) => {
-    setCommentInput(event.target.value);
+  const handleCommentInput = (event, id) => {
+    setCommentInput({ ...commentInput, [id]: event.target.value });
   };
 
-  // const handleAddNewComment = () => {
-  //   if (!commentInput.trim()) {
-  //     return;
-  //   }
-  //   setCommentsList((prevState) => [...prevState, commentInput]);
-  //   setCommentInput('');
-  // };
-
-  const displayCurrentComments = () =>
-    commentsList.map((comment, index) => (
-      <ListItem fullWidth key={index} sx={{ p: '0px 0px 8px 0px' }}>
-        <DisplayCurrentComment comment={comment} />
+  const displayComments = () =>
+    commentsList.map((question, index) => (
+      <ListItem
+        fullWidth
+        key={index}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          // justifyContent: 'space-between',
+          p: '0px 0px 8px 0px',
+        }}
+      >
+        <DisplayComment
+          comment={question}
+          handleCommentInput={handleCommentInput}
+          getComments={getComments}
+          setCommentInput={setCommentInput}
+          newComment={commentInput}
+        />
+        <List sx={{ width: '100%' }}>
+          {question.replied_comment_ids.map((reply, number) => (
+            <ListItem fullWidth key={number} sx={{ p: '0px 0px 8px 20px' }}>
+              <DisplayComment
+                comment={reply}
+                handleCommentInput={handleCommentInput}
+                getComments={getComments}
+                setCommentInput={setCommentInput}
+                newComment={commentInput}
+              />
+            </ListItem>
+          ))}
+        </List>
       </ListItem>
     ));
 
@@ -49,14 +71,14 @@ function Comments() {
     <Card sx={{ minWidth: 275, maxWidth: 1169 }}>
       <CardContent>
         <AddNewComment
+          id="8ebc6f07-a034-47ce-9176-1d00e9e856c1"
           handleCommentInput={handleCommentInput}
-          // handleAddNewComment={handleAddNewComment}
           getComments={getComments}
           setCommentInput={setCommentInput}
           newComment={commentInput}
         />
         <Box fullWidth>
-          <List fullWidth>{displayCurrentComments()}</List>
+          <List fullWidth>{displayComments()}</List>
         </Box>
         <Box
           sx={{

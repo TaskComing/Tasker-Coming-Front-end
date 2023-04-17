@@ -9,7 +9,7 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 
-import { postComment } from '../../services/comment';
+import { postComment, addCommentToUser } from '../../services/comment';
 
 function AddNewComment(props) {
   const [isBold, setIsBold] = useState(false);
@@ -18,18 +18,24 @@ function AddNewComment(props) {
 
   const { user } = useSelector((state) => state.auth);
   const firstName = user?.user?.firstName || 'Unknown';
+  // eslint-disable-next-line no-underscore-dangle
+  const userId = user?.user?._id || 'Unknown';
 
-  const { handleCommentInput, getComments, setCommentInput, newComment } = props;
+  const { handleCommentInput, getComments, setCommentInput, newComment, id } = props;
 
   const handleAddNewComment = async () => {
-    if (!newComment.trim()) {
+    const value = newComment?.[id];
+    if (!value || !value.trim()) {
       return;
     }
     setIsPosting(true);
-    await postComment(newComment);
+    const comment = await postComment(value, userId);
+    // eslint-disable-next-line no-underscore-dangle
+    const commentId = comment.data._id;
+    addCommentToUser(userId, commentId);
     getComments();
     setIsPosting(false);
-    setCommentInput('');
+    setCommentInput({});
   };
 
   const handleBoldToggle = () => {
@@ -60,7 +66,7 @@ function AddNewComment(props) {
   if (isPosting) return <div>New comment is submitting......</div>;
 
   return (
-    <Box sx={{ border: 1 }} noValidate autoComplete="off">
+    <Box sx={{ border: 1, width: '100%' }} noValidate autoComplete="off">
       <Box>
         <CardHeader
           avatar={<Avatar alt={firstName} src="/img/homepage2/Avatar1.jpg" />}
@@ -83,8 +89,8 @@ function AddNewComment(props) {
         multiline
         maxRows={4}
         variant="standard"
-        onChange={handleCommentInput}
-        value={newComment}
+        onChange={(e) => handleCommentInput(e, id)}
+        value={newComment?.[id] || ''}
       />
       <Box
         sx={{
