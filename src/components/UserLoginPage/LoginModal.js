@@ -122,17 +122,7 @@ function LoginModal() {
             <Image src={star} alt="img-star" />
             <MainHeading>Sign in</MainHeading>
           </HeaderSection>
-          {/* <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            buttonText="Login with Google"
-            style={{ width: '60%' }}
-          /> */}
-//           <div>
-//             <Divider sx={{ my: 1 }}>
-//               <Text>Or,Sign in with your email</Text>
-//             </Divider>
-//           </div>
+
           <Form onSubmit={handleSubmit}>
             <Text>Email address</Text>
             <Input
