@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
   Button,
   InputLabel,
@@ -59,8 +59,8 @@ async function postImage(images) {
     formData.append('image', image);
   });
 
-  const result = await axios(`/v1/images`, {
-    formData,
+  const result = await http(`/v1/images`, {
+    data: formData,
     headers: { 'Content-Type': 'multipart/form' },
   });
   return result.data;
@@ -81,6 +81,8 @@ export default function Page404() {
   const maxNumber = 69;
   const taskID = uuidv4();
   const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
+
+  const navigate = useNavigate();
 
   const onChange = (imageList, addUpdateIndex) => {
     console.log(imageList, addUpdateIndex);
@@ -692,7 +694,7 @@ export default function Page404() {
                             user.user._id
                           );
                           hotToast('success', 'Task Posted!');
-                          window.location.href = '/browse-task';
+                          navigate('/browse-task');
                         }}
                       >
                         Yes
