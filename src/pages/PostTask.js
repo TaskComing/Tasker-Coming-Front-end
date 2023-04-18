@@ -692,7 +692,7 @@ export default function Page404() {
                             user.user._id
                           );
                           hotToast('success', 'Task Posted!');
-                          window.location.href = '/profile';
+                          window.location.href = '/browse-task';
                         }}
                       >
                         Yes
