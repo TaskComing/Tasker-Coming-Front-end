@@ -695,6 +695,7 @@ export default function Page404() {
                           );
                           hotToast('success', 'Task Posted!');
                           navigate('/browse-task');
+
                         }}
                       >
                         Yes
