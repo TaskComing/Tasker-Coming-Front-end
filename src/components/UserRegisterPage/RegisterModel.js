@@ -86,14 +86,6 @@ function RegisterModel() {
           <HeaderSection>
             <MainHeading>Let&apos;s join us</MainHeading>
           </HeaderSection>
-//           <GoogleButton>
-//             <Text sx={{ color: 'white' }}>Sign up with Google</Text>
-//           </GoogleButton>
-//           <div>
-//             <Divider sx={{ my: 1 }}>
-//               <Text>Or,Sign up with your email</Text>
-//             </Divider>
-//           </div>
           <Form onSubmit={handleSubmit}>
             <Text>First Name:</Text>
             <Input
