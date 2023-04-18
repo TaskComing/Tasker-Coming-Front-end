@@ -47,11 +47,6 @@ const StyledDiv = styled('div')(() => ({
   width: '80%',
   borderRadius: '4rem',
   backgroundColor: 'white',
-  fontFamily: 'Poppins',
-
-  '& .MuiTypography-root': {
-    fontFamily: 'Poppins',
-  },
   '& .MuiAvatar-root': {
     width: '5rem',
     height: '5rem',
@@ -106,14 +101,13 @@ export default function Notification() {
         variant="h2"
         sx={{
           marginBottom: '20px',
-          fontFamily: 'Poppins',
           '& .MuiTabList-indicator': { bgcolor: 'red' },
         }}
       >
         Notifications
       </Typography>
       <TabContext value={tabValue}>
-        <Box sx={{ '& .MuiButtonBase-root': { fontFamily: 'DM Sans' } }}>
+        <Box sx={{ '& .MuiButtonBase-root': { fontSize: '1.5rem' } }}>
           <StyledTabs onChange={handleTabChange} textColor="inherit">
             <StyledTab label="Tasks" value="task" />
             <StyledTab label="Offers" value="offer" />

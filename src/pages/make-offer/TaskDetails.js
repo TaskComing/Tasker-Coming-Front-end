@@ -14,7 +14,7 @@ function TaskDetails({ task }) {
       <div className="task-carousel">
         <Carousel animation="slide" navButtonsAlwaysVisible autoPlay="false">
           {task.images.map((image) => (
-            <img key={image} src={image} alt="houseclean" />
+            <img key={image} src={image} alt="houseclean" style={{ maxHeight: '600px' }} />
           ))}
         </Carousel>
       </div>

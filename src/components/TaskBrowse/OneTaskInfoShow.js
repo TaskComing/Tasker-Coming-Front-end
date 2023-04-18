@@ -31,18 +31,18 @@ function OneTaskInfoShow({
     <Card sx={{ maxWidth: 400 }}>
       <CardMedia component="img" alt="TaskDetailCard" height="140" width="" image={images[0]} />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom style={{ fontSize: '2rem' }} component="div">
           {title}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div" color="font.green">
+        <Typography gutterBottom variant="h5" component="div" color="font.green">
           $ {budget}
         </Typography>
 
-        <Typography variant="body2" color="font.darkGrey">
+        <Typography style={{ fontSize: '1.5rem' }} color="font.darkGrey">
           <LocationOnIcon /> {suburb && state ? `${suburb}, ${state}` : address}
         </Typography>
 
-        <Typography variant="body2" color="font.darkGrey">
+        <Typography style={{ fontSize: '1.5rem' }} color="font.darkGrey">
           <DateRangeIcon />{' '}
           {formatTime(createTime, {
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -51,7 +51,7 @@ function OneTaskInfoShow({
           })}
         </Typography>
 
-        <Typography variant="body2" color="font.darkGrey">
+        <Typography style={{ fontSize: '1.5rem' }} color="font.darkGrey">
           <AccessTimeIcon />{' '}
           {formatTime(dueTime, {
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -64,9 +64,13 @@ function OneTaskInfoShow({
         <Avatar alt="Avatar" src={avatarUrl} />
       </Stack>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small" style={{ fontSize: '1.3em' }}>
+          Share
+        </Button>
         <Link to={`/task-details/${id}`} style={{ textDecoration: 'none' }}>
-          <Button size="small">Learn More</Button>
+          <Button size="small" style={{ fontSize: '1.3rem' }}>
+            Learn More
+          </Button>
         </Link>
       </CardActions>
     </Card>

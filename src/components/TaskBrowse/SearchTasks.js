@@ -47,7 +47,7 @@ function InputFormProps({ tasks, onChange }) {
     >
       <FormControl sx={{ display: 'flex', flexDirection: 'row' }}>
         <Input
-          placeholder="                 .....    Search   Task    ......   "
+          placeholder="Enter keywords to search"
           required
           value={keyword}
           onChange={changeHandler}
@@ -64,7 +64,12 @@ function InputFormProps({ tasks, onChange }) {
             fontSize: '16px',
           }}
         />
-        <Button type="submit" sx={{ color: 'white' }} onClick={submitHandler}>
+        <Button
+          type="submit"
+          sx={{ color: 'white' }}
+          onClick={submitHandler}
+          style={{ fontSize: '1.5rem' }}
+        >
           Search
         </Button>
       </FormControl>

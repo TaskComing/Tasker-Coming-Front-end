@@ -66,9 +66,11 @@ function BrowseTaskItems() {
       <Box sx={{ flexGrow: 1 }} marginBottom={5}>
         <Box container="true" spacing={8} display="flex" marginLeft={5} marginTop={5}>
           <Grid item xs={4} marginBottom={5} marginLeft={2}>
-            <InputLabel id="sortBy">Sort by</InputLabel>
+            <InputLabel id="sortBy" style={{ fontSize: '2rem' }}>
+              Sort by
+            </InputLabel>
           </Grid>
-          <Grid item xs={4} marginBottom={2} marginLeft={10}>
+          <Grid item xs={4} marginBottom={2} marginLeft={2}>
             <TaskFilter tasks={tasks} onChange={handleOptionChange} />
           </Grid>
         </Box>

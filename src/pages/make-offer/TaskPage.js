@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import TaskTitle from './TaskTitle';
 import TaskBody from './TaskBody';
 import TaskDetails from './TaskDetails';
-import OfferForm from './OfferForm';
+import FormDialog from './OfferForm';
 import OfferandQuestionTab from './OfferAndQuestionTab';
 import http from '../../utils/axios';
 
@@ -26,7 +26,6 @@ function TaskPage() {
   }, []);
   return (
     <div>
-      {}
       {loading ? (
         <div> </div>
       ) : (
@@ -36,9 +35,9 @@ function TaskPage() {
             <TaskDetails task={task} />
             <TaskBody task={task} />
             {user && user.user.id !== task.create_user_id.id && task.status === 'open' && (
-              <OfferForm task={task} />
+              <FormDialog task={task} user={user} />
             )}
-            <OfferandQuestionTab task={task} user={user} />
+            <OfferandQuestionTab task={task} user={user} setTask={setTask} />
           </div>
         </>
       )}

@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
@@ -38,6 +39,7 @@ const SiderContainer = styled('div')(({ theme }) => ({
 }));
 
 function ProfileSider({ ...props }) {
+  const { user } = useSelector((state) => state.auth);
   return (
     <SiderContainer>
       <StyledBadge
@@ -47,11 +49,11 @@ function ProfileSider({ ...props }) {
       >
         <Avatar
           alt="Remy Sharp"
-          src="img/defaultAvatar.svg"
+          src={user.user.head_img_url}
           sx={{ width: '12rem', height: '12rem' }}
         />
       </StyledBadge>
-      <Typography variant="h1">User&apos;s Name</Typography>
+      <Typography variant="h1">{`${user.user.firstName} ${user.user.lastName}`}</Typography>
       <SiderTab {...props} sx={{ width: '200rem' }} />
     </SiderContainer>
   );

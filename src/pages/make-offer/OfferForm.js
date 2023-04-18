@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import * as React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
@@ -6,33 +6,53 @@ import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import http from '../../utils/axios';
 
-export default function FormDialog() {
-  const [open, setOpen] = useState(false);
+function FormDialog({ task, user }) {
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = React.useState({
     name: '',
-    number: '',
+    phone: '',
     email: '',
-    reasons: '',
+    description: '',
   });
-  const onChange = (event) => {
-    setFormData((prevFormData) => ({ ...prevFormData, [event.target.name]: event.target.value }));
-  };
-  const handleOfferSubmit = async () => {
-    await http(`/v1${window.location.pathname}/`, {
-      method: 'POST',
-      data: formData,
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
-  const onSubmit = () => {
-    handleOfferSubmit();
-    handleClose();
+  const submitOffer = async (event) => {
+    event.preventDefault();
+    const { name, phone, email, description } = formData;
+    const response = await http(`/v1/offers`, {
+      method: 'POST',
+      data: {
+        name,
+        number: phone,
+        email,
+        description,
+        deleted: false,
+        task: task.id,
+        create_user_id: user.user.id,
+      },
+    });
+    console.log('response', response);
   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleClose();
+    submitOffer(event);
+  };
+
+  // useEffect(() => {
+  //   getNotification();
+  // }, []);
 
   return (
     <div style={{ marginTop: '10px' }}>
@@ -42,61 +62,62 @@ export default function FormDialog() {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <DialogTitle sx={{ textAlign: 'center' }}>Make an Offer</DialogTitle>
-          <Typography id="name" sx={{ mt: 2 }}>
+          <Typography id="preferred name" sx={{ mt: 2 }}>
             Your preferred name:
           </Typography>
           <TextField
             fullWidth
             label="name"
-            id="name"
-            variant="filled"
             name="name"
-            value={formData.name}
-            onChange={(event) => onChange(event)}
+            id="fullWidth"
+            variant="filled"
+            onChange={handleFormChange}
           />
-          <Typography id="number" sx={{ mt: 2 }}>
+          <Typography id="phone number" sx={{ mt: 2 }}>
             Your phone number:
           </Typography>
           <TextField
             fullWidth
             label="phone"
-            id="number"
+            name="phone"
+            id="fullWidth"
             variant="filled"
-            name="number"
-            value={formData.number}
-            onChange={(event) => onChange(event)}
+            onChange={handleFormChange}
           />
-          <Typography id="email" sx={{ mt: 2 }}>
+          <Typography id="email address" sx={{ mt: 2 }}>
             Your email address:
           </Typography>
           <TextField
             fullWidth
             label="email"
-            id="email"
-            variant="filled"
             name="email"
-            value={formData.email}
-            onChange={(event) => onChange(event)}
+            id="fullWidth"
+            variant="filled"
+            onChange={handleFormChange}
           />
           <Typography id="reasons" sx={{ mt: 2 }}>
             Why are you the best person for this task?
           </Typography>
           <TextField
             fullWidth
-            id="reasons"
+            id="filled-multiline-static"
             multiline
+            name="description"
             rows={4}
             variant="filled"
-            name="reasons"
-            value={formData.reasons}
-            onChange={(event) => onChange(event)}
+            onChange={handleFormChange}
           />
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center' }}>
           <Button sx={{ bgcolor: '#808080', color: '#ffffff' }} autoFocus onClick={handleClose}>
             Cancel
           </Button>
-          <Button sx={{ bgcolor: '#c71585', color: '#ffffff' }} onClick={onSubmit} autoFocus>
+          <Button
+            type="submit"
+            sx={{ bgcolor: '#c71585', color: '#ffffff' }}
+            autoFocus
+            onClick={handleSubmit}
+          >
             Submit Offer
           </Button>
         </DialogActions>
@@ -104,3 +125,5 @@ export default function FormDialog() {
     </div>
   );
 }
+
+export default FormDialog;
