@@ -83,9 +83,9 @@ function BrowseTaskItems() {
               tasks.filteredAndSearchedTask.map(
                 (task) =>
                   task.id &&
-                  task.create_user_id && (
-                    // task.images &&
-                    // task.images.length > 0 &&
+                  task.create_user_id &&
+                  task.images &&
+                  task.images.length > 0 && (
                     <Grid item xs={4} key={task.id}>
                       <OneTaskInfoShow task={task} />
                     </Grid>
