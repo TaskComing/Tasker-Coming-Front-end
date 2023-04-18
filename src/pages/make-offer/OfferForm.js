@@ -1,4 +1,5 @@
-import * as React from 'react';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
@@ -9,11 +10,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import http from '../../utils/axios';
 
 function FormDialog({ task, user }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
@@ -30,7 +31,7 @@ function FormDialog({ task, user }) {
   const submitOffer = async (event) => {
     event.preventDefault();
     const { name, phone, email, description } = formData;
-    const response = await http(`/v1/offers`, {
+    await http(`/v1/offers`, {
       method: 'POST',
       data: {
         name,
@@ -42,7 +43,6 @@ function FormDialog({ task, user }) {
         create_user_id: user.user.id,
       },
     });
-    console.log('response', response);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -125,5 +125,24 @@ function FormDialog({ task, user }) {
     </div>
   );
 }
+
+FormDialog.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    create_user_id: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+    offers: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }).isRequired
+    ).isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    user: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default FormDialog;
