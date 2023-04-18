@@ -16,7 +16,7 @@ import theme from './Theme/Theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
+//   <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
     <React.StrictMode>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
@@ -25,7 +25,7 @@ root.render(
         </ThemeProvider>
       </Provider>
     </React.StrictMode>
-  </GoogleOAuthProvider>
+//   </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
