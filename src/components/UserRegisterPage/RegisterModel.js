@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Box, Divider, Checkbox } from '@mui/material';
+import { Box, Checkbox } from '@mui/material';
 import { register, reset } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
 import {
@@ -14,7 +14,7 @@ import {
   Section,
   TextWrapper,
 } from '../../Theme/globalStyles';
-import { HeaderSection, GoogleButton, Form, Input } from './Register.styles';
+import { HeaderSection, Form, Input } from './Register.styles';
 
 function RegisterModel() {
   const [userInfo, setUserInfo] = useState({
@@ -86,14 +86,14 @@ function RegisterModel() {
           <HeaderSection>
             <MainHeading>Let&apos;s join us</MainHeading>
           </HeaderSection>
-          <GoogleButton>
-            <Text sx={{ color: 'white' }}>Sign up with Google</Text>
-          </GoogleButton>
-          <div>
-            <Divider sx={{ my: 1 }}>
-              <Text>Or,Sign up with your email</Text>
-            </Divider>
-          </div>
+//           <GoogleButton>
+//             <Text sx={{ color: 'white' }}>Sign up with Google</Text>
+//           </GoogleButton>
+//           <div>
+//             <Divider sx={{ my: 1 }}>
+//               <Text>Or,Sign up with your email</Text>
+//             </Divider>
+//           </div>
           <Form onSubmit={handleSubmit}>
             <Text>First Name:</Text>
             <Input
