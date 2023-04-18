@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Box, Divider, Link, Stack, Checkbox } from '@mui/material';
+import { Box, Link, Stack, Checkbox } from '@mui/material';
 import theme from '../../Theme/Theme';
 import { login } from '../../features/slices/authSlice';
 import Spinner from '../Spinner/Spinner';
@@ -128,11 +128,11 @@ function LoginModal() {
             buttonText="Login with Google"
             style={{ width: '60%' }}
           /> */}
-          <div>
-            <Divider sx={{ my: 1 }}>
-              <Text>Or,Sign in with your email</Text>
-            </Divider>
-          </div>
+//           <div>
+//             <Divider sx={{ my: 1 }}>
+//               <Text>Or,Sign in with your email</Text>
+//             </Divider>
+//           </div>
           <Form onSubmit={handleSubmit}>
             <Text>Email address</Text>
             <Input
