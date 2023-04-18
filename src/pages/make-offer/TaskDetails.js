@@ -25,7 +25,7 @@ function TaskDetails({ task }) {
           </div>
           <div>
             <p style={{ fontWeight: 500, fontSize: '24px' }}>Posted By</p>
-            <p>{`${task.create_user_id.firstName} ${task.create_user_id.lastName}`}</p>
+            <p>{`${task.create_user_id?.firstName} ${task.create_user_id?.lastName}`}</p>
           </div>
         </div>
         <div className="person-info">

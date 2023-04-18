@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
-// import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +15,6 @@ import theme from './Theme/Theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -25,7 +23,6 @@ root.render(
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
-  // </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
