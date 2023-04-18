@@ -9,7 +9,7 @@ button.unfollowing-button {
   background-color: gainsboro;
   border: none;
   position: absolute;
-  right: - 100px;
+  right: -100px;
   transform: translateX(100%);
   margin-top: 6px;
 }

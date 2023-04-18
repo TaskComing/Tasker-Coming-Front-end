@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -7,16 +7,71 @@ import TextField from '@mui/material/TextField';
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
 import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
+
+import { postComment, addCommentToUser } from '../../services/comment';
 
 function AddNewComment(props) {
-  const { handleAddNewComment, handleCommentInput, newComment } = props;
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isPosting, setIsPosting] = useState(false);
+
+  const { user } = useSelector((state) => state.auth);
+  const firstName = user?.user?.firstName || 'Unknown';
+  // eslint-disable-next-line no-underscore-dangle
+  const userId = user?.user?._id || 'Unknown';
+
+  const { handleCommentInput, getComments, setCommentInput, newComment, id } = props;
+
+  const handleAddNewComment = async () => {
+    const value = newComment?.[id];
+    if (!value || !value.trim()) {
+      return;
+    }
+    setIsPosting(true);
+    const comment = await postComment(value, userId);
+    // eslint-disable-next-line no-underscore-dangle
+    const commentId = comment.data._id;
+    addCommentToUser(userId, commentId);
+    getComments();
+    setIsPosting(false);
+    setCommentInput({});
+  };
+
+  const handleBoldToggle = () => {
+    setIsBold(() => {
+      if (isBold) {
+        return false;
+      }
+      return true;
+    });
+  };
+
+  const styleBold = () => {
+    if (isBold) {
+      return 'bold';
+    }
+    return '';
+  };
+
+  const handleItalicToggle = () => {
+    setIsItalic(() => {
+      if (isItalic) {
+        return false;
+      }
+      return true;
+    });
+  };
+
+  if (isPosting) return <div>New comment is submitting......</div>;
+
   return (
-    <Box sx={{ border: 1 }} noValidate autoComplete="off">
+    <Box sx={{ border: 1, width: '100%' }} noValidate autoComplete="off">
       <Box>
         <CardHeader
-          avatar={<Avatar alt="John" src="/img/homepage2/Avatar1.jpg" />}
+          avatar={<Avatar alt={firstName} src="/img/homepage2/Avatar1.jpg" />}
           action={<IconButton aria-label="settings" />}
-          title="John"
+          title={firstName}
           titleTypographyProps={{
             fontSize: 18,
           }}
@@ -26,7 +81,7 @@ function AddNewComment(props) {
         fullWidth
         sx={{ p: '0px 20px 0px 20px' }}
         inputProps={{
-          style: { fontSize: 18 },
+          style: { fontSize: 18, fontStyle: {}, fontWeight: { styleBold } },
         }}
         margin="normal"
         id="standard-multiline-flexible"
@@ -34,14 +89,8 @@ function AddNewComment(props) {
         multiline
         maxRows={4}
         variant="standard"
-        onChange={handleCommentInput}
-        value={newComment}
-        // inputProps={{
-        //   sx: {
-        //     fontStyle: 'italic',
-        //     fontWeight: 'bold',
-        //   },
-        // }}
+        onChange={(e) => handleCommentInput(e, id)}
+        value={newComment?.[id] || ''}
       />
       <Box
         sx={{
@@ -57,9 +106,34 @@ function AddNewComment(props) {
           },
         }}
       >
-        <Box>
-          <FormatBoldIcon />
-          <FormatItalicIcon />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            m: '0 0 0 10px',
+          }}
+        >
+          <Box
+            sx={{
+              '&:hover': {
+                backgroundColor: '#DCDCDC',
+              },
+            }}
+            onClick={handleBoldToggle}
+          >
+            <FormatBoldIcon />
+          </Box>
+          <Box
+            sx={{
+              '&:hover': {
+                backgroundColor: '#DCDCDC',
+              },
+            }}
+            onClick={handleItalicToggle}
+          >
+            <FormatItalicIcon />
+          </Box>
         </Box>
         <Button
           variant="contained"
@@ -69,7 +143,7 @@ function AddNewComment(props) {
           }}
           onClick={handleAddNewComment}
         >
-          Comment
+          Submit
         </Button>
       </Box>
     </Box>

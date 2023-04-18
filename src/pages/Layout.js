@@ -81,6 +81,12 @@ function Layout() {
                     <Typography variant="subtitle">Browse tasks</Typography>
                   </ListItem>
                 </Link>
+                {/* This link need to be deleted when browser page is ready */}
+                {/* <Link to="/task-details/641e155eb18a29fbf07b6ede" className="link">
+                  <ListItem sx={headerStyles.listItem}>
+                    <Typography variant="subtitle">Task Details</Typography>
+                  </ListItem>
+                </Link> */}
                 <Link to="/about-team" className="link">
                   <ListItem sx={headerStyles.listItem}>
                     <Typography variant="subtitle">About teams</Typography>
