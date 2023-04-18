@@ -113,8 +113,11 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>{`${firstName} ${lastName}`}</MenuItem>
-        <p>{email}</p>
+        <MenuItem
+          onClick={handleClose}
+          style={{ fontSize: '2rem' }}
+        >{`${firstName} ${lastName}`}</MenuItem>
+        <p style={{ fontSize: '1.5rem' }}>{email}</p>
         <Divider />
         <MenuItem onClick={handleClose}>
           <Link to="/profile" state={{ siderValue: 0 }}>

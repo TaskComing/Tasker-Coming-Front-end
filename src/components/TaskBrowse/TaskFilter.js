@@ -33,10 +33,10 @@ function BasicSelect({ tasks, onChange }) {
   };
 
   return (
-    <Box sx={{ maxWidth: 120, margin: '10', width: '300%' }}>
+    <Box sx={{ maxWidth: 120, margin: '10', width: '300%', fontSize: '1.5rem' }}>
       {/* <InputLabel id="select-label" >Sort by</InputLabel> */}
       <FormControl fullWidth>
-        <InputLabel id="select-status-label-" placeholder="location ">
+        <InputLabel id="select-status-label-" placeholder="location " style={{ fontSize: '2rem' }}>
           Task Status
         </InputLabel>
         <Select
@@ -45,6 +45,7 @@ function BasicSelect({ tasks, onChange }) {
           value={TaskStatus}
           label="TaskStatus"
           onChange={handleChange}
+          style={{ fontSize: '1.2rem' }}
         >
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="open">Open</MenuItem>
