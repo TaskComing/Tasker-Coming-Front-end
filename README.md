@@ -1,6 +1,6 @@
 # Tasker Coming Frontend
 
-> node version 18
+> node version 19
 
 ## Available Scripts
 
